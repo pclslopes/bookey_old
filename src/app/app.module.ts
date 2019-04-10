@@ -17,6 +17,9 @@ import { NavtabsComponent } from './navigation/navtabs/navtabs.component'
 import { SidenavlistComponent } from './navigation/sidenavlist/sidenavlist.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CommandBarComponent } from './components/command-bar/command-bar.component';
+import { NavComponent } from './nav/nav/nav.component';
+import { NavigationBarComponent } from './nav/navigation-bar/navigation-bar.component';
+import { PlaceholderComponent } from './nav/placeholder/placeholder.component';
 
 @NgModule({
   imports: [
@@ -33,7 +36,10 @@ import { CommandBarComponent } from './components/command-bar/command-bar.compon
     NavtabsComponent,
     SidenavlistComponent,
     DashboardComponent,
-    CommandBarComponent
+    CommandBarComponent,
+    NavComponent,
+    NavigationBarComponent,
+    PlaceholderComponent
   ],
   entryComponents: [DialogContentComponent],
   bootstrap: [AppComponent],
