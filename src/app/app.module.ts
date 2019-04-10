@@ -16,6 +16,7 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { NavtabsComponent } from './navigation/navtabs/navtabs.component'
 import { SidenavlistComponent } from './navigation/sidenavlist/sidenavlist.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CommandBarComponent } from './components/command-bar/command-bar.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HeaderComponent,
     NavtabsComponent,
     SidenavlistComponent,
-    DashboardComponent
+    DashboardComponent,
+    CommandBarComponent
   ],
   entryComponents: [DialogContentComponent],
   bootstrap: [AppComponent],

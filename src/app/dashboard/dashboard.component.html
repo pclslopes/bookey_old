@@ -1,5 +1,146 @@
-<div class="dashboard-container">
-  <p>
-  dashboard works!
-  </p>
+<command-bar class="crm-command-bar" fxHide.xs>
+
+  <ng-container *ngIf="newContact">
+
+    <button mat-button class="crm-command-bar-button"
+            [disabled]="!isValid()"
+            (click)="onSave()">
+      <mat-icon>save</mat-icon>
+      SAVE
+    </button>
+
+    <button mat-button class="crm-command-bar-button"
+            [disabled]="!isValid()"
+            (click)="onSaveAndClose()">
+      <mat-icon>arrow_back</mat-icon>
+      SAVE & CLOSE
+    </button>
+
+  </ng-container>
+
+  <ng-container *ngIf="!newContact">
+
+    <button mat-button class="crm-command-bar-button" (click)="onNew()">
+      <mat-icon>add</mat-icon>
+      NEW
+    </button>
+
+    <button mat-button class="crm-command-bar-button" [disabled]="true">
+      <mat-icon>visibility</mat-icon>
+      ACTIVATE
+    </button>
+
+    <button mat-button class="crm-command-bar-button" [disabled]="true">
+      <mat-icon>visibility_off</mat-icon>
+      DEACTIVATE
+    </button>
+
+    <button mat-button class="crm-command-bar-button" [disabled]="true">
+      <mat-icon>link</mat-icon>
+      EMAIL A LINK
+    </button>
+
+  </ng-container>
+
+  <div fxFlex fxLayout fxLayoutAlign="flex-end">
+
+    <button mat-button class="crm-command-bar-button" [disabled]="true">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+
+    <button mat-button class="crm-command-bar-button" [disabled]="true">
+      <mat-icon>clear</mat-icon>
+    </button>
+
+  </div>
+
+</command-bar>
+
+<div class="crm-component-title-container">
+  <h1 class="crm-component-title"> CONTACT_HEADER </h1>
 </div>
+
+<div #contentContainer class="crm-content-container">
+
+  <ng-container *ngIf="!item; then skeleton"> </ng-container>
+
+  <ng-container *ngIf="item">
+
+    <div #gridContainer class="crm-grid-container">
+
+      <mat-card>
+
+        <mat-card-header>
+          <mat-card-title>
+            General Information
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <!-- Chrome ignores autocomplete="off" so go to chrome://settings/autofill and turn 'Auto-fill forms' off -->
+
+          <dynamic-form autocomplete="off"
+                        [className]="'crm-nested-grid-container'"
+                        [formGroup]="generalInformationGroup"
+                        [model]="generalInformationModel"
+                        (customEvent)="onCustomEvent($event)">
+          </dynamic-form>
+
+          <!--
+          <p>
+            Form Value: {{ generalInformationGroup.value | json }}
+          </p>
+          -->
+
+        </mat-card-content>
+
+      </mat-card>
+
+      <mat-card>
+
+        <mat-card-header>
+          <mat-card-title>
+            Address Information
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <!-- Chrome ignores autocomplete="off" so go to chrome://settings/autofill and turn 'Auto-fill forms' off -->
+
+          <dynamic-form autocomplete="off"
+                        [className]="'crm-nested-grid-container'"
+                        [formGroup]="addressInformationGroup"
+                        [model]="addressInformationModel">
+          </dynamic-form>
+
+          <!--
+          <p>
+            Form Value: {{ addressInformationGroup.value | json }}
+          </p>
+          -->
+
+        </mat-card-content>
+
+      </mat-card>
+
+    </div>
+
+  </ng-container> <!-- gridContainer -->
+
+  <!-- Skeleton template -->
+
+  <ng-template #skeleton>
+    <div class="crm-spinner-container" [style.height.px]="containerHeight">
+      <mat-spinner color="accent"></mat-spinner>
+    </div>
+  </ng-template>
+
+</div> <!-- contentContainer -->
+
+<!--
+
+ (dynamicEvent)="onEvent($event)">
+
+-->
