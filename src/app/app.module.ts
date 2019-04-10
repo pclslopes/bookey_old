@@ -12,9 +12,6 @@ import { AppMaterialModule } from './app.material.module';
 // Components
 import { AppComponent } from './app.component';
 import { TemplateComponent, DialogContentComponent } from './templates/templates.component';
-import { HeaderComponent } from './navigation/header/header.component';
-import { NavtabsComponent } from './navigation/navtabs/navtabs.component'
-import { SidenavlistComponent } from './navigation/sidenavlist/sidenavlist.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CommandBarComponent } from './components/command-bar/command-bar.component';
 import { NavComponent } from './nav/nav/nav.component';
@@ -32,9 +29,6 @@ import { PlaceholderComponent } from './nav/placeholder/placeholder.component';
   declarations: [
     AppComponent, 
     DialogContentComponent,
-    HeaderComponent,
-    NavtabsComponent,
-    SidenavlistComponent,
     DashboardComponent,
     CommandBarComponent,
     NavComponent,
