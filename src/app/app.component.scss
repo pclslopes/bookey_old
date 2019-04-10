@@ -1,38 +1,27 @@
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav{
+  height: 100%;
+}
+
 mat-sidenav-container.m2app-dark {
   background: black;
+  height: 100%;
 }
 
 .app-content {
   padding: 5px;
 }
 
-.app-content mat-card {
-  margin: 5px;
-}
-
 .app-sidenav {
   min-width: 200px;
-}
-
-.app-content mat-checkbox {
-  margin: 10px;
+  width: 250px;
+  height: 100%;
 }
 
 .app-toolbar-filler {
   flex: 1 1 auto;
-}
-
-
-.app-fab {
-  position: fixed !important;
-  bottom: 20px;
-  right: 20px;
-}
-
-.app-spinner {
-  height: 30px;
-  width: 30px;
-  display: inline-block;
+  height: 100%;
 }
 
 .app-input-icon {
@@ -46,42 +35,6 @@ mat-sidenav-container.m2app-dark {
 }
 .app-button {
   margin: 5px;
-}
-
-.app-list {
-  border: 1px solid rgba(0,0,0,0.12);
-}
-
-.app-progress {
-  margin: 5px;
-}
-
-.example-h2 {
-  margin: 10px 0;
-  color: rgba(0,0,0,.54);
-}
-
-.example-section {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: 60px;
-}
-
-.example-margin {
-  margin: 10px;
-}
-
-.mat-slider-horizontal {
-  width: 300px;
-}
-
-.mat-slider-vertical {
-  height: 300px;
-}
-
-mat-chip {
-  max-width: 200px;
 }
 
 .app-sidebar-button {
