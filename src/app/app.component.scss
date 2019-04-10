@@ -4,6 +4,10 @@ mat-sidenav{
   height: 100%;
 }
 
+mat-sidenav{
+  width: 250px;
+}
+
 mat-sidenav-container.m2app-dark {
   background: black;
   height: 100%;
@@ -16,11 +20,6 @@ mat-sidenav-container.m2app-dark {
 .app-sidenav {
   min-width: 200px;
   width: 250px;
-  height: 100%;
-}
-
-.app-toolbar-filler {
-  flex: 1 1 auto;
   height: 100%;
 }
 
