@@ -14,10 +14,10 @@ import { AppMaterialModule } from './app.material.module';
 import { AppComponent } from './app.component';
 import { TemplateComponent, DialogContentComponent } from './templates/templates.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CommandBarComponent } from './components/command-bar/command-bar.component';
-import { NavComponent } from './nav/nav/nav.component';
-import { NavigationBarComponent } from './nav/navigation-bar/navigation-bar.component';
-import { PlaceholderComponent } from './nav/placeholder/placeholder.component';
+import { CommandBarComponent } from './navigation/command-bar/command-bar.component';
+import { NavComponent } from './navigation/nav/nav.component';
+import { NavigationBarComponent } from './navigation/navigation-bar/navigation-bar.component';
+import { PlaceholderComponent } from './navigation/placeholder/placeholder.component';
 
 @NgModule({
   imports: [
