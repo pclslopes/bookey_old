@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Subscription} from 'rxjs';
+// Dynamic Forms
+import { TestModel } from "../models/test-model.model";
+import { DynamicFormModel, DynamicFormService } from "@ng-dynamic-forms/core";
 
 interface PeriodicElement {
   name: string;
@@ -64,6 +66,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class DashboardComponent implements OnInit {
 
+  formModel: DynamicFormModel = TestModel;
+  formGroup: FormGroup;
+
   protected subscription: Subscription;
 
   public items: Array<Contact>;
@@ -71,12 +76,12 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
 
-  constructor() {
+  constructor(private formService: DynamicFormService) {
 
   }
 
   public ngOnInit() {
-
+    this.formGroup = this.formService.createFormGroup(this.formModel);
     
   }
 }
