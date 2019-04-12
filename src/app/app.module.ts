@@ -3,7 +3,7 @@ import 'hammerjs';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatTableModule } from '@angular/material';
 
 // Modules
@@ -30,7 +30,8 @@ import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
     BrowserAnimationsModule,
     MatTableModule,
     DynamicFormsCoreModule,
-    DynamicFormsMaterialUIModule
+    DynamicFormsMaterialUIModule,
+    ReactiveFormsModule 
   ],
   declarations: [
     AppComponent, 
