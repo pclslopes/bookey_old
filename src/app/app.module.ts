@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material';
 
 // Modules
 import { RoutingModule } from './routing/routing.module';
@@ -24,7 +25,8 @@ import { PlaceholderComponent } from './nav/placeholder/placeholder.component';
     FormsModule,
     RoutingModule,
     AppMaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   declarations: [
     AppComponent, 
