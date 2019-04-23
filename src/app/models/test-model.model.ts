@@ -18,7 +18,7 @@ export const TestModel: DynamicFormModel = [
     new DynamicRadioGroupModel<string>({
 
         id: "sampleRadioGroup",
-        label: "Sample Radio Group",
+        label: "Radio Group ",
         options: [
             {
                 label: "Option 1",
