@@ -13,7 +13,7 @@ import { AppMaterialModule } from './app.material.module';
 // Components
 import { AppComponent } from './app.component';
 import { TemplateComponent, DialogContentComponent } from './templates/templates.component';
-import { DashboardComponent } from './componentsdashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CommandBarComponent } from './navigation/command-bar/command-bar.component';
 import { NavComponent } from './navigation/nav/nav.component';
 import { NavigationBarComponent } from './navigation/navigation-bar/navigation-bar.component';
