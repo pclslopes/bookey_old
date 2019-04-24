@@ -38,14 +38,6 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
     BrowserAnimationsModule,
     MatTableModule,
     ReactiveFormsModule,
-    DynamicInputComponent,
-    DynamicButtonComponent,
-    DynamicSelectComponent,
-    DynamicDateComponent,
-    DynamicRadiobuttonComponent,
-    DynamicCheckboxComponent,
-    DynamicFieldDirective,
-    DynamicFormComponent
   ],
   declarations: [
     AppComponent, 
@@ -54,7 +46,15 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
     CommandBarComponent,
     NavComponent,
     NavigationBarComponent,
-    PlaceholderComponent
+    PlaceholderComponent,
+    DynamicInputComponent,
+    DynamicButtonComponent,
+    DynamicSelectComponent,
+    DynamicDateComponent,
+    DynamicRadiobuttonComponent,
+    DynamicCheckboxComponent,
+    DynamicFieldDirective,
+    DynamicFormComponent
   ],
   entryComponents: [
     DialogContentComponent,

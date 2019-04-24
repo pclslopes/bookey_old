@@ -16,6 +16,8 @@ import { FieldConfig } from "../../interfaces/dynamic-field.interface";
 export class DynamicInputComponent implements OnInit {
   field: FieldConfig;
   group: FormGroup;
+
   constructor() {}
+  
   ngOnInit() {}
 }
