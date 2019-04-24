@@ -13,11 +13,12 @@ import { AppMaterialModule } from './app.material.module';
 // Components
 import { AppComponent } from './app.component';
 import { TemplateComponent, DialogContentComponent } from './templates/templates.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CommandBarComponent } from './navigation/command-bar/command-bar.component';
 import { NavComponent } from './navigation/nav/nav.component';
 import { NavigationBarComponent } from './navigation/navigation-bar/navigation-bar.component';
 import { PlaceholderComponent } from './navigation/placeholder/placeholder.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FormTemplateComponent } from './components/form-template/form-template.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -43,6 +44,7 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
     AppComponent, 
     DialogContentComponent,
     DashboardComponent,
+    FormTemplateComponent,
     CommandBarComponent,
     NavComponent,
     NavigationBarComponent,

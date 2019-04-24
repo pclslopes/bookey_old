@@ -6,7 +6,7 @@ import { DynamicFormComponent } from "../../dynamic-forms/components/dynamic-for
 @Component({
   selector: 'app-form-template',
   templateUrl: './form-template.component.html',
-  styleUrls: ['./form-template.component.css']
+  styleUrls: ['./form-template.component.scss']
 })
 export class FormTemplateComponent implements OnInit {
 
