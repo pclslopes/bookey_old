@@ -19,6 +19,16 @@ import { NavComponent } from './navigation/nav/nav.component';
 import { NavigationBarComponent } from './navigation/navigation-bar/navigation-bar.component';
 import { PlaceholderComponent } from './navigation/placeholder/placeholder.component';
 
+// Dynamic-Forms
+import { InputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
+import { ButtonComponent } from "./dynamic-forms/components/dynamic-button/dynamic-button.component";
+import { SelectComponent } from "./dynamic-forms/components/dynamic-select/dynamic-select.component";
+import { DateComponent } from "./dynamic-forms/components/dynamic-date/dynamic-date.component";
+import { RadiobuttonComponent } from "./dynamic-forms/components/dynamic-radiobutton/dynamic-radiobutton.component";
+import { CheckboxComponent } from "./dynamic-forms/components/dynamic-checkbox/dynamic-checkbox.component";
+import { DynamicFieldDirective } from "./dynamic-forms/components/dynamic-field/dynamic-field.directive";
+import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dynamic-form.component";
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -27,7 +37,15 @@ import { PlaceholderComponent } from './navigation/placeholder/placeholder.compo
     AppMaterialModule,
     BrowserAnimationsModule,
     MatTableModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    InputComponent,
+    ButtonComponent,
+    SelectComponent,
+    DateComponent,
+    RadiobuttonComponent,
+    CheckboxComponent,
+    DynamicFieldDirective,
+    DynamicFormComponent
   ],
   declarations: [
     AppComponent, 
@@ -38,7 +56,15 @@ import { PlaceholderComponent } from './navigation/placeholder/placeholder.compo
     NavigationBarComponent,
     PlaceholderComponent
   ],
-  entryComponents: [DialogContentComponent],
+  entryComponents: [
+    DialogContentComponent,
+    InputComponent,
+    ButtonComponent,
+    SelectComponent,
+    DateComponent,
+    RadiobuttonComponent,
+    CheckboxComponent
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

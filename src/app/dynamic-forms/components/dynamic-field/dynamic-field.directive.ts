@@ -7,13 +7,13 @@ import {
   ViewContainerRef
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { FieldConfig } from "../../field.interface";
-import { InputComponent } from "../input/input.component";
-import { ButtonComponent } from "../button/button.component";
-import { SelectComponent } from "../select/select.component";
-import { DateComponent } from "../date/date.component";
-import { RadiobuttonComponent } from "../radiobutton/radiobutton.component";
-import { CheckboxComponent } from "../checkbox/checkbox.component";
+import { FieldConfig } from "../../interfaces/dynamic-field.interface";
+import { InputComponent } from "../dynamic-input/dynamic-input.component";
+import { ButtonComponent } from "../dynamic-button/dynamic-button.component";
+import { SelectComponent } from "../dynamic-select/dynamic-select.component";
+import { DateComponent } from "../dynamic-date/dynamic-date.component";
+import { RadiobuttonComponent } from "../dynamic-radiobutton/dynamic-radiobutton.component";
+import { CheckboxComponent } from "../dynamic-checkbox/dynamic-checkbox.component";
 
 const componentMapper = {
   input: InputComponent,

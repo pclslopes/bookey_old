@@ -12,7 +12,8 @@ import {
   Validators,
   FormControl
 } from "@angular/forms";
-import { FieldConfig, Validator } from "../../field.interface";
+
+import { FieldConfig, Validator } from "../../interfaces/dynamic-field.interface";
 
 @Component({
   exportAs: "dynamicForm",
