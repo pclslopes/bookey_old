@@ -2,3 +2,19 @@
 // https://material.angular.io/guide/theming-your-components
 
 @import "themes/black-deep-orange.theme";
+
+.demo-full-width {
+  width: 100%;
+}
+
+.radio-label-padding {
+  padding-right: 10px;
+  //color: grey;
+  display:flex ;
+  //width:100%;
+  justify-content: justify-content;
+}
+
+.mat-radio-group{
+  
+}
