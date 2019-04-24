@@ -13,7 +13,7 @@ import { FieldConfig } from "../../interfaces/dynamic-field.interface";
 `,
   styles: []
 })
-export class InputComponent implements OnInit {
+export class DynamicInputComponent implements OnInit {
   field: FieldConfig;
   group: FormGroup;
   constructor() {}

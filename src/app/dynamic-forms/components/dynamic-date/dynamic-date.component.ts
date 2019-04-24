@@ -16,9 +16,11 @@ import { FieldConfig } from "../../interfaces/dynamic-field.interface";
 `,
   styles: []
 })
-export class DateComponent implements OnInit {
+export class DynamicDateComponent implements OnInit {
   field: FieldConfig;
   group: FormGroup;
+
   constructor() {}
+  
   ngOnInit() {}
 }

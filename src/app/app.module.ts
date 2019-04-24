@@ -20,12 +20,12 @@ import { NavigationBarComponent } from './navigation/navigation-bar/navigation-b
 import { PlaceholderComponent } from './navigation/placeholder/placeholder.component';
 
 // Dynamic-Forms
-import { InputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
-import { ButtonComponent } from "./dynamic-forms/components/dynamic-button/dynamic-button.component";
-import { SelectComponent } from "./dynamic-forms/components/dynamic-select/dynamic-select.component";
-import { DateComponent } from "./dynamic-forms/components/dynamic-date/dynamic-date.component";
-import { RadiobuttonComponent } from "./dynamic-forms/components/dynamic-radiobutton/dynamic-radiobutton.component";
-import { CheckboxComponent } from "./dynamic-forms/components/dynamic-checkbox/dynamic-checkbox.component";
+import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
+import { DynamicButtonComponent } from "./dynamic-forms/components/dynamic-button/dynamic-button.component";
+import { DynamicSelectComponent } from "./dynamic-forms/components/dynamic-select/dynamic-select.component";
+import { DynamicDateComponent } from "./dynamic-forms/components/dynamic-date/dynamic-date.component";
+import { DynamicRadiobuttonComponent } from "./dynamic-forms/components/dynamic-radiobutton/dynamic-radiobutton.component";
+import { DynamicCheckboxComponent } from "./dynamic-forms/components/dynamic-checkbox/dynamic-checkbox.component";
 import { DynamicFieldDirective } from "./dynamic-forms/components/dynamic-field/dynamic-field.directive";
 import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dynamic-form.component";
 
@@ -38,12 +38,12 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
     BrowserAnimationsModule,
     MatTableModule,
     ReactiveFormsModule,
-    InputComponent,
-    ButtonComponent,
-    SelectComponent,
-    DateComponent,
-    RadiobuttonComponent,
-    CheckboxComponent,
+    DynamicInputComponent,
+    DynamicButtonComponent,
+    DynamicSelectComponent,
+    DynamicDateComponent,
+    DynamicRadiobuttonComponent,
+    DynamicCheckboxComponent,
     DynamicFieldDirective,
     DynamicFormComponent
   ],
@@ -58,12 +58,12 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
   ],
   entryComponents: [
     DialogContentComponent,
-    InputComponent,
-    ButtonComponent,
-    SelectComponent,
-    DateComponent,
-    RadiobuttonComponent,
-    CheckboxComponent
+    DynamicInputComponent,
+    DynamicButtonComponent,
+    DynamicSelectComponent,
+    DynamicDateComponent,
+    DynamicRadiobuttonComponent,
+    DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
 })

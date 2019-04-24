@@ -10,9 +10,11 @@ import { FieldConfig } from "../../interfaces/dynamic-field.interface";
 `,
   styles: []
 })
-export class CheckboxComponent implements OnInit {
+export class DynamicCheckboxComponent implements OnInit {
   field: FieldConfig;
   group: FormGroup;
+
   constructor() {}
+  
   ngOnInit() {}
 }

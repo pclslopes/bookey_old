@@ -10,9 +10,11 @@ import { FieldConfig } from "../../interfaces/dynamic-field.interface";
 `,
   styles: []
 })
-export class ButtonComponent implements OnInit {
+export class DynamicButtonComponent implements OnInit {
   field: FieldConfig;
   group: FormGroup;
+
   constructor() {}
+  
   ngOnInit() {}
 }
