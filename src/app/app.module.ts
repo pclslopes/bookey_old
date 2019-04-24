@@ -18,8 +18,6 @@ import { CommandBarComponent } from './navigation/command-bar/command-bar.compon
 import { NavComponent } from './navigation/nav/nav.component';
 import { NavigationBarComponent } from './navigation/navigation-bar/navigation-bar.component';
 import { PlaceholderComponent } from './navigation/placeholder/placeholder.component';
-import { DynamicFormsCoreModule } from "@ng-dynamic-forms/core";
-import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
 
 @NgModule({
   imports: [
@@ -29,8 +27,6 @@ import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
     AppMaterialModule,
     BrowserAnimationsModule,
     MatTableModule,
-    DynamicFormsCoreModule,
-    DynamicFormsMaterialUIModule,
     ReactiveFormsModule 
   ],
   declarations: [
