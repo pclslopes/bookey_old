@@ -97,22 +97,11 @@
 
     </div>
     
-    <form [formGroup]="formGroup">
-
-    <dynamic-material-form [group]="formGroup" [model]="formModel"></dynamic-material-form>
-
-                           
-</form>
-
-
-
-<div #contentContainer class="crm-content-container">
+                              
 
   <ng-container *ngIf="item; then skeleton"> </ng-container>
 
   <ng-container *ngIf="!item">
-
-    <div #gridContainer class="crm-grid-container">
 
       <mat-card>
 
@@ -141,7 +130,7 @@
       </mat-card>
 
       
-    </div>
+   
 
   </ng-container> <!-- gridContainer -->
 
@@ -153,7 +142,7 @@
     </div>
   </ng-template>
 
-</div> <!-- contentContainer -->
+
     
 
   </ng-container> <!-- gridContainer -->
