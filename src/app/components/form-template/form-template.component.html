@@ -1,0 +1,98 @@
+<command-bar class="crm-command-bar" fxHide.xs>
+
+  <ng-container *ngIf="newContact">
+
+    <button mat-button class="crm-command-bar-button"
+            [disabled]="!isValid()"
+            (click)="onSave()">
+      <mat-icon>save</mat-icon>
+      SAVE
+    </button>
+
+    <button mat-button class="crm-command-bar-button"
+            [disabled]="!isValid()"
+            (click)="onSaveAndClose()">
+      <mat-icon>arrow_back</mat-icon>
+      SAVE & CLOSE
+    </button>
+
+  </ng-container>
+
+  <ng-container *ngIf="!newContact">
+
+    <button mat-button class="crm-command-bar-button" (click)="onNew()">
+      <mat-icon>add</mat-icon>
+      NEW
+    </button>
+
+    <button mat-button class="crm-command-bar-button" [disabled]="true">
+      <mat-icon>visibility</mat-icon>
+      ACTIVATE
+    </button>
+
+    <button mat-button class="crm-command-bar-button" [disabled]="true">
+      <mat-icon>visibility_off</mat-icon>
+      DEACTIVATE
+    </button>
+
+    <button mat-button class="crm-command-bar-button" [disabled]="true">
+      <mat-icon>link</mat-icon>
+      EMAIL A LINK
+    </button>
+
+  </ng-container>
+
+<!--
+  <div fxFlex fxLayout fxLayoutAlign="flex-end">
+
+    <button mat-button class="crm-command-bar-button" [disabled]="true">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+
+    <button mat-button class="crm-command-bar-button" [disabled]="true">
+      <mat-icon>clear</mat-icon>
+    </button>
+
+  </div>
+-->
+</command-bar>
+
+
+<div #contentContainer class="crm-content-container">
+  <div class="crm-component-title-container">
+    <h2 class="crm-component-title"> Form Template </h2>
+  </div>
+
+  <ng-container>
+
+    <ng-container *ngIf="item; then skeleton"> </ng-container>
+
+    <ng-container *ngIf="!item">
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            General Information
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          
+          <dynamic-form [fields]="regConfig" (submit)="submit($event)"></dynamic-form>
+
+        </mat-card-content>
+      </mat-card>
+
+    </ng-container> <!-- gridContainer -->
+
+    <!-- Skeleton template -->
+
+    <ng-template #skeleton>
+      <div class="crm-spinner-container" [style.height.px]="containerHeight">
+        <mat-spinner color="accent"></mat-spinner>
+      </div>
+    </ng-template>
+
+  </ng-container> <!-- gridContainer -->
+
+</div> <!-- contentContainer -->

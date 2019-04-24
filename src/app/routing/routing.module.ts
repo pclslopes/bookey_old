@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
+import { FormTemplateComponent } from '../components/form-template/form-template.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: FormTemplateComponent },
 ];
 
 @NgModule({
