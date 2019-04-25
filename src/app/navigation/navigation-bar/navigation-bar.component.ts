@@ -12,6 +12,11 @@ export class NavigationBarComponent {
 
   constructor(private router: Router) {}
 
+  public profile() {
+    //this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
   public logout() {
     //this.authService.logout();
     this.router.navigate(['/']);
