@@ -22,6 +22,7 @@ import { FormTemplateComponent } from './components/form-template/form-template.
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
+import { DynamicTextAreaComponent } from "./dynamic-forms/components/dynamic-textarea/dynamic-textarea.component";
 import { DynamicButtonComponent } from "./dynamic-forms/components/dynamic-button/dynamic-button.component";
 import { DynamicSelectComponent } from "./dynamic-forms/components/dynamic-select/dynamic-select.component";
 import { DynamicDateComponent } from "./dynamic-forms/components/dynamic-date/dynamic-date.component";
@@ -50,6 +51,7 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
     NavigationBarComponent,
     PlaceholderComponent,
     DynamicInputComponent,
+    DynamicTextAreaComponent,
     DynamicButtonComponent,
     DynamicSelectComponent,
     DynamicDateComponent,
@@ -61,6 +63,7 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
   entryComponents: [
     DialogContentComponent,
     DynamicInputComponent,
+    
     DynamicButtonComponent,
     DynamicSelectComponent,
     DynamicDateComponent,

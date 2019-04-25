@@ -95,6 +95,24 @@ export class FormTemplateComponent{
       value: true
     },
     {
+      type: "textarea",
+      label: "Text Area",
+      inputType: "textarea",
+      name: "name2",
+      validations: [
+        {
+          name: "required",
+          validator: Validators.required,
+          message: "Name Required"
+        },
+        {
+          name: "pattern",
+          validator: Validators.pattern("^[a-zA-Z]+$"),
+          message: "Accept only text"
+        }
+      ]
+    },
+    {
       type: "button",
       label: "Save"
     }

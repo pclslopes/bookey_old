@@ -9,6 +9,7 @@ import {
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../../interfaces/dynamic-field.interface";
 import { DynamicInputComponent } from "../dynamic-input/dynamic-input.component";
+import { DynamicTextAreaComponent } from "../dynamic-textarea/dynamic-textarea.component";
 import { DynamicButtonComponent } from "../dynamic-button/dynamic-button.component";
 import { DynamicSelectComponent } from "../dynamic-select/dynamic-select.component";
 import { DynamicDateComponent } from "../dynamic-date/dynamic-date.component";
@@ -17,6 +18,7 @@ import { DynamicCheckboxComponent } from "../dynamic-checkbox/dynamic-checkbox.c
 
 const componentMapper = {
   input: DynamicInputComponent,
+  textarea: DynamicTextAreaComponent,
   button: DynamicButtonComponent,
   select: DynamicSelectComponent,
   date: DynamicDateComponent,
