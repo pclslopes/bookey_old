@@ -12,7 +12,7 @@ import { AppMaterialModule } from './app.material.module';
 
 // Components
 import { AppComponent } from './app.component';
-import { TemplateComponent, DialogContentComponent } from './templates/templates.component';
+import { TemplateComponent, DialogContentComponent } from './templates_old/templates.component';
 import { CommandBarComponent } from './navigation/command-bar/command-bar.component';
 import { NavComponent } from './navigation/nav/nav.component';
 import { NavigationBarComponent } from './navigation/navigation-bar/navigation-bar.component';
@@ -46,6 +46,7 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
     DialogContentComponent,
     DashboardComponent,
     FormTemplateComponent,
+    TemplateComponent,
     CommandBarComponent,
     NavComponent,
     NavigationBarComponent,

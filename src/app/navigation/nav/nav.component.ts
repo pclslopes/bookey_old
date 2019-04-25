@@ -29,8 +29,8 @@ export class NavComponent {
   customerRoutes: ROUTE[] = [
     {
       icon: 'contacts',
-      route: 'sales/accounts',
-      title: 'Accounts',
+      route: 'template_old',
+      title: 'Old Tmplate',
     }, {
       icon: 'people',
       route: 'sales/contacts',
