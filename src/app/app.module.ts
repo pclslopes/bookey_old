@@ -63,7 +63,7 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
   entryComponents: [
     DialogContentComponent,
     DynamicInputComponent,
-    
+    DynamicTextAreaComponent,
     DynamicButtonComponent,
     DynamicSelectComponent,
     DynamicDateComponent,

@@ -16,12 +16,12 @@ export class NavComponent {
   myWorkRoutes: ROUTE[] = [
     {
       icon: 'assignment',
-      route: 'sales/activities',
-      title: 'Activities',
+      route: 'template',
+      title: 'Form Template',
     }, {
       icon: 'dashboard',
-      route: 'sales/dashboards',
-      title: 'Dashboards',
+      route: 'dashboard',
+      title: 'Dashboard',
     }
   ];
 
