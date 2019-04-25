@@ -1,6 +1,6 @@
 <command-bar class="crm-command-bar" fxHide.xs>
 
-  <ng-container *ngIf="newContact">
+  <ng-container *ngIf="isEdit">
 
     <button mat-button class="crm-command-bar-button"
             [disabled]="!isValid()"
@@ -18,14 +18,14 @@
 
   </ng-container>
 
-  <ng-container *ngIf="!newContact">
+  <ng-container *ngIf="!isEdit">
 
     <button mat-button class="crm-command-bar-button" (click)="onNew()">
       <mat-icon>add</mat-icon>
       NEW
     </button>
 
-    <button mat-button class="crm-command-bar-button" [disabled]="true">
+    <button mat-button class="crm-command-bar-button" [disabled]="false">
       <mat-icon>visibility</mat-icon>
       ACTIVATE
     </button>
@@ -42,23 +42,11 @@
 
   </ng-container>
 
-<!--
-  <div fxFlex fxLayout fxLayoutAlign="flex-end">
-
-    <button mat-button class="crm-command-bar-button" [disabled]="true">
-      <mat-icon>open_in_new</mat-icon>
-    </button>
-
-    <button mat-button class="crm-command-bar-button" [disabled]="true">
-      <mat-icon>clear</mat-icon>
-    </button>
-
-  </div>
--->
 </command-bar>
 
 
 <div #contentContainer class="crm-content-container">
+  
   <div class="crm-component-title-container">
     <h2 class="crm-component-title"> Form Template </h2>
   </div>

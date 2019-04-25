@@ -3,18 +3,17 @@
 
 @import "themes/black-deep-orange.theme";
 
+// Forms
 .demo-full-width {
   width: 100%;
 }
 
 .radio-label-padding {
   padding-right: 10px;
-  //color: grey;
-  display:flex ;
-  //width:100%;
   justify-content: justify-content;
 }
 
-.mat-radio-group{
-  
+mat-radio-button{
+  padding-right: 10px;
 }
+

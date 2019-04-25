@@ -9,8 +9,8 @@ import { DynamicFormComponent } from "../../dynamic-forms/components/dynamic-for
   styleUrls: ['./form-template.component.scss']
 })
 export class FormTemplateComponent{
-@ViewChild(DynamicFormComponent) form: DynamicFormComponent;
-  regConfig: FieldConfig[] = [
+  @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
+    regConfig: FieldConfig[] = [
     {
       type: "input",
       label: "Username",
