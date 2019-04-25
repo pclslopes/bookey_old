@@ -15,13 +15,14 @@ export class NavComponent {
 
   myWorkRoutes: ROUTE[] = [
     {
-      icon: 'assignment',
-      route: 'template',
-      title: 'Form Template',
-    }, {
       icon: 'dashboard',
       route: 'dashboard',
       title: 'Dashboard',
+    },
+    {
+      icon: 'assignment',
+      route: 'template',
+      title: 'Form Template',
     }
   ];
 
