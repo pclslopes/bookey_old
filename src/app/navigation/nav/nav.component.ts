@@ -30,18 +30,18 @@ export class NavComponent {
     {
       icon: 'contacts',
       route: 'template_old',
-      title: 'Old Tmplate',
+      title: 'Old Template',
     }, {
       icon: 'people',
-      route: 'sales/contacts',
+      route: '/',
       title: 'Contacts',
     }, {
       icon: 'settings_phone',
-      route: 'sales/leads',
+      route: '/',
       title: 'Leads',
     }, {
       icon: 'account_box',
-      route: 'sales/opportunities',
+      route: '/',
       title: 'Opportunities',
     }
   ];
