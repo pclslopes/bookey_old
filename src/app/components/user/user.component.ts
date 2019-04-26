@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FirebaseUserModel } from '../../servicescore/user.model';
+import { FirebaseUserModel } from '../../services/user.model';
 
 @Component({
   selector: 'page-user',
