@@ -1,27 +1,82 @@
-<nav class="navbar navbar-default navbar-static-top navbar-inverse">
-  <div class="container">
-    <a (click)="logout()" class="navbar-text navbar-right navbar-link">Logout</a>
+<command-bar class="crm-command-bar" fxHide.xs>
+
+  <ng-container *ngIf="newContact">
+
+    <button mat-button class="crm-command-bar-button"
+            [disabled]="!isValid()"
+            (click)="onSave()">
+      <mat-icon>save</mat-icon>
+      SAVE
+    </button>
+
+    <button mat-button class="crm-command-bar-button"
+            [disabled]="!isValid()"
+            (click)="onSaveAndClose()">
+      <mat-icon>arrow_back</mat-icon>
+      SAVE & CLOSE
+    </button>
+
+  </ng-container>
+
+  <ng-container *ngIf="!newContact">
+
+    <button mat-button class="crm-command-bar-button" (click)="save(profileForm.value)">
+      <mat-icon>save</mat-icon>
+      SAVE
+    </button>
+
+    <button mat-button class="crm-command-bar-button" [disabled]="false" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      LOGOUT
+    </button>
+
+  </ng-container>
+
+</command-bar>
+
+<div #contentContainer class="crm-content-container">
+  <div class="crm-component-title-container">
+    <h2 class="crm-component-title"> Profile </h2>
   </div>
-</nav>
-<h1 class="header">Logged User Page</h1>
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
-    <div class="card" style="width: 20rem;">
-      <img class="card-img-top image" [src]="user.image" *ngIf="user.image" alt="User image">
-      <img class="card-img-top image" src="https://via.placeholder.com/400x300" *ngIf="!user.image" alt="User image">
-      <div *ngIf='user.provider != "password"'class="card-body">
-        <h4 class="card-title">{{user.name}}</h4>
-        <p class="card-text">This is an example of Social Authentication using Firebase in an Angular 7 web app. </p>
-      </div>
-      <div *ngIf='user.provider == "password"'class="card-body">
-        <form [formGroup]="profileForm">
-          <div class="form-group">
-            <label>Your name</label>
-            <input type="text" formControlName="name" class="form-control" required>
-          </div>
-        </form>
-        <a (click)="save(profileForm.value)" class="btn btn-primary">Save</a>
-      </div>
-    </div>
-  </div>
-</div>
+
+  <ng-container>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            User Information
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          
+          <img class="card-img-top image" [src]="user.image" *ngIf="user.image" alt="User image">
+
+          <img class="card-img-top image" src="http://www.comolakechiropractic.com/wp-content/uploads/2018/06/female-placeholder.png" *ngIf="!user.image" alt="User image">
+
+          <ng-container *ngIf='user.provider == "password"'>
+
+            <form class="dynamic-form" [formGroup]="profileForm">
+          
+              <mat-form-field class="demo-full-width" [formGroup]="profileForm">
+                <input matInput [type]="text" formControlName="name" placeholder="Your Name">
+              </mat-form-field>
+
+            </form>
+
+            
+          </ng-container>
+
+          <ng-container *ngIf='user.provider != "password"'>
+            <h4 class="card-title">{{user.name}}</h4>
+          </ng-container>
+
+        </mat-card-content>
+      </mat-card> 
+
+
+
+
+  </ng-container> <!-- gridContainer -->
+
+</div> <!-- contentContainer -->

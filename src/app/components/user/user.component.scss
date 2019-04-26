@@ -1,0 +1,29 @@
+@import "../../../themes/mat-variables";
+@import "../../../themes/variables";
+
+.table-container {
+  /* margin-top: 64px; */
+  height: 400px;
+  overflow: auto;
+}
+
+.mat-card {
+  padding: 0;
+}
+
+.mat-card-header {
+  background: rgba(0, 0, 0, 0.04);
+  padding-top: 8px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mat-card-content {
+  padding: 16px;
+}
+
+.crm-content-container{
+  margin-top: 100px;
+}

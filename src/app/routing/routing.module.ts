@@ -2,8 +2,8 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-
+//import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 import { TemplateComponent, DialogContentComponent } from '../templates_old/templates.component';
 
 // Components
@@ -17,9 +17,8 @@ import { UserComponent } from '../components/user/user.component';
 import { UserResolver } from '../components/user/user.resolver';
 import { AuthGuard } from '../services/auth.guard';
 
-const routes: Routes = [
+export const rootRouterConfig: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterUserComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent,  resolve: { data: UserResolver}},
@@ -28,8 +27,8 @@ const routes: Routes = [
   { path: 'template_old', component: TemplateComponent },
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class RoutingModule { }
+//@NgModule({
+//  imports: [RouterModule.forRoot(routes)],
+//  exports: [RouterModule]
+//})
+//export class RoutingModule { }

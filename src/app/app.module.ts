@@ -7,10 +7,10 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatTableModule } from '@angular/material';
 
 // Modules
-import { RoutingModule } from './routing/routing.module';
+//import { RoutingModule } from './routing/routing.module';
 import { RouterModule } from '@angular/router';
 import { AppMaterialModule } from './app.material.module';
-import { Routes } from './routing/routing.module';
+import { rootRouterConfig } from './routing/routing.module';
 
 // Components
 import { AppComponent } from './app.component';
@@ -38,7 +38,7 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
 
 // Firebase
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
@@ -52,14 +52,11 @@ import { UserResolver } from './components/user/user.resolver';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(Routes, { useHash: false }),
+    RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    
     FormsModule,
-    //RoutingModule,
-    
     AppMaterialModule,
     BrowserAnimationsModule,
     MatTableModule,
@@ -99,6 +96,6 @@ import { UserResolver } from './components/user/user.resolver';
     DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
-  providers: [AuthService, UserService, UserResolver, AuthGuard],
+  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, AuthService, UserService, UserResolver, AuthGuard],
 })
 export class AppModule { }
