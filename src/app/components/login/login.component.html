@@ -1,4 +1,68 @@
+<command-bar class="crm-command-bar" fxHide.xs>
 
+    <ng-container *ngIf="!newContact">
+
+    <button mat-button class="crm-command-bar-button" (click)="save(profileForm.value)">
+      <mat-icon>save</mat-icon>
+      CREATE ACCOUNT
+    </button>
+
+  </ng-container>
+
+</command-bar>
+
+<div #contentContainer class="crm-content-container">
+  <div class="crm-component-title-container">
+    <h2 class="crm-component-title"> Login </h2>
+  </div>
+
+  <ng-container>
+
+      <mat-card>
+
+        <mat-card-content>
+   
+            <form class="dynamic-form" [formGroup]="loginForm">
+          
+              <mat-form-field class="demo-full-width" [formGroup]="loginForm">
+                <input matInput type="text" formControlName="email" placeholder="Email address">
+              </mat-form-field>
+              <mat-form-field class="demo-full-width" [formGroup]="loginForm">
+                <input matInput type="password" formControlName="password" placeholder="Password">
+              </mat-form-field>
+
+            </form>
+            <button mat-flat-button color="accent" (click)="tryLogin(loginForm.value)">Login</button>
+
+        </mat-card-content>
+      </mat-card> 
+
+      <br/>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Social Platforms
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+   
+          <ng-container>
+            <button mat-flat-button color="accent" class="facebookbtn" (click)="tryFacebookLogin()">Login with Facebook</button>
+          </ng-container>
+          <ng-container>
+            <button mat-flat-button color="accent" class="googlebtn" (click)="tryGoogleLogin()">Login with Google</button>
+          </ng-container>
+          <ng-container>
+            <button mat-flat-button color="accent" class="twitterbtn" (click)="tryTwitterLogin()">Login with Twitter</button>
+          </ng-container>
+
+        </mat-card-content>
+      </mat-card> 
+
+  </ng-container> <!-- gridContainer -->
+</div> <!-- contentContainer -->
 
 
 
