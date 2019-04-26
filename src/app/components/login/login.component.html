@@ -2,9 +2,9 @@
 
     <ng-container *ngIf="!newContact">
 
-    <button mat-button class="crm-command-bar-button" (click)="save(profileForm.value)">
-      <mat-icon>create</mat-icon>
-      CREATE ACCOUNT
+    <button mat-button class="crm-command-bar-button" [routerLink]="['/register']" routerLinkActive="active">
+      <mat-icon>person_add</mat-icon>
+      Don't have an account? CREATE ACCOUNT
     </button>
 
   </ng-container>
