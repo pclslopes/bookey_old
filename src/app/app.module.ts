@@ -19,6 +19,9 @@ import { NavigationBarComponent } from './navigation/navigation-bar/navigation-b
 import { PlaceholderComponent } from './navigation/placeholder/placeholder.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormTemplateComponent } from './components/form-template/form-template.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
+import { UserComponent } from './components/user/user.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -31,8 +34,17 @@ import { DynamicCheckboxComponent } from "./dynamic-forms/components/dynamic-che
 import { DynamicFieldDirective } from "./dynamic-forms/components/dynamic-field/dynamic-field.directive";
 import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dynamic-form.component";
 
+// Firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+
 @NgModule({
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     BrowserModule,
     FormsModule,
     RoutingModule,
@@ -46,6 +58,9 @@ import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dy
     DialogContentComponent,
     DashboardComponent,
     FormTemplateComponent,
+    LoginComponent,
+    RegisterUserComponent,
+    UserComponent,
     TemplateComponent,
     CommandBarComponent,
     NavComponent,

@@ -5,26 +5,19 @@
 export const environment = {
 
   production: false,
-
-  defaultLanguage: 'en-GB',
-
-  isDebugMode: true,
-
-  firebase: {
-    apiKey: '',
-    authDomain: '',
-    databaseURL: '',
-    projectId: '',
-    storageBucket: '',
-    messagingSenderId: ''
-  },
-
-  storageUriPrefix: 'https://firebasestorage.googleapis.com/v0/b/',
-
   version: '1.0.0-beta.1',
-
+  defaultLanguage: 'en-GB',
+  isDebugMode: true,
+  // Initialize Firebase
+  firebase: {
+    apiKey: "AIzaSyBfH63MEZZCE7_8YkExetcviJxwn8eNaSY",
+    authDomain: "bookey-dev.firebaseapp.com",
+    databaseURL: "https://bookey-dev.firebaseio.com",
+    projectId: "bookey-dev",
+    storageBucket: "bookey-dev.appspot.com",
+    messagingSenderId: "319067930874"
+  },
   sentryDsn: ''
-
 };
 
 /*
