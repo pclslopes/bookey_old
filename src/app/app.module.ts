@@ -8,7 +8,9 @@ import { MatTableModule } from '@angular/material';
 
 // Modules
 import { RoutingModule } from './routing/routing.module';
+import { RouterModule } from '@angular/router';
 import { AppMaterialModule } from './app.material.module';
+import { Routes } from './routing/routing.module';
 
 // Components
 import { AppComponent } from './app.component';
@@ -40,18 +42,28 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
+//Services
+import { AuthGuard } from './services/auth.guard';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { UserResolver } from './components/user/user.resolver';
+
 @NgModule({
   imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(Routes, { useHash: false }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
-    BrowserModule,
+    
     FormsModule,
-    RoutingModule,
+    //RoutingModule,
+    
     AppMaterialModule,
     BrowserAnimationsModule,
     MatTableModule,
-    ReactiveFormsModule,
+    
   ],
   declarations: [
     AppComponent, 
@@ -87,5 +99,6 @@ import { environment } from '../environments/environment';
     DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
+  providers: [AuthService, UserService, UserResolver, AuthGuard],
 })
 export class AppModule { }

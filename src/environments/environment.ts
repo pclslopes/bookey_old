@@ -10,7 +10,12 @@ export const environment = {
   isDebugMode: true,
   // Initialize Firebase
   firebase: {
-    
+    apiKey: "AIzaSyBfH63MEZZCE7_8YkExetcviJxwn8eNaSY",
+    authDomain: "bookey-dev.firebaseapp.com",
+    databaseURL: "https://bookey-dev.firebaseio.com",
+    projectId: "bookey-dev",
+    storageBucket: "bookey-dev.appspot.com",
+    messagingSenderId: "319067930874"
   },
   sentryDsn: ''
 };

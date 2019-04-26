@@ -18,7 +18,8 @@ import { UserResolver } from '../components/user/user.resolver';
 import { AuthGuard } from '../services/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterUserComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent,  resolve: { data: UserResolver}},
