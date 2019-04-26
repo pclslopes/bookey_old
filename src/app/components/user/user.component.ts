@@ -7,9 +7,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseUserModel } from '../../services/user.model';
 
 @Component({
-  selector: 'page-user',
+  selector: 'app-user',
   templateUrl: 'user.component.html',
-  styleUrls: ['user.scss']
+  styleUrls: ['user.component.scss']
 })
 export class UserComponent implements OnInit{
 
