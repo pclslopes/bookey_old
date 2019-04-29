@@ -13,7 +13,7 @@ interface ROUTE {
 })
 export class NavComponent {
 
-  myWorkRoutes: ROUTE[] = [
+  mainRoutes: ROUTE[] = [
     {
       icon: 'dashboard',
       route: 'dashboard',
@@ -26,7 +26,47 @@ export class NavComponent {
     }
   ];
 
-  customerRoutes: ROUTE[] = [
+  bookingRoutes: ROUTE[] = [
+    {
+      icon: 'contacts',
+      route: 'template_old',
+      title: 'Old Template',
+    }, {
+      icon: 'people',
+      route: '/',
+      title: 'Contacts',
+    }, {
+      icon: 'settings_phone',
+      route: '/',
+      title: 'Leads',
+    }, {
+      icon: 'account_box',
+      route: '/',
+      title: 'Opportunities',
+    }
+  ];
+
+  expensesRoutes: ROUTE[] = [
+    {
+      icon: 'contacts',
+      route: 'template_old',
+      title: 'Old Template',
+    }, {
+      icon: 'people',
+      route: '/',
+      title: 'Contacts',
+    }, {
+      icon: 'settings_phone',
+      route: '/',
+      title: 'Leads',
+    }, {
+      icon: 'account_box',
+      route: '/',
+      title: 'Opportunities',
+    }
+  ];
+
+  otherRoutes: ROUTE[] = [
     {
       icon: 'contacts',
       route: 'template_old',

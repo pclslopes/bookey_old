@@ -10,11 +10,11 @@
 
     <mat-nav-list>
 
-      <h2 matSubheader> Reservas </h2>
+      <h2 matSubheader> Bookings </h2>
 
       <a mat-list-item routerLink="/" style="height: 0;"></a>
 
-      <a *ngFor="let item of myWorkRoutes"
+      <a *ngFor="let item of bookingRoutes"
          mat-list-item
          (click)="sidenav.close()"
          routerLinkActive
@@ -27,9 +27,9 @@
 
       <mat-divider></mat-divider>
 
-      <h2 matSubheader> Despesas </h2>
+      <h2 matSubheader> Expenses </h2>
 
-      <a *ngFor="let item of customerRoutes"
+      <a *ngFor="let item of expensesRoutes"
          mat-list-item
          (click)="sidenav.close()"
          routerLinkActive
