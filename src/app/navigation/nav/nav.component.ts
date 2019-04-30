@@ -18,71 +18,54 @@ export class NavComponent {
       icon: 'dashboard',
       route: 'dashboard',
       title: 'Dashboard',
-    },
-    {
-      icon: 'assignment',
-      route: 'template',
-      title: 'Form Template',
     }
   ];
 
   bookingRoutes: ROUTE[] = [
     {
+      icon: 'bookmarks',
+      route: 'booking',
+      title: 'Bookings',
+    }, {
+      icon: 'date_range',
+      route: 'calendar',
+      title: 'Calendar',
+    }, {
+      icon: 'trending_up',
+      route: 'prices',
+      title: 'Prices',
+    }, {
       icon: 'contacts',
-      route: 'template_old',
-      title: 'Old Template',
-    }, {
-      icon: 'people',
-      route: '/',
-      title: 'Contacts',
-    }, {
-      icon: 'settings_phone',
-      route: '/',
-      title: 'Leads',
-    }, {
-      icon: 'account_box',
-      route: '/',
-      title: 'Opportunities',
+      route: 'guest-crm',
+      title: 'Guest CRM',
     }
   ];
 
   expensesRoutes: ROUTE[] = [
     {
-      icon: 'contacts',
-      route: 'template_old',
-      title: 'Old Template',
+      icon: 'add_shopping_cart',
+      route: 'expenses',
+      title: 'Expenses',
     }, {
-      icon: 'people',
-      route: '/',
-      title: 'Contacts',
+      icon: 'assignment',
+      route: 'comissions',
+      title: 'Comissions',
     }, {
-      icon: 'settings_phone',
-      route: '/',
-      title: 'Leads',
-    }, {
-      icon: 'account_box',
-      route: '/',
-      title: 'Opportunities',
+      icon: 'attach_money',
+      route: 'payments',
+      title: 'Payments',
     }
   ];
 
   otherRoutes: ROUTE[] = [
     {
+      icon: 'assignment',
+      route: 'template',
+      title: 'Form Template',
+    }, {
       icon: 'contacts',
       route: 'template_old',
       title: 'Old Template',
-    }, {
-      icon: 'people',
-      route: '/',
-      title: 'Contacts',
-    }, {
-      icon: 'settings_phone',
-      route: '/',
-      title: 'Leads',
-    }, {
-      icon: 'account_box',
-      route: '/',
-      title: 'Opportunities',
     }
   ];
 

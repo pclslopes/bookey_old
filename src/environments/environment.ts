@@ -10,7 +10,7 @@ export const environment = {
   isDebugMode: true,
   // Initialize Firebase
   firebase: {
-    
+
   },
   sentryDsn: ''
 };

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription} from 'rxjs';
+import * as firebase from "firebase";
 // Dynamic Forms
 //import { TestModel } from "../models/test-model.model";
 //import { DynamicFormModel, DynamicFormService } from "@ng-dynamic-forms/core";
@@ -83,6 +84,6 @@ export class DashboardComponent implements OnInit {
 
   public ngOnInit() {
     //this.formGroup = this.formService.createFormGroup(this.formModel);
-    
+    console.log(firebase.auth().currentUser);
   }
 }
