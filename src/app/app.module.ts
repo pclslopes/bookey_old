@@ -48,6 +48,8 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { UserResolver } from './components/user/user.resolver';
 
+import { Auth2Service } from './services/auth2.service';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -96,6 +98,6 @@ import { UserResolver } from './components/user/user.resolver';
     DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, AuthService, UserService, UserResolver, AuthGuard],
+  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, AuthService, UserService, UserResolver, AuthGuard, Auth2Service],
 })
 export class AppModule { }

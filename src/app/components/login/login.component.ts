@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service'
+import { Auth2Service } from '../../services/auth2.service'
 import { Router, RouterModule, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -14,7 +14,7 @@ export class LoginComponent {
   errorMessage: string = '';
 
   constructor(
-    public authService: AuthService,
+    public authService: Auth2Service,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -50,7 +50,7 @@ export class LoginComponent {
   }
 
   tryLogin(value){
-    this.authService.doLogin(value)
+    this.authService.doLogi(value)
     .then(res => {
       this.router.navigate(['/user']);
     }, err => {

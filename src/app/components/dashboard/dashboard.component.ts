@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription} from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 import * as firebase from "firebase";
 // Dynamic Forms
 //import { TestModel } from "../models/test-model.model";
@@ -78,12 +80,15 @@ export class DashboardComponent implements OnInit {
   dataSource = ELEMENT_DATA;
 
   //constructor(private formService: DynamicFormService) {
-  constructor() {
+  constructor(
+      public authService: AuthService,
+      private route: ActivatedRoute
+    ) {
 
   }
 
   public ngOnInit() {
     //this.formGroup = this.formService.createFormGroup(this.formModel);
-    console.log(firebase.auth().currentUser);
+    //console.log(firebase.auth().currentUser);
   }
 }
