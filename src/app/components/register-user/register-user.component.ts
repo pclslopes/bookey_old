@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Auth2Service } from '../../services/auth2.service'
+import { AuthService } from '../../services/auth.service'
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -15,7 +15,7 @@ export class RegisterUserComponent {
   successMessage: string = '';
 
   constructor(
-    public authService: Auth2Service,
+    public authService: AuthService,
     private router: Router,
     private fb: FormBuilder
   ) {

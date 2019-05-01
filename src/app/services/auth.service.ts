@@ -7,7 +7,7 @@ import { User } from  'firebase';
 @Injectable({
     providedIn:  'root'
 })
-export  class  Auth2Service {
+export  class  AuthService {
   
     user: User;
 
