@@ -10,13 +10,14 @@
 
     <mat-nav-list>
 
-      <a *ngFor="let item of mainRoutes"
-         mat-list-item
+      <a *ngFor="let item of mainRoutes" 
+         mat-list-item 
          (click)="sidenav.close()"
          routerLinkActive
          #routerLinkActiveInstance="routerLinkActive"
          [class.list-item-active]="routerLinkActiveInstance.isActive"
-         [routerLink]="[item.route]">
+         [routerLink]="[item.route]"
+         [hidden]="(!this.authService.isLoggedIn && item.showAnonymous == true) || (this.authService.isLoggedIn)">
         <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon>
         {{item.title}}
       </a>
@@ -26,14 +27,15 @@
       <h2 matSubheader> Bookings </h2>
 
       <a mat-list-item routerLink="/" style="height: 0;"></a>
-
-      <a *ngFor="let item of bookingRoutes"
+      
+      <a *ngFor="let item of bookingRoutes" 
          mat-list-item
          (click)="sidenav.close()"
          routerLinkActive
          #routerLinkActiveInstance="routerLinkActive"
          [class.list-item-active]="routerLinkActiveInstance.isActive"
-         [routerLink]="[item.route]">
+         [routerLink]="[item.route]"
+         [hidden]="(!this.authService.isLoggedIn && item.showAnonymous == true) || (this.authService.isLoggedIn && item.showAuth == true)">
         <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon>
         {{item.title}}
       </a>
@@ -42,13 +44,14 @@
 
       <h2 matSubheader> Expenses </h2>
 
-      <a *ngFor="let item of expensesRoutes"
+      <a *ngFor="let item of expensesRoutes" 
          mat-list-item
          (click)="sidenav.close()"
          routerLinkActive
          #routerLinkActiveInstance="routerLinkActive"
          [class.list-item-active]="routerLinkActiveInstance.isActive"
-         [routerLink]="[item.route]">
+         [routerLink]="[item.route]"
+         [hidden]="(!this.authService.isLoggedIn && item.showAnonymous == true) || (this.authService.isLoggedIn && item.showAuth == true)">
         <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon>
         {{item.title}}
       </a>
@@ -57,13 +60,14 @@
 
       <h2 matSubheader> Other </h2>
 
-      <a *ngFor="let item of otherRoutes"
+      <a *ngFor="let item of otherRoutes" 
          mat-list-item
          (click)="sidenav.close()"
          routerLinkActive
          #routerLinkActiveInstance="routerLinkActive"
          [class.list-item-active]="routerLinkActiveInstance.isActive"
-         [routerLink]="[item.route]">
+         [routerLink]="[item.route]"
+         [hidden]="(!this.authService.isLoggedIn && item.showAnonymous == true) || (this.authService.isLoggedIn && item.showAuth == true)">
         <mat-icon matListIcon class="app-nav-list-icon"> {{ item.icon }} </mat-icon>
         {{item.title}}
       </a>
@@ -73,7 +77,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <crm-navigation-bar *ngIf="isAuthenticated()" (toggleSidenav)="sidenav.toggle()"></crm-navigation-bar>
+    <crm-navigation-bar (toggleSidenav)="sidenav.toggle()"></crm-navigation-bar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 
