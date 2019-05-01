@@ -12,16 +12,18 @@ import { FormTemplateComponent } from '../components/form-template/form-template
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterUserComponent } from '../components/register-user/register-user.component';
 import { UserComponent } from '../components/user/user.component';
+import { HomeComponent } from '../components/home/home.component';
 
 // Authentication
 import { UserResolver } from '../components/user/user.resolver';
-
 import { AuthGuard } from  '../services/auth.guard';
+import { AnonymousGuard } from  '../services/anonymous.guard';
 
 export const rootRouterConfig: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterUserComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, canActivate: [AnonymousGuard]},
+  { path: 'login', component: LoginComponent, canActivate: [AnonymousGuard]},
+  { path: 'register', component: RegisterUserComponent, canActivate: [AnonymousGuard]},
   { path: 'user', component: UserComponent,  resolve: { data: UserResolver}, canActivate: [AuthGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'template', component: FormTemplateComponent, canActivate: [AuthGuard] },

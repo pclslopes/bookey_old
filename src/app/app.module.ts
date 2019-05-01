@@ -24,6 +24,7 @@ import { FormTemplateComponent } from './components/form-template/form-template.
 import { LoginComponent } from './components/login/login.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { UserComponent } from './components/user/user.component';
+import { HomeComponent } from './components/home/home.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -45,6 +46,7 @@ import { environment } from '../environments/environment';
 //Services
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
+import { AnonymousGuard } from './services/anonymous.guard';
 import { UserService } from './services/user.service';
 import { UserResolver } from './components/user/user.resolver';
 
@@ -70,6 +72,7 @@ import { UserResolver } from './components/user/user.resolver';
     LoginComponent,
     RegisterUserComponent,
     UserComponent,
+    HomeComponent,
     TemplateComponent,
     CommandBarComponent,
     NavComponent,
@@ -96,6 +99,6 @@ import { UserResolver } from './components/user/user.resolver';
     DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, AuthService, AuthGuard, UserService, UserResolver],
+  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, AuthService, AuthGuard, AnonymousGuard, UserService, UserResolver],
 })
 export class AppModule { }
