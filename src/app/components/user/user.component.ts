@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { AuthService } from '../../services/auth.service';
+import { Auth2Service } from '../../services/auth2.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -18,7 +18,7 @@ export class UserComponent implements OnInit{
 
   constructor(
     public userService: UserService,
-    public authService: AuthService,
+    public authService: Auth2Service,
     private route: ActivatedRoute,
     private location : Location,
     private fb: FormBuilder

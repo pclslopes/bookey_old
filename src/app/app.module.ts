@@ -43,8 +43,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 //Services
-import { AuthGuard } from './services/auth.guard';
-import { AuthService } from './services/auth.service';
+//import { AuthGuard } from './services/auth.guard';
+//import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { UserResolver } from './components/user/user.resolver';
 
@@ -99,6 +99,6 @@ import { Auth2Guard } from './services/auth2.guard';
     DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, AuthService, UserService, UserResolver, AuthGuard, Auth2Service, Auth2Guard],
+  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, Auth2Service, Auth2Guard, UserService, UserResolver],
 })
 export class AppModule { }

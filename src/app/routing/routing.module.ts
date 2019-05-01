@@ -15,7 +15,7 @@ import { UserComponent } from '../components/user/user.component';
 
 // Authentication
 import { UserResolver } from '../components/user/user.resolver';
-import { AuthGuard } from '../services/auth.guard';
+
 import { Auth2Guard } from  '../services/auth2.guard';
 
 export const rootRouterConfig: Routes = [

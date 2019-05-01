@@ -7,7 +7,6 @@ export const environment = {
   production: false,
   version: '1.0.0-beta.1',
   defaultLanguage: 'en-GB',
-  isDebugMode: true,
   // Initialize Firebase
   firebase: {
     apiKey: "AIzaSyBfH63MEZZCE7_8YkExetcviJxwn8eNaSY",
@@ -16,8 +15,7 @@ export const environment = {
     projectId: "bookey-dev",
     storageBucket: "bookey-dev.appspot.com",
     messagingSenderId: "319067930874"
-  },
-  sentryDsn: ''
+  }
 };
 
 /*
