@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Auth2Service } from '../../services/auth2.service';
 
 @Component({
   selector: 'crm-navigation-bar',
@@ -10,16 +11,22 @@ export class NavigationBarComponent {
 
   @Output() toggleSidenav = new EventEmitter<void>();
 
-  constructor(private router: Router) {}
+  constructor(
+      public authService: Auth2Service,
+      private router: Router
+    ) {}
 
-  public profile() {
-    //this.authService.logout();
-    this.router.navigate(['/']);
+  public navProfile() {
+    this.router.navigate(['user']);
   }
 
   public logout() {
-    //this.authService.logout();
+    this.authService.doLogout();
     this.router.navigate(['/']);
+  }
+
+  public login() {
+    this.router.navigate(['login']);
   }
 
 }

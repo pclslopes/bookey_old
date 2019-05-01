@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service'
+import { Auth2Service } from '../../services/auth2.service'
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -15,7 +15,7 @@ export class RegisterUserComponent {
   successMessage: string = '';
 
   constructor(
-    public authService: AuthService,
+    public authService: Auth2Service,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -30,27 +30,27 @@ export class RegisterUserComponent {
    }
 
    tryFacebookLogin(){
-     this.authService.doFacebookLogin()
-     .then(res =>{
-       this.router.navigate(['/user']);
-     }, err => console.log(err)
-     )
+     //this.authService.doFacebookLogin()
+     //.then(res =>{
+     //  this.router.navigate(['/user']);
+     //}, err => console.log(err)
+     //)
    }
 
    tryTwitterLogin(){
-     this.authService.doTwitterLogin()
-     .then(res =>{
-       this.router.navigate(['/user']);
-     }, err => console.log(err)
-     )
+     //this.authService.doTwitterLogin()
+     //.then(res =>{
+     //  this.router.navigate(['/user']);
+     //}, err => console.log(err)
+     //)
    }
 
    tryGoogleLogin(){
-     this.authService.doGoogleLogin()
-     .then(res =>{
-       this.router.navigate(['/user']);
-     }, err => console.log(err)
-     )
+     //this.authService.doGoogleLogin()
+     //.then(res =>{
+     //  this.router.navigate(['/user']);
+     //}, err => console.log(err)
+     //)
    }
 
    tryRegister(value){

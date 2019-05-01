@@ -29,33 +29,34 @@ export class LoginComponent {
   }
 
   tryFacebookLogin(){
-    this.authService.doFacebookLogin()
-    .then(res => {
-      this.router.navigate(['/user']);
-    })
+    //this.authService.doFacebookLogin()
+    //.then(res => {
+    //  this.router.navigate(['/user']);
+    //})
   }
 
   tryTwitterLogin(){
-    this.authService.doTwitterLogin()
-    .then(res => {
-      this.router.navigate(['/user']);
-    })
+    //this.authService.doTwitterLogin()
+    //.then(res => {
+    //  this.router.navigate(['/user']);
+    //})
   }
 
   tryGoogleLogin(){
-    this.authService.doGoogleLogin()
-    .then(res => {
-      this.router.navigate(['/user']);
-    })
+    //this.authService.doGoogleLogin()
+    //.then(res => {
+    //  this.router.navigate(['/user']);
+    //})
   }
 
   tryLogin(value){
-    this.authService.doLogi(value)
-    .then(res => {
-      this.router.navigate(['/user']);
-    }, err => {
-      console.log(err);
-      this.errorMessage = err.message;
-    })
+    this.authService.doLogin(value);
+    //this.authService.doLogi(value)
+    //.then(res => {
+    //  this.router.navigate(['/user']);
+    //}, err => {
+    //  console.log(err);
+    //  this.errorMessage = err.message;
+    //})
   }
 }

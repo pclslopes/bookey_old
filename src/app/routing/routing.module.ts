@@ -16,15 +16,16 @@ import { UserComponent } from '../components/user/user.component';
 // Authentication
 import { UserResolver } from '../components/user/user.resolver';
 import { AuthGuard } from '../services/auth.guard';
+import { Auth2Guard } from  '../services/auth2.guard';
 
 export const rootRouterConfig: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterUserComponent },
-  { path: 'user', component: UserComponent,  resolve: { data: UserResolver}, canActivate: [AuthGuard]},
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'template', component: FormTemplateComponent },
-  { path: 'template_old', component: TemplateComponent },
+  { path: 'user', component: UserComponent,  resolve: { data: UserResolver}, canActivate: [Auth2Guard]},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [Auth2Guard] },
+  { path: 'template', component: FormTemplateComponent, canActivate: [Auth2Guard] },
+  { path: 'template_old', component: TemplateComponent, canActivate: [Auth2Guard] },
 ];
 
 //@NgModule({

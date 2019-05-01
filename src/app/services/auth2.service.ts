@@ -23,9 +23,9 @@ export  class  Auth2Service {
 
     }
 
-  async doLogin(email:  string, password:  string) {
+  async doLogin(value) {
     try {
-        await this.afAuth.auth.signInWithEmailAndPassword(email, password)
+        await this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password)
         this.router.navigate(['dashboard']);
     } catch (e) {
         alert("Error!" + e.message);
@@ -36,6 +36,15 @@ export  class  Auth2Service {
       await this.afAuth.auth.signOut();
       localStorage.removeItem('user');
       this.router.navigate(['login']);
+  }
+
+  doRegister(value){
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.auth.createUserWithEmailAndPassword(value.email, value.password)
+      .then(res => {
+        resolve(res);
+      }, err => reject(err))
+    })
   }
 
   get isLoggedIn(): boolean {
