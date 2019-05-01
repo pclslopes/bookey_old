@@ -1,0 +1,33 @@
+<command-bar class="crm-command-bar" fxHide.xs>
+
+    <ng-container *ngIf="!newContact">
+
+    <button mat-button class="crm-command-bar-button" [routerLink]="['/login']" routerLinkActive="active">
+      <mat-icon>fingerprint</mat-icon>
+      Already have an account? LOGIN
+    </button>
+
+  </ng-container>
+
+</command-bar>
+
+<div #contentContainer class="crm-content-container">
+  <div class="crm-component-title-container">
+    <h2 class="crm-component-title"> Bookey </h2>
+  </div>
+
+  <ng-container>
+
+      <mat-card>
+
+        <mat-card-content>
+   
+            
+
+        </mat-card-content>
+      </mat-card> 
+
+      <br/>
+
+  </ng-container>
+</div>
