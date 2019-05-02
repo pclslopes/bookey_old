@@ -5,8 +5,6 @@ interface ROUTE {
   icon?: string;
   route?: string;
   title?: string;
-  showAnonymous?: boolean;
-  showAuth?: boolean;
 }
 
 @Component({
@@ -16,28 +14,35 @@ interface ROUTE {
 })
 export class NavComponent {
 
-  mainRoutes: ROUTE[] = [
-    {
-      icon: 'dashboard',
-      route: 'dashboard',
-      title: 'Dashboard',
-      showAnonymous: false,
-      showAuth: true
-    },
+anonymousRoutes: ROUTE[] = [
     {
       icon: 'dashboard',
       route: 'home',
       title: 'Home',
-      showAnonymous: true,
-      showAuth: false
     },
     {
       icon: 'fingerprint',
       route: 'login',
       title: 'Login',
-      showAnonymous: true,
-      showAuth: false
     },
+    {
+      icon: 'fingerprint',
+      route: 'login',
+      title: 'Login',
+    },
+  ];
+
+  mainRoutes: ROUTE[] = [
+    {
+      icon: 'dashboard',
+      route: 'dashboard',
+      title: 'Dashboard',
+    },
+    {
+      icon: 'dashboard',
+      route: 'home',
+      title: 'Home',
+    }
   ];
 
   bookingRoutes: ROUTE[] = [
@@ -45,26 +50,18 @@ export class NavComponent {
       icon: 'bookmarks',
       route: 'booking',
       title: 'Bookings',
-      showAnonymous: false,
-      showAuth: true
     }, {
       icon: 'date_range',
       route: 'calendar',
       title: 'Calendar',
-      showAnonymous: false,
-      showAuth: true
     }, {
       icon: 'trending_up',
       route: 'prices',
       title: 'Prices',
-      showAnonymous: false,
-      showAuth: true
     }, {
       icon: 'contacts',
       route: 'guest-crm',
       title: 'Guest CRM',
-      showAnonymous: false,
-      showAuth: true
     }
   ];
 
@@ -73,20 +70,14 @@ export class NavComponent {
       icon: 'add_shopping_cart',
       route: 'expenses',
       title: 'Expenses',
-      showAnonymous: false,
-      showAuth: true
     }, {
       icon: 'assignment',
       route: 'comissions',
       title: 'Comissions',
-      showAnonymous: false,
-      showAuth: true
     }, {
       icon: 'attach_money',
       route: 'payments',
       title: 'Payments',
-      showAnonymous: false,
-      showAuth: true
     }
   ];
 
@@ -95,14 +86,10 @@ export class NavComponent {
       icon: 'assignment',
       route: 'template',
       title: 'Form Template',
-      showAnonymous: true,
-      showAuth: true
     }, {
       icon: 'contacts',
       route: 'template_old',
       title: 'Old Template',
-      showAnonymous: true,
-      showAuth: true
     }
   ];
 
