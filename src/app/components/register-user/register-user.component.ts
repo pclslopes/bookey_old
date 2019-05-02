@@ -60,7 +60,7 @@ export class RegisterUserComponent {
      this.authService.doRegister(value)
      .then(res => {
        console.log(res);
-       
+       this.snackbar.open("", 'OK', { duration: 3000 });
      }, err => {
        console.log(err);
        this.snackbar.open(err.message, 'OK', { duration: 3000 });
