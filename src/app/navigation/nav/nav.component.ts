@@ -24,12 +24,7 @@ anonymousRoutes: ROUTE[] = [
       icon: 'fingerprint',
       route: 'login',
       title: 'Login',
-    },
-    {
-      icon: 'fingerprint',
-      route: 'login',
-      title: 'Login',
-    },
+    }
   ];
 
   mainRoutes: ROUTE[] = [
