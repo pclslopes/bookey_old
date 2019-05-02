@@ -24,10 +24,12 @@
    
             <form class="dynamic-form" [formGroup]="loginForm">
           
-              <mat-form-field class="demo-full-width" [formGroup]="loginForm">
+              <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker="false" class="demo-full-width" [formGroup]="loginForm">
+                <mat-label>Email address</mat-label>
                 <input matInput type="text" formControlName="email" placeholder="Email address">
               </mat-form-field>
-              <mat-form-field class="demo-full-width" [formGroup]="loginForm">
+              <mat-form-field appearance="outline" floatLabel="always" hideRequiredMarker="false" class="demo-full-width" [formGroup]="loginForm">
+                <mat-label>Password</mat-label>
                 <input matInput type="password" formControlName="password" placeholder="Password">
               </mat-form-field>
 

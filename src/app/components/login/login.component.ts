@@ -18,6 +18,10 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder
   ) {
+    this.loginForm = fb.group({
+      hideRequired: false,
+      floatLabel: 'never',
+    });
     this.createForm();
   }
 
