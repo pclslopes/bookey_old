@@ -23,12 +23,15 @@ export  class  AuthService {
 
     }
 
-  async doLogin(value) {
+  async doLogin(value):Promise<string> {
     try {
         await this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password)
         this.router.navigate(['dashboard']);
     } catch (e) {
-        alert("Error!" + e.message);
+      return new Promise<string>((error) => {
+        error(e.message);
+      });
+        //return new Promise("Error!" + e.message);
     }
   }
 
@@ -38,7 +41,7 @@ export  class  AuthService {
       this.router.navigate(['login']);
   }
 
-  doRegister(value){
+  doRegister(value):Promise<any>{
     return new Promise<any>((resolve, reject) => {
       this.afAuth.auth.createUserWithEmailAndPassword(value.email, value.password)
       .then(res => {

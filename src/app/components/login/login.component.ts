@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
 import { Router, RouterModule, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -9,26 +11,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['login.component.scss']
 })
 export class LoginComponent {
-
+  
+  env = environment;
   loginForm: FormGroup;
   errorMessage: string = '';
 
   constructor(
     public authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackbar: MatSnackBar
   ) {
-    this.loginForm = fb.group({
-      hideRequired: false,
-      floatLabel: 'never',
-    });
+    
     this.createForm();
   }
 
   createForm() {
     this.loginForm = this.fb.group({
       email: ['', Validators.required ],
-      password: ['',Validators.required]
+      password: ['',Validators.required ]
     });
   }
 
@@ -54,7 +55,18 @@ export class LoginComponent {
   }
 
   tryLogin(value){
-    this.authService.doLogin(value);
+    // Validations
+    if(!value.email || !value.password){
+      this.snackbar.open('Invalid email or password', 'OK', { duration: 3000 });
+      return;
+    }
+
+    this.authService.doLogin(value).then((results) => {
+      if(results){
+        this.snackbar.open(results, 'OK', { duration: 3000 });
+      }
+    });
+
     //this.authService.doLogi(value)
     //.then(res => {
     //  this.router.navigate(['/user']);

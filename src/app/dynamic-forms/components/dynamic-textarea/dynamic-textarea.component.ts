@@ -5,7 +5,7 @@ import { FieldConfig } from "../../interfaces/dynamic-field.interface";
   selector: "app-textarea",
   template: `
     <mat-form-field class="demo-full-width" [formGroup]="group" appearance="outline" floatLabel="always" hideRequiredMarker="false">
-    
+      <mat-label>{{field.label}}</mat-label>
       <textarea matInput [formControlName]="field.name" [placeholder]="field.label"></textarea>
       <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
         <mat-error *ngIf="group.get(field.name).hasError(validation.name)">{{validation.message}}</mat-error>

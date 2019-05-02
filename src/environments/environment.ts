@@ -7,6 +7,7 @@ export const environment = {
   production: false,
   version: '1.0.0-beta.1',
   defaultLanguage: 'en-GB',
+  socialLogins: false,
   // Initialize Firebase
   firebase: {
     apiKey: "AIzaSyBfH63MEZZCE7_8YkExetcviJxwn8eNaSY",

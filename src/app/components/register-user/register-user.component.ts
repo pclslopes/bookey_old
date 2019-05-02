@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-register-user',
@@ -10,14 +12,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterUserComponent {
 
+  env = environment;
   registerForm: FormGroup;
-  errorMessage: string = '';
-  successMessage: string = '';
 
   constructor(
     public authService: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackbar: MatSnackBar
   ) {
     this.createForm();
    }
@@ -25,7 +27,8 @@ export class RegisterUserComponent {
    createForm() {
      this.registerForm = this.fb.group({
        email: ['', Validators.required ],
-       password: ['',Validators.required]
+       password: ['',Validators.required],
+       repeat_password: ['',Validators.required]
      });
    }
 
@@ -57,12 +60,11 @@ export class RegisterUserComponent {
      this.authService.doRegister(value)
      .then(res => {
        console.log(res);
-       this.errorMessage = "";
-       this.successMessage = "Your account has been created";
+       
      }, err => {
        console.log(err);
-       this.errorMessage = err.message;
-       this.successMessage = "";
+       this.snackbar.open(err.message, 'OK', { duration: 3000 });
+       
      })
    }
 
