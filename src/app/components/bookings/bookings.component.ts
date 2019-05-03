@@ -30,7 +30,6 @@ export class BookingsComponent implements OnInit {
           checkoutDate: e.payload.doc.data().checkoutDate,
           customerId: e.payload.doc.data().customerId,
           customerName: e.payload.doc.data().customerName,
-          //...e.payload.doc.data()
         } as BookingModel;
       })
     });

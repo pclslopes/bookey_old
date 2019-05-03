@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { BookingModel } from '../models/booking.model';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class BookingsService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(
+      private firestore: AngularFirestore,
+      public authService: AuthService,) { }
 
   getBookings() {
-      return this.firestore.collection('bookings').snapshotChanges();
+    return this.firestore.collection('bookings', ref => ref.where('companyId', '==', "234234")).snapshotChanges();
   }
 
   createBooking(booking: BookingModel){
