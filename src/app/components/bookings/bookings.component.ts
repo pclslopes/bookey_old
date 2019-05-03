@@ -1,0 +1,42 @@
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { BookingsService } from '../../services/bookings.service';
+import { BookingModel } from '../../models/booking.model';
+
+@Component({
+  selector: 'app-bookings',
+  templateUrl: './bookings.component.html',
+  styleUrls: ['./bookings.component.scss']
+})
+export class BookingsComponent implements OnInit {
+
+  bookings: BookingModel[];
+  displayedColumns: string[] = [ 'customerName', 'checkinDate', 'checkoutDate', 'propertyName'];
+
+  constructor(
+      public authService: AuthService,
+      private route: ActivatedRoute,
+      private bookingService: BookingsService) { }
+
+  ngOnInit() {
+    this.bookingService.getBookings().subscribe(data => {
+      this.bookings = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          propertyId:  e.payload.doc.propertyId,
+          propertyName: e.payload.doc.propertyName,
+          checkinDate: e.payload.doc.checkinDate,
+          checkoutDate: e.payload.doc.checkoutDate,
+          customerId: e.payload.doc.customerId,
+          customerName: e.payload.doc.customerName,
+          //...e.payload.doc.data()
+        } as BookingModel;
+      })
+    });
+  }
+
+  private newBooking(){
+
+  }
+}

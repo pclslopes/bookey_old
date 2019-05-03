@@ -25,6 +25,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './components/home/home.component';
+import { BookingsComponent } from './components/bookings/bookings.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -49,6 +50,7 @@ import { AuthGuard } from './services/auth.guard';
 import { AnonymousGuard } from './services/anonymous.guard';
 import { UserService } from './services/user.service';
 import { UserResolver } from './components/user/user.resolver';
+import { BookingsService } from './services/bookings.service';
 
 @NgModule({
   imports: [
@@ -73,6 +75,7 @@ import { UserResolver } from './components/user/user.resolver';
     RegisterUserComponent,
     UserComponent,
     HomeComponent,
+    BookingsComponent,
     TemplateComponent,
     CommandBarComponent,
     NavComponent,
@@ -99,6 +102,6 @@ import { UserResolver } from './components/user/user.resolver';
     DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, AuthService, AuthGuard, AnonymousGuard, UserService, UserResolver],
+  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, AuthService, AuthGuard, AnonymousGuard, UserService, UserResolver, BookingsService],
 })
 export class AppModule { }
