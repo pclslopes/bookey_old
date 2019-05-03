@@ -24,12 +24,12 @@ export class BookingsComponent implements OnInit {
       this.bookings = data.map(e => {
         return {
           id: e.payload.doc.id,
-          propertyId:  e.payload.doc.propertyId,
-          propertyName: e.payload.doc.propertyName,
-          checkinDate: e.payload.doc.checkinDate,
-          checkoutDate: e.payload.doc.checkoutDate,
-          customerId: e.payload.doc.customerId,
-          customerName: e.payload.doc.customerName,
+          propertyId:  e.payload.doc.data().propertyId,
+          propertyName: e.payload.doc.data().propertyName,
+          checkinDate: e.payload.doc.data().checkinDate,
+          checkoutDate: e.payload.doc.data().checkoutDate,
+          customerId: e.payload.doc.data().customerId,
+          customerName: e.payload.doc.data().customerName,
           //...e.payload.doc.data()
         } as BookingModel;
       })
