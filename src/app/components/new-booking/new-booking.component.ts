@@ -9,7 +9,10 @@ import { FieldConfig } from "../../dynamic-forms/interfaces/dynamic-field.interf
   styleUrls: ['./new-booking.component.scss']
 })
 export class NewBookingComponent implements OnInit {
- @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
+  
+  isEdit = false;
+
+  @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
     regConfig: FieldConfig[] = [
     {
       type: "input",
@@ -24,7 +27,7 @@ export class NewBookingComponent implements OnInit {
         },
         {
           name: "pattern",
-          validator: Validators.pattern("^[a-zA-Z]+$"),
+          validator: Validators.pattern("^[a-zA-Z ]+$"),
           message: "Accept only text"
         }
       ]
@@ -42,79 +45,40 @@ export class NewBookingComponent implements OnInit {
         },
         {
           name: "pattern",
-          validator: Validators.pattern(
-            "^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"
-          ),
+          validator: Validators.pattern("^[a-zA-Z ]+$"),
           message: "Accept only text"
         }
       ]
-    },
-    {
-      type: "input",
-      label: "Password",
-      inputType: "password",
-      name: "password",
-      validations: [
-        {
-          name: "required",
-          validator: Validators.required,
-          message: "Password Required"
-        }
-      ]
-    },
-    {
-      type: "radiobutton",
-      label: "Gender",
-      name: "gender",
-      options: ["Male", "Female"],
-      value: "Male"
     },
     {
       type: "date",
-      label: "DOB",
-      name: "dob",
+      label: "Check-in",
+      name: "checkInDate",
       validations: [
         {
           name: "required",
           validator: Validators.required,
-          message: "Date of Birth Required"
+          message: "Check-In Date Required"
         }
       ]
     },
     {
-      type: "select",
-      label: "Country",
-      name: "country",
-      value: "UK",
-      options: ["India", "UAE", "UK", "US"]
-    },
-    {
-      type: "checkbox",
-      label: "Accept Terms",
-      name: "term",
-      value: true
-    },
-    {
-      type: "textarea",
-      label: "Text Area",
-      inputType: "textarea",
-      name: "name2",
+      type: "date",
+      label: "Check-out",
+      name: "checkOutDate",
       validations: [
         {
           name: "required",
           validator: Validators.required,
-          message: "Name Required"
-        },
-        {
-          name: "pattern",
-          validator: Validators.pattern("^[a-zA-Z]+$"),
-          message: "Accept only text"
+          message: "Check-Out Date Required"
         }
       ]
     }
   ];
 
-  submit(value: any) {}
+  submit(value: any) {
+    alert('test');
+  }
 
   ngOnInit() {
   }
