@@ -32,11 +32,6 @@ anonymousRoutes: ROUTE[] = [
       icon: 'dashboard',
       route: 'dashboard',
       title: 'Dashboard',
-    },
-    {
-      icon: 'dashboard',
-      route: 'home',
-      title: 'Home',
     }
   ];
 
