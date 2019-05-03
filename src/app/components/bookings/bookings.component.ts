@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from  "@angular/router";
 import { BookingsService } from '../../services/bookings.service';
 import { BookingModel } from '../../models/booking.model';
 
@@ -17,7 +18,8 @@ export class BookingsComponent implements OnInit {
   constructor(
       public authService: AuthService,
       private route: ActivatedRoute,
-      private bookingService: BookingsService) { }
+      private bookingService: BookingsService,
+      public router: Router) { }
 
   ngOnInit() {
     this.bookingService.getBookings().subscribe(data => {
@@ -36,6 +38,6 @@ export class BookingsComponent implements OnInit {
   }
 
   private newBooking(){
-
+    this.router.navigate(['new-booking']);
   }
 }

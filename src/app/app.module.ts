@@ -26,6 +26,7 @@ import { RegisterUserComponent } from './components/register-user/register-user.
 import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './components/home/home.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
+import { NewBookingComponent } from './components/new-booking/new-booking.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -76,6 +77,7 @@ import { BookingsService } from './services/bookings.service';
     UserComponent,
     HomeComponent,
     BookingsComponent,
+    NewBookingComponent,
     TemplateComponent,
     CommandBarComponent,
     NavComponent,

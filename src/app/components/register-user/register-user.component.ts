@@ -56,16 +56,19 @@ export class RegisterUserComponent {
      //)
    }
 
-   tryRegister(value){
-     this.authService.doRegister(value)
-     .then(res => {
-       console.log(res);
-       this.snackbar.open("", 'OK', { duration: 3000 });
-     }, err => {
-       console.log(err);
-       this.snackbar.open(err.message, 'OK', { duration: 3000 });
-       
-     })
-   }
+    tryRegister(value){
+      if(value.password != value.repeat_password){
+        this.snackbar.open("Passwords differ", 'OK', { duration: 3000 });
+      }
+
+      this.authService.doRegister(value)
+      .then(res => {
+        console.log(res);
+        this.snackbar.open("User registered successfully", 'OK', { duration: 3000 });
+      }, err => {
+        console.log(err);
+        this.snackbar.open(err.message, 'OK', { duration: 3000 });
+      })
+    }
 
 }
