@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FirebaseUserModel } from '../../services/user.model';
+import { FirebaseUserModel } from '../../models/user.model';
 
 @Component({
   selector: 'app-user',
@@ -31,6 +31,7 @@ export class UserComponent implements OnInit{
       let data = routeData['data'];
       if (data) {
         this.user = data;
+        //alert(JSON.stringify(data));
         this.createForm(this.user.name);
       }
     })
