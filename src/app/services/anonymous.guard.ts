@@ -15,7 +15,7 @@ export class AnonymousGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       if(this.authService.isLoggedIn){
-        this.router.navigate(['/dashboard']);
+        //this.router.navigate(['/dashboard']);
         return false;
       }else{
         return true;

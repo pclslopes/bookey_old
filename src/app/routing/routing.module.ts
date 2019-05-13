@@ -24,7 +24,7 @@ import { AnonymousGuard } from  '../services/anonymous.guard';
 export const rootRouterConfig: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: '404' },
-  { path: '404', component: HomeComponent, canActivate: [AnonymousGuard] },
+  { path: '404',  redirectTo: 'home' },
   { path: 'home', component: HomeComponent, canActivate: [AnonymousGuard]},
   { path: 'login', component: LoginComponent, canActivate: [AnonymousGuard]},
   { path: 'register', component: RegisterUserComponent, canActivate: [AnonymousGuard]},
