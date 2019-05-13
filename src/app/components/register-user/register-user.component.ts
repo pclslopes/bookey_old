@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service'
+import { AuthParseService } from '../../services/auth.parse.service'
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -16,7 +16,7 @@ export class RegisterUserComponent {
   registerForm: FormGroup;
 
   constructor(
-    public authService: AuthService,
+    public authService: AuthParseService,
     private router: Router,
     private fb: FormBuilder,
     private snackbar: MatSnackBar

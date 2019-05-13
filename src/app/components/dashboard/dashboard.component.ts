@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription} from 'rxjs';
-import { AuthService } from '../../services/auth.service';
+import { AuthParseService } from '../../services/auth.parse.service';
 import { ActivatedRoute } from '@angular/router';
-import * as firebase from "firebase";
+//import * as firebase from "firebase";
 // Dynamic Forms
 //import { TestModel } from "../models/test-model.model";
 //import { DynamicFormModel, DynamicFormService } from "@ng-dynamic-forms/core";
@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
 
   //constructor(private formService: DynamicFormService) {
   constructor(
-      public authService: AuthService,
+      public authService: AuthParseService,
       private route: ActivatedRoute
     ) {
 

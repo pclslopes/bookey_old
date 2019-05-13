@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthParseService } from '../../services/auth.parse.service';
 
 @Component({
   selector: 'crm-navigation-bar',
@@ -12,7 +12,7 @@ export class NavigationBarComponent {
   @Output() toggleSidenav = new EventEmitter<void>();
 
   constructor(
-      public authService: AuthService,
+      public authService: AuthParseService,
       private router: Router
     ) {}
 

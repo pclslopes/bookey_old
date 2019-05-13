@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthParseService } from '../../services/auth.parse.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookingsService } from '../../services/bookings.service';
 import { BookingModel } from '../../models/booking.model';
@@ -15,7 +15,7 @@ export class BookingsComponent implements OnInit {
   displayedColumns: string[] = [ 'customerName', 'checkinDate', 'checkoutDate', 'propertyName'];
 
   constructor(
-      public authService: AuthService,
+      public authService: AuthParseService,
       private route: ActivatedRoute,
       private bookingService: BookingsService,
       public router: Router) { }

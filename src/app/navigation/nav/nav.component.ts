@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service'
+import { AuthParseService } from '../../services/auth.parse.service'
 
 interface ROUTE {
   icon?: string;
@@ -83,7 +83,7 @@ anonymousRoutes: ROUTE[] = [
     }
   ];
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthParseService) {}
 
 }
 

@@ -40,13 +40,14 @@ import { DynamicFieldDirective } from "./dynamic-forms/components/dynamic-field/
 import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dynamic-form.component";
 
 // Firebase
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+//import { AngularFireModule } from '@angular/fire';
+//import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+//import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 //Services
-import { AuthService } from './services/auth.service';
+//import { AuthService } from './services/auth.service';
+import { AuthParseService } from './services/auth.parse.service';
 import { AuthGuard } from './services/auth.guard';
 import { AnonymousGuard } from './services/anonymous.guard';
 import { UserService } from './services/user.service';
@@ -58,9 +59,9 @@ import { BookingsService } from './services/bookings.service';
     BrowserModule,
     ReactiveFormsModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    //AngularFireModule.initializeApp(environment.firebase),
+    //AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    //AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     FormsModule,
     AppMaterialModule,
     BrowserAnimationsModule,
@@ -104,6 +105,6 @@ import { BookingsService } from './services/bookings.service';
     DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, AuthService, AuthGuard, AnonymousGuard, UserService, UserResolver, BookingsService],
+  providers: [/*{ provide: FirestoreSettingsToken, useValue: {} },*/ AuthParseService, AuthGuard, AnonymousGuard, UserService, UserResolver, BookingsService],
 })
 export class AppModule { }

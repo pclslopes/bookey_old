@@ -16,6 +16,11 @@ export const environment = {
     projectId: "bookey-dev",
     storageBucket: "bookey-dev.appspot.com",
     messagingSenderId: "319067930874"
+  },
+  parseServer: {
+    PARSE_APP_ID: 'hVu6Jo2ExNwBnY1XovS8c8crncqWHjxVnHmPt3VQ',
+    PARSE_JS_KEY: 'r8SgEsW6gOCFGK3UwBGPLiP0x3Y0cwP3TMOjAcuc',
+    serverURL: 'https://parseapi.back4app.com'
   }
 };
 
