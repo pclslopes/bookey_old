@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import 'rxjs/add/operator/toPromise';
+import { AuthParseService} from './auth.parse.service';
 //import { AngularFirestore } from '@angular/fire/firestore';
 //import { AngularFireAuth } from '@angular/fire/auth';
 //import * as firebase from 'firebase/app';
@@ -8,6 +9,7 @@ import 'rxjs/add/operator/toPromise';
 export class UserService {
 
   constructor(
+    public authService: AuthParseService
    //public db: AngularFirestore,
    //public afAuth: AngularFireAuth
  ){
@@ -15,6 +17,7 @@ export class UserService {
 
 
   getCurrentUser(){
+    return 
     //return new Promise<any>((resolve, reject) => {
     //  var user = firebase.auth().onAuthStateChanged(function(user){
     //    if (user) {

@@ -1,4 +1,4 @@
-export class FirebaseUserModel {
+export class UserModel {
   image: string;
   name: string;
   email: string;

@@ -65,6 +65,7 @@ export class RegisterUserComponent {
       .then(res => {
         console.log(res);
         this.snackbar.open("User registered successfully", 'OK', { duration: 3000 });
+        this.router.navigate(['/login']);
       }, err => {
         console.log(err);
         this.snackbar.open(err.message, 'OK', { duration: 3000 });

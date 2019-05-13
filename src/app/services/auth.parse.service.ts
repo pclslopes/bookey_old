@@ -63,6 +63,10 @@ export class AuthParseService {
     return  user  !==  null;
   }
 
+  get currentUser(){
+    return Parse.User.current();
+  }
+
   validateLoggedInUser(){
     var currentUser = Parse.User.current();
       if (currentUser) {

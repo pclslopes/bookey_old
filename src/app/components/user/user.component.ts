@@ -4,7 +4,7 @@ import { AuthParseService } from '../../services/auth.parse.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FirebaseUserModel } from '../../models/user.model';
+import { UserModel } from '../../models/user.model';
 
 @Component({
   selector: 'app-user',
@@ -13,7 +13,7 @@ import { FirebaseUserModel } from '../../models/user.model';
 })
 export class UserComponent implements OnInit{
 
-  user: FirebaseUserModel = new FirebaseUserModel();
+  user: UserModel = new UserModel();
   profileForm: FormGroup;
 
   constructor(
