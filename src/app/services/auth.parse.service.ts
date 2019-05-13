@@ -21,10 +21,14 @@ export class AuthParseService {
   async doLogin(value):Promise<string> {
 
     try {
+      console.log('attemptng login');
         await Parse.User.logIn(value.email, value.password).then(() => {
+          console. log('successfull');
+          this.validateLoggedInUser();
           this.router.navigate(['dashboard']);
         });
     } catch (e) {
+      console. log('error:'+e.code + ' ' + e.message);
       return new Promise<string>((error) => {
         error(e.code + ' ' + e.message);
       });
