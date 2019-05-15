@@ -21,19 +21,19 @@ export class BookingsComponent implements OnInit {
       public router: Router) { }
 
   ngOnInit() {
-    this.bookingService.getBookings().subscribe(data => {
-      this.bookings = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          propertyId:  e.payload.doc.data().propertyId,
-          propertyName: e.payload.doc.data().propertyName,
-          checkinDate: e.payload.doc.data().checkinDate,
-          checkoutDate: e.payload.doc.data().checkoutDate,
-          customerId: e.payload.doc.data().customerId,
-          customerName: e.payload.doc.data().customerName,
-        } as BookingModel;
-      })
-    });
+    //this.bookingService.getBookings().subscribe(data => {
+    //  this.bookings = data.map(e => {
+    //    return {
+    //      id: e.payload.doc.id,
+    //      propertyId:  e.payload.doc.data().propertyId,
+    //      propertyName: e.payload.doc.data().propertyName,
+    //      checkinDate: e.payload.doc.data().checkinDate,
+    //      checkoutDate: e.payload.doc.data().checkoutDate,
+    //      customerId: e.payload.doc.data().customerId,
+    //      customerName: e.payload.doc.data().customerName,
+    //    } as BookingModel;
+    //  })
+    //});
   }
 
   private newBooking(){

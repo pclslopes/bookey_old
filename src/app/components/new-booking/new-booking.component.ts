@@ -87,26 +87,28 @@ export class NewBookingComponent implements OnInit {
     
   }
 
-  submit(value: any) {
+  onSubmit(value: any) {
+    //const formValue = this.questionsForm.value;
+    alert(JSON.stringify(value));
     //Extend the native Parse.Object class.
-    var ListItem = Parse.Object.extend("ListItem");
+    //var ListItem = Parse.Object.extend("ListItem");
 
     //Instantiate an object of the ListItem class
-    var listItem = new ListItem();
+    //var listItem = new ListItem();
 
     //listItem is now the object that we want to save, so we assign the properties that we want on it.
-    listItem.set("content", text);
-    listItem.set("isComplete", false);
+    //listItem.set("content", text);
+    //listItem.set("isComplete", false);
 
     //We call the save method, and pass in success and failure callback functions.
-    listItem.save(null, {       
-        success: function(item) {
+    //listItem.save(null, {       
+    //    success: function(item) {
         //Success Callback 
-    },
-    error: function(gameScore, error) {
+    //},
+    //error: function(gameScore, error) {
         //Failure Callback
-    }
-    });
+    //}
+    //});
   }
 
   ngOnInit() {

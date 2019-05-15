@@ -4,7 +4,7 @@
 
     <button mat-button type="submit" class="crm-command-bar-button"
             [disabled]="false"
-            (click)="onSave()">
+            (click)="onSubmit(form.value)">
       <mat-icon>save</mat-icon>
       SAVE
     </button>
@@ -42,7 +42,7 @@
 
         <mat-card-content>
           
-          <dynamic-form [fields]="regConfig" (submit)="submit($event)"></dynamic-form>
+          <dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>
 
         </mat-card-content>
       </mat-card>
