@@ -88,8 +88,11 @@ export class NewBookingComponent implements OnInit {
   }
 
   onSubmit(value: any) {
+    alert(this.form.form.valid);
+    if(this.form..valid){
     //const formValue = this.questionsForm.value;
     alert(JSON.stringify(value));
+    }
     //Extend the native Parse.Object class.
     //var ListItem = Parse.Object.extend("ListItem");
 
