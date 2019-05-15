@@ -36,7 +36,9 @@ export class AuthParseService {
   }
 
   async doLogout(){
+    console.log('attemptng logout');
     await Parse.User.logOut().then(() => {
+      console. log('successfull');
       localStorage.removeItem('user');
       this.router.navigate(['login']);
     });

@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators } from "@angular/forms";
 import { DynamicFormComponent } from "../../dynamic-forms/components/dynamic-form/dynamic-form.component";
 import { FieldConfig } from "../../dynamic-forms/interfaces/dynamic-field.interface";
+import { MatSnackBar } from '@angular/material';
+import { Router, RouterModule, Params } from '@angular/router';
+import { AuthParseService } from '../../services/auth.parse.service'
 
 @Component({
   selector: 'app-new-booking',
@@ -76,8 +79,34 @@ export class NewBookingComponent implements OnInit {
     }
   ];
 
+  constructor(
+    public authService: AuthParseService,
+    private router: Router,
+    private snackbar: MatSnackBar
+  ) {
+    
+  }
+
   submit(value: any) {
-    alert('test');
+    //Extend the native Parse.Object class.
+    var ListItem = Parse.Object.extend("ListItem");
+
+    //Instantiate an object of the ListItem class
+    var listItem = new ListItem();
+
+    //listItem is now the object that we want to save, so we assign the properties that we want on it.
+    listItem.set("content", text);
+    listItem.set("isComplete", false);
+
+    //We call the save method, and pass in success and failure callback functions.
+    listItem.save(null, {       
+        success: function(item) {
+        //Success Callback 
+    },
+    error: function(gameScore, error) {
+        //Failure Callback
+    }
+    });
   }
 
   ngOnInit() {
