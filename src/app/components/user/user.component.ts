@@ -44,10 +44,10 @@ export class UserComponent implements OnInit{
   }
 
   save(value){
-    this.userService.updateCurrentUser(value)
-    .then(res => {
-      console.log(res);
-    }, err => console.log(err))
+    //this.userService.updateCurrentUser(value)
+    //.then(res => {
+    //  console.log(res);
+    //}, err => console.log(err))
   }
 
   logout(){

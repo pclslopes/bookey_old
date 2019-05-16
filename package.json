@@ -15,7 +15,6 @@
     "@angular/platform-browser": "7.2.14",
     "@angular/platform-browser-dynamic": "7.2.14",
     "@angular/router": "7.2.14",
-    "@firebase/util": "^0.2.13",
     "@types/hammerjs": "2.0.35",
     "@types/jasmine": "2.8.7",
     "@types/node": "9.6.14",

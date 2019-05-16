@@ -51,7 +51,7 @@ import { AuthParseService } from './services/auth.parse.service';
 import { AuthGuard } from './services/auth.guard';
 import { AnonymousGuard } from './services/anonymous.guard';
 import { UserService } from './services/user.service';
-import { UserResolver } from './components/user/user.resolver';
+//import { UserResolver } from './components/user/user.resolver';
 import { BookingsService } from './services/bookings.service';
 
 @NgModule({
@@ -105,6 +105,6 @@ import { BookingsService } from './services/bookings.service';
     DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
-  providers: [/*{ provide: FirestoreSettingsToken, useValue: {} },*/ AuthParseService, AuthGuard, AnonymousGuard, UserService, UserResolver, BookingsService],
+  providers: [/*{ provide: FirestoreSettingsToken, useValue: {} },*/ AuthParseService, AuthGuard, AnonymousGuard, UserService, /*UserResolver*/ BookingsService],
 })
 export class AppModule { }
