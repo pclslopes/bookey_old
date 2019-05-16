@@ -88,7 +88,7 @@ export class NewBookingComponent implements OnInit {
   }
 
   onSubmit(value: any) {
-    
+    this.registerForm.invalid
     if(this.form.form.valid){
       //const formValue = this.questionsForm.value;
       alert(JSON.stringify(value));
