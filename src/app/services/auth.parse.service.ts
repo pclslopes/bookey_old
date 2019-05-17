@@ -18,12 +18,16 @@ export class AuthParseService {
     this.validateLoggedInUser();
   }
 
+  get ParseInstance(){
+    return Parse;
+  }
+
   async doLogin(value):Promise<string> {
 
     try {
       console.log('attemptng login');
         await Parse.User.logIn(value.email, value.password).then(() => {
-          console. log('successfull');
+          console.log('successfull');
           this.validateLoggedInUser();
           this.router.navigate(['dashboard']);
         });
@@ -49,9 +53,10 @@ export class AuthParseService {
     user.set("username", value.email);
     user.set("password", value.password);
     user.set("email", value.email);
-
+    
     try {
       await user.signUp();
+      user.setACL(new Parse.ACL(user));
     } catch (e) {
       return new Promise<string>((error) => {
         error(e.code + ' ' + e.message);

@@ -21,6 +21,8 @@ export class BookingsComponent implements OnInit {
       public router: Router) { }
 
   ngOnInit() {
+    console.log('start');
+    this.bookingService.getBookings();
     //this.bookingService.getBookings().subscribe(data => {
     //  this.bookings = data.map(e => {
     //    return {
