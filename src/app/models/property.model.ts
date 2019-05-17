@@ -1,5 +1,5 @@
 export class PropertyModel {
-    objectId: string;
+    objectId : string;
     PropertyName: String;
     PropertyLink: String;
 }

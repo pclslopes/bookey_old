@@ -14,7 +14,21 @@ export class PropertyService {
         Parse.serverURL = environment.parseServer.serverURL;
       }
 
-  async getProperties() {
+  async getProperties():Promise<PropertyModel[]> {
+
+    return new Promise<PropertyModel[]>((resolve, reject) => {
+      var item = Parse.Object.extend("Properties");
+
+      var query = new Parse.Query(item);
+
+      query.limit = 10;
+      query.descending('createdAt');
+    });
+
+
+
+
+
     //Once again, we extend the Parse.Object class to make the ListItem class
     var item = Parse.Object.extend("Properties");
 
@@ -29,9 +43,19 @@ export class PropertyService {
     await query.find().then((results) => {
         // You can use the "get" method to get the value of an attribute
       // Ex: response.get("<ATTRIBUTE_NAME>")
-      if (typeof document !== 'undefined'){
-        
-      } //alert(`ParseObjects found: ${JSON.stringify(results)}`);
+    if (typeof document !== 'undefined'){
+      return new Promise<any>((resolve, reject) => {
+        results.map(e => {
+          return {
+            objectId: e.objectId,
+            PropertyName: e.PropertyName,
+            PropertyLink: e.PropertyLink
+          } as PropertyModel
+        });
+      })
+    };
+
+       
       console.log('ParseObjects found:', results);
       return results;
     }, (error) => {

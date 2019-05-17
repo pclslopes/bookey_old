@@ -11,7 +11,7 @@ import { PropertyModel } from '../../models/property.model';
 })
 export class PropertiesComponent implements OnInit {
 
-  properties: PropertyModel[];
+  properties: any;
   displayedColumns: string[] = [ 'PropertyName', 'PropertyLink'];
 
   constructor(public authService: AuthParseService,
@@ -41,15 +41,7 @@ export class PropertiesComponent implements OnInit {
    //       );
     //    });
      // });
-      this.propertyService.getProperties().then(results => {
-        this.properties = results.map(e => {
-          return new PropertyModel {
-            objectId: e.objectId,
-            PropertyName: e.PropertyName,
-            PropertyLink: e.PropertyLink
-          }
-        })
-      });
+      alert(JSON.stringify(this.propertyService.getProperties()));
   }
 
   private newProperty(){
