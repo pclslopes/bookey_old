@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatTableModule } from '@angular/material';
 
 // Modules
-//import { RoutingModule } from './routing/routing.module';
 import { RouterModule } from '@angular/router';
 import { AppMaterialModule } from './app.material.module';
 import { rootRouterConfig } from './routing/routing.module';
@@ -27,6 +26,8 @@ import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './components/home/home.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
 import { NewBookingComponent } from './components/new-booking/new-booking.component';
+import { PropertiesComponent } from './components/properties/properties.component';
+import { NewPropertyComponent } from './components/new-property/new-property.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -39,19 +40,14 @@ import { DynamicCheckboxComponent } from "./dynamic-forms/components/dynamic-che
 import { DynamicFieldDirective } from "./dynamic-forms/components/dynamic-field/dynamic-field.directive";
 import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dynamic-form.component";
 
-// Firebase
-//import { AngularFireModule } from '@angular/fire';
-//import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
-//import { AngularFireAuthModule } from '@angular/fire/auth';
+// Environment
 import { environment } from '../environments/environment';
 
 //Services
-//import { AuthService } from './services/auth.service';
 import { AuthParseService } from './services/auth.parse.service';
 import { AuthGuard } from './services/auth.guard';
 import { AnonymousGuard } from './services/anonymous.guard';
 import { UserService } from './services/user.service';
-//import { UserResolver } from './components/user/user.resolver';
 import { BookingsService } from './services/bookings.service';
 
 @NgModule({
@@ -59,9 +55,6 @@ import { BookingsService } from './services/bookings.service';
     BrowserModule,
     ReactiveFormsModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
-    //AngularFireModule.initializeApp(environment.firebase),
-    //AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    //AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     FormsModule,
     AppMaterialModule,
     BrowserAnimationsModule,
@@ -79,6 +72,8 @@ import { BookingsService } from './services/bookings.service';
     HomeComponent,
     BookingsComponent,
     NewBookingComponent,
+    PropertiesComponent,
+    NewPropertyComponent,
     TemplateComponent,
     CommandBarComponent,
     NavComponent,
@@ -105,6 +100,6 @@ import { BookingsService } from './services/bookings.service';
     DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
-  providers: [/*{ provide: FirestoreSettingsToken, useValue: {} },*/ AuthParseService, AuthGuard, AnonymousGuard, UserService, /*UserResolver*/ BookingsService],
+  providers: [AuthParseService, AuthGuard, AnonymousGuard, UserService, BookingsService],
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
 export class PropertyModel {
-    id: string;
-    propertyName: String;
+    objectId: string;
+    PropertyName: String;
 }
