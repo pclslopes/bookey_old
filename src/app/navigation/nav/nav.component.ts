@@ -37,6 +37,10 @@ anonymousRoutes: ROUTE[] = [
 
   bookingRoutes: ROUTE[] = [
     {
+      icon: 'location_city',
+      route: 'properties',
+      title: 'Properties',
+    }, {
       icon: 'bookmarks',
       route: 'bookings',
       title: 'Bookings',

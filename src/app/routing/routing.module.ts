@@ -15,9 +15,11 @@ import { UserComponent } from '../components/user/user.component';
 import { HomeComponent } from '../components/home/home.component';
 import { BookingsComponent } from '../components/bookings/bookings.component';
 import { NewBookingComponent } from '../components/new-booking/new-booking.component';
+import { PropertiesComponent } from '../components/properties/properties.component';
+import { NewPropertyComponent } from '../components/new-property/new-property.component';
 
 // Authentication
-import { UserResolver } from '../components/user/user.resolver';
+//import { UserResolver } from '../components/user/user.resolver';
 import { AuthGuard } from  '../services/auth.guard';
 import { AnonymousGuard } from  '../services/anonymous.guard';
 
@@ -28,16 +30,12 @@ export const rootRouterConfig: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AnonymousGuard]},
   { path: 'login', component: LoginComponent, canActivate: [AnonymousGuard]},
   { path: 'register', component: RegisterUserComponent, canActivate: [AnonymousGuard]},
-  { path: 'user', component: UserComponent, resolve: { data: UserResolver}, canActivate: [AuthGuard]},
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard]},
   { path: 'bookings', component: BookingsComponent, canActivate: [AuthGuard]},
   { path: 'new-booking', component: NewBookingComponent, canActivate: [AuthGuard]},
+  { path: 'properties', component: PropertiesComponent, canActivate: [AuthGuard]},
+  { path: 'new-property', component: NewPropertyComponent, canActivate: [AuthGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'template', component: FormTemplateComponent, canActivate: [AuthGuard] },
   { path: 'template_old', component: TemplateComponent, canActivate: [AuthGuard] },
 ];
-
-//@NgModule({
-//  imports: [RouterModule.forRoot(routes)],
-//  exports: [RouterModule]
-//})
-//export class RoutingModule { }

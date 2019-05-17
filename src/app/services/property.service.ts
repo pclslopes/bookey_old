@@ -14,9 +14,9 @@ export class PropertyService {
         Parse.serverURL = environment.parseServer.serverURL;
       }
 
-  getBookings() {
+  async getProperties() {
     //Once again, we extend the Parse.Object class to make the ListItem class
-    var item = Parse.Object.extend("Bookings");
+    var item = Parse.Object.extend("Properties");
 
     //This time, we use Parse.Query to generate a new query, specifically querying the ListItem table.
     var query = new Parse.Query(item);
@@ -26,32 +26,34 @@ export class PropertyService {
     query.limit = 10;
     query.descending('createdAt');
 
-    //We submit the query and pass in callback functions.
-    query.find({
-      success: function(results) {
-        //Success callback
-        alert("Success");
-      },
-      error: function(error) {
-        //Error Callback
-        alert("Error");
-      }
+    await query.find().then((results) => {
+        // You can use the "get" method to get the value of an attribute
+      // Ex: response.get("<ATTRIBUTE_NAME>")
+      if (typeof document !== 'undefined'){
+        
+      } //alert(`ParseObjects found: ${JSON.stringify(results)}`);
+      console.log('ParseObjects found:', results);
+      return results;
+    }, (error) => {
+      if (typeof document !== 'undefined') alert(`Error while fetching ParseObjects: ${JSON.stringify(error)}`);
+      console.error('Error while fetching ParseObjects', error);
     });
+
+    
     
   }
 
-  createBooking(value: any){
+  createProperty(value: any){
    
     //Extend the native Parse.Object class.
-    var itemCustomers = Parse.Object.extend("Customers");
-    var itemBooking = Parse.Object.extend("Bookings");
+    var itemProperty = Parse.Object.extend("Customers");
 
     //Instantiate an object of the ListItem class
-    var listItem = new itemCustomers();
+    var listItem = new itemProperty();
 
     //listItem is now the object that we want to save, so we assign the properties that we want on it.
-    listItem.set("content", text);
-    listItem.set("isComplete", false);
+    listItem.set("PropertyName", text);
+    listItem.set("PropertyLink", false);
 
     //We call the save method, and pass in success and failure callback functions.
     listItem.save(null, {       
@@ -64,12 +66,12 @@ export class PropertyService {
     });
   }
 
-  updateBooking(booking: BookingModel){
+  updateProperty(property: PropertyModel){
     //delete booking.id;
     //this.firestore.doc('bookings/' + booking.id).update(booking);
   }
 
-  deleteBooking(bookingId: string){
+  deleteProperty(propertyId: string){
    // this.firestore.doc('bookings/' + bookingId).delete();
   }
 }

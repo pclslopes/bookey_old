@@ -49,6 +49,7 @@ import { AuthGuard } from './services/auth.guard';
 import { AnonymousGuard } from './services/anonymous.guard';
 import { UserService } from './services/user.service';
 import { BookingsService } from './services/bookings.service';
+import { PropertyService } from './services/property.service';
 
 @NgModule({
   imports: [
@@ -100,6 +101,6 @@ import { BookingsService } from './services/bookings.service';
     DynamicCheckboxComponent
   ],
   bootstrap: [AppComponent],
-  providers: [AuthParseService, AuthGuard, AnonymousGuard, UserService, BookingsService],
+  providers: [AuthParseService, AuthGuard, AnonymousGuard, UserService, BookingsService, PropertyService],
 })
 export class AppModule { }
