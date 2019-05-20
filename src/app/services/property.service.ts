@@ -14,16 +14,28 @@ export class PropertyService {
         Parse.serverURL = environment.parseServer.serverURL;
       }
 
-  async getProperties():Promise<PropertyModel[]> {
+  async getProperties2():Promise<any> {
 
-    return new Promise<PropertyModel[]>((resolve, reject) => {
+    return new Promise((resolve,reject) => {
       var item = Parse.Object.extend("Properties");
 
       var query = new Parse.Query(item);
 
       query.limit = 10;
       query.descending('createdAt');
+      query.find().then((results) => {
+        console.log('Properties found', results);
+        resolve(results);
+      }, (error) => {
+        console.error('Error while fetching Properties', error);
+        reject(error);
+      });
     });
+    
+  }
+  async getProperties():PropertyModel[] {
+
+    
 
 
 

@@ -11,7 +11,7 @@ import { PropertyModel } from '../../models/property.model';
 })
 export class PropertiesComponent implements OnInit {
 
-  properties: any;
+  properties: PropertyModel[];
   displayedColumns: string[] = [ 'PropertyName', 'PropertyLink'];
 
   constructor(public authService: AuthParseService,
@@ -41,10 +41,33 @@ export class PropertiesComponent implements OnInit {
    //       );
     //    });
      // });
-      alert(JSON.stringify(this.propertyService.getProperties()));
+      //alert(JSON.stringify());
+  this.propertyService.getProperties2().then((res) => {
+      console.log("replied");
+      console.log(JSON.stringify(res)); // not called
+      //this.properties = res.map(item => new PropertyModel(item));
+      //Object.assign(new PropertyModel(), res)
+      this.properties = res.map(e => {
+        return {
+            objectId: e.objectId,
+            PropertyName: e.PropertyName,
+            PropertyLink: e.PropertyLink
+        } as PropertyModel;
+      });
+      
+      console.log("final obj: "+JSON.stringify(Object.assign(new PropertyModel(), res)));
+      console.log("final obj2: "+JSON.stringify(this.properties));
+    })
+    .catch((err) => {
+        console.log(err.message);
+    })
   }
 
   private newProperty(){
     this.router.navigate(['new-property']);
+  }
+
+  navProperty(){
+
   }
 }
