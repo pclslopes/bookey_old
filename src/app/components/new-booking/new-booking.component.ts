@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { Validators } from "@angular/forms";
 import { DynamicFormComponent } from "../../dynamic-forms/components/dynamic-form/dynamic-form.component";
 import { FieldConfig } from "../../dynamic-forms/interfaces/dynamic-field.interface";
@@ -82,7 +83,8 @@ export class NewBookingComponent implements OnInit {
   constructor(
     public authService: AuthParseService,
     private router: Router,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private location: Location
   ) {
     
   }
@@ -121,4 +123,7 @@ export class NewBookingComponent implements OnInit {
   ngOnInit() {
   }
 
+  onCancel(){
+    this.location.back();
+  }
 }

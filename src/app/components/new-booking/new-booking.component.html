@@ -9,6 +9,13 @@
       SAVE
     </button>
 
+    <button mat-button class="crm-command-bar-button"
+            [disabled]="false"
+            (click)="onCancel()">
+      <mat-icon>cancel</mat-icon>
+      CANCEL
+    </button>
+
     <button mat-button *ngIf="isEdit" class="crm-command-bar-button"
             [disabled]="false"
             (click)="onDelete()">
