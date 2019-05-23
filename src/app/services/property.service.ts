@@ -2,21 +2,33 @@ import { Injectable } from '@angular/core';
 import { PropertyModel } from '../models/property.model';
 import { AuthParseService } from '../services/auth.parse.service';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { map } from 'rxjs/operators';
 
 declare const Parse: any;
 
 @Injectable()
 export class PropertyService {
 
-  constructor(
-      public authService: AuthParseService,) { 
-        Parse.initialize(environment.parseServer.PARSE_APP_ID, environment.parseServer.PARSE_JS_KEY);
-        Parse.serverURL = environment.parseServer.serverURL;
-      }
+  public properties: Observable<PropertyModel[]>
+  private _properties: BehaviorSubject<PropertyModel[]>;
+  private dataStore: {
+    properties: PropertyModel[]
+  };
 
-  async getProperties2():Promise<any> {
+  constructor(public authService: AuthParseService,) { 
+    Parse.initialize(environment.parseServer.PARSE_APP_ID, environment.parseServer.PARSE_JS_KEY);
+    Parse.serverURL = environment.parseServer.serverURL;
 
-    return new Promise((resolve,reject) => {
+    this.dataStore = { properties: [] };
+    this._properties = <BehaviorSubject<PropertyModel[]>> new BehaviorSubject([]);
+    this.properties = this._properties.asObservable();
+    console.log("contructor");
+
+  }
+
+  public getProperties():Observable<any>{
       var item = Parse.Object.extend("Properties");
 
       var query = new Parse.Query(item);
@@ -24,61 +36,13 @@ export class PropertyService {
       query.limit = 10;
       query.descending('createdAt');
       query.find().then((results) => {
-        console.log('Properties found', results);
-        resolve(results);
-      }, (error) => {
-        console.error('Error while fetching Properties', error);
-        reject(error);
+        this.dataStore.properties = results;
+        console.log("Results -- >"+ JSON.stringify(results));
+        this._properties.next(Object.assign({}, this.dataStore).properties);
       });
-    });
-    
-  }
-  async getProperties():PropertyModel[] {
-
-    
-
-
-
-
-
-    //Once again, we extend the Parse.Object class to make the ListItem class
-    var item = Parse.Object.extend("Properties");
-
-    //This time, we use Parse.Query to generate a new query, specifically querying the ListItem table.
-    var query = new Parse.Query(item);
-
-    //We set constraints on the query.
-    //query.equalTo('isComplete', false)
-    query.limit = 10;
-    query.descending('createdAt');
-
-    await query.find().then((results) => {
-        // You can use the "get" method to get the value of an attribute
-      // Ex: response.get("<ATTRIBUTE_NAME>")
-    if (typeof document !== 'undefined'){
-      return new Promise<any>((resolve, reject) => {
-        results.map(e => {
-          return {
-            objectId: e.objectId,
-            PropertyName: e.PropertyName,
-            PropertyLink: e.PropertyLink
-          } as PropertyModel
-        });
-      })
-    };
-
-       
-      console.log('ParseObjects found:', results);
-      return results;
-    }, (error) => {
-      if (typeof document !== 'undefined') alert(`Error while fetching ParseObjects: ${JSON.stringify(error)}`);
-      console.error('Error while fetching ParseObjects', error);
-    });
-
-    
-    
   }
 
+  
   createProperty(value: any){
    
     //Extend the native Parse.Object class.
