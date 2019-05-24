@@ -4,6 +4,7 @@ import { AuthParseService } from '../../services/auth.parse.service';
 import { PropertyService } from '../../services/property.service';
 import { PropertyModel } from '../../models/property.model';
 import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-properties',
@@ -12,9 +13,8 @@ import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 })
 export class PropertiesComponent implements OnInit {
 
-  //dataSource: any; // = new PropertyDataSource(this.propertyService);;
   displayedColumns: string[] = [ 'PropertyName', 'PropertyLink'];
-  dataSource: MatTableDataSource<PropertyModel[]>;
+  dataSource: any;
 
   constructor(public authService: AuthParseService,
       private route: ActivatedRoute,
@@ -22,24 +22,25 @@ export class PropertiesComponent implements OnInit {
       public router: Router) { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource();
+    //this.dataSource = new MatTableDataSource();
 
+    this.propertyService.getProperties().then(data => {
+      console.log("test");
+      console.log("promise result: "+JSON.stringify(data));
+      data.forEach(function (value) {
+        let x = new PropertyModel();
+        x.objectId = value.objectId;
+        x.PropertyName = value.PropertyName;
+        x.PropertyLink = value.PropertyLink;
+        this.dataSource = x;
+      }); 
 
-    //this.dataSource = this.propertyService.properties; // subscribe to entire collection
-    //this.propertyService.getProperties();
-this.getLaps();
-    //console.log("DataSource: --> " + JSON.stringify(this.dataSource));
-    //console.log("Properties: --> " + JSON.stringify(this.propertyService.properties));
+      this.dataSource = data;
+      console.log("dataSource: "+JSON.stringify(this.dataSource));
+    });
+    console.log('I will not wait until promise is resolved');
   }
 
-getLaps() {
-     this.propertyService.getProperties().subscribe((data: {}) => {
-       console.log(data);
-       console.log('Laps');
-       this.dataSource.data = data; // on data receive populate dataSource.data array
-       return data;
-    });
-}
   private newProperty(){
     this.router.navigate(['new-property']);
   }

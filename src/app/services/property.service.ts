@@ -20,15 +20,10 @@ export class PropertyService {
   constructor(public authService: AuthParseService,) { 
     Parse.initialize(environment.parseServer.PARSE_APP_ID, environment.parseServer.PARSE_JS_KEY);
     Parse.serverURL = environment.parseServer.serverURL;
-
-    this.dataStore = { properties: [] };
-    this._properties = <BehaviorSubject<PropertyModel[]>> new BehaviorSubject([]);
-    this.properties = this._properties.asObservable();
-    console.log("contructor");
-
   }
 
-  public getProperties():Observable<any>{
+  public getProperties(){
+    return new Promise(resolve => {
       var item = Parse.Object.extend("Properties");
 
       var query = new Parse.Query(item);
@@ -36,12 +31,11 @@ export class PropertyService {
       query.limit = 10;
       query.descending('createdAt');
       query.find().then((results) => {
-        this.dataStore.properties = results;
         console.log("Results -- >"+ JSON.stringify(results));
-        this._properties.next(Object.assign({}, this.dataStore).properties);
+        resolve(results);
       });
+    });
   }
-
   
   createProperty(value: any){
    

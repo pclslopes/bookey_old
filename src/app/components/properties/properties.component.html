@@ -21,7 +21,7 @@
 
     <div class="table-container">
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table *ngIf="dataSource" [dataSource]="dataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="PropertyName">
           <th mat-header-cell *matHeaderCellDef> Name </th>
