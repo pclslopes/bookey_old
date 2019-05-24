@@ -29,6 +29,7 @@ export class PropertiesComponent implements OnInit {
       console.log("promise result: "+JSON.stringify(data));
       data.forEach(function (value) {
         console.log(JSON.stringify(value));
+        
         let x = new PropertyModel();
         x.objectId = value["objectId"];
         x.PropertyName = value.PropertyName;
