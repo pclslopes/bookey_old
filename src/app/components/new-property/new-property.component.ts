@@ -4,7 +4,7 @@ import { Validators } from "@angular/forms";
 import { DynamicFormComponent } from "../../dynamic-forms/components/dynamic-form/dynamic-form.component";
 import { FieldConfig } from "../../dynamic-forms/interfaces/dynamic-field.interface";
 import { MatSnackBar } from '@angular/material';
-import { Router, RouterModule, Params } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { AuthParseService } from '../../services/auth.parse.service'
 import { PropertyModel } from '../../models/property.model';
 import { PropertyService } from '../../services/property.service';
@@ -15,9 +15,9 @@ import { PropertyService } from '../../services/property.service';
   styleUrls: ['./new-property.component.scss']
 })
 export class NewPropertyComponent implements OnInit {
-  @Input() property: PropertyModel;
-
-  isEdit = (this.property != undefined);
+  
+  property;
+  //isEdit = (this.property !== undefined);
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
     regConfig: FieldConfig[] = [
@@ -59,14 +59,21 @@ export class NewPropertyComponent implements OnInit {
     private router: Router,
     private snackbar: MatSnackBar,
     private location: Location,
-    private propertyService: PropertyService) { }
+    private propertyService: PropertyService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.propertyService.getPropertyById(id).then(data => {
+      this.property = data;
+    });
 
-    if(this.isEdit){
+    console.log("-->"+JSON.stringify(this.property));
+    if(this.property){
+      console.log("IsEdit: "+ this.isEdit);
       this.form.form.setValue({
-        propertyName: user.username,
-        propertyLink: user.email
+        propertyName: this.property.propertyName,
+        propertyLink: this.property.propertyLink
       })
     }
 

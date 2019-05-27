@@ -36,6 +36,21 @@ export class PropertyService {
       });
     });
   }
+
+  public getPropertyById(id:string){
+    return new Promise(resolve => {
+      var item = Parse.Object.extend("Properties");
+
+      var query = new Parse.Query(item);
+
+      query.limit = 10;
+      query.descending('createdAt');
+      query.find().then((results) => {
+        console.log("Results -- >"+ JSON.stringify(results));
+        resolve(JSON.parse(JSON.stringify(results)));
+      });
+    });
+  }
   
   createProperty(value: any){
    

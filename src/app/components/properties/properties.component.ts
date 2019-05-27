@@ -40,6 +40,6 @@ export class PropertiesComponent implements OnInit {
 
   navProperty(row){
     console.log("click: "+JSON.stringify(row));
-    this.router.navigate(['new-property'], row);
+    this.router.navigate(['new-property'], {queryParams: {id: row.objectId}});
   }
 }
