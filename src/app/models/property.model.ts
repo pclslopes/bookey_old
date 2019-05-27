@@ -1,5 +1,9 @@
-export class PropertyModel {
+export interface PropertyModel {
     objectId : string;
-    PropertyName: String;
-    PropertyLink: String;
+    propertyName: string;
+    propertyLink: string;
+    createdAt:string;
+    updatedAt:string;
 }
+
+export interface PropertyModels extends Array<PropertyModel>{}

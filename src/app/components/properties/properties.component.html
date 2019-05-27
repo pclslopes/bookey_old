@@ -23,14 +23,14 @@
 
       <table mat-table *ngIf="dataSource" [dataSource]="dataSource" class="mat-elevation-z8">
 
-        <ng-container matColumnDef="PropertyName">
+        <ng-container matColumnDef="propertyName">
           <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.PropertyName}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.propertyName}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="PropertyLink">
+        <ng-container matColumnDef="propertyLink">
           <th mat-header-cell *matHeaderCellDef> Link </th>
-          <td mat-cell *matCellDef="let element"> {{element.PropertyLink}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.propertyLink}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
