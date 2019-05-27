@@ -28,21 +28,8 @@ export class PropertiesComponent implements OnInit {
     this.propertyService.getProperties().then(data => {
       console.log("test");
       console.log("promise result: "+JSON.stringify(data));
-      //let mymodel: PropertyModel[] = data;
 
-      //data.forEach(function (value) {
-      //  console.log(JSON.stringify(value));
-        
-      //  let x = new PropertyModel();
-      //  x.objectId = value["objectId"];
-        //x.PropertyName = value.PropertyName;
-        //x.PropertyLink = value.PropertyLink;
-      //  console.log(JSON.stringify(x));
-        
-     // }); 
-
-      this.dataSource = JSON.parse(JSON.stringify(data));
-      console.log("dataSource: "+JSON.stringify(this.dataSource));
+      this.dataSource = data;
     });
     console.log('I will not wait until promise is resolved');
   }
@@ -51,17 +38,7 @@ export class PropertiesComponent implements OnInit {
     this.router.navigate(['new-property']);
   }
 
-  navProperty(){
-
-  }
-
-  decodeUser(json: string): PropertyModels {
-    json.forEach(function (value) {
-      let prop = Object.create(PropertyModels);
-      return Object.assign(prop, json, {
-        propertyName: json.propertyName
-        //created: new Date(json.created)
-      });
-    });
+  navProperty(row){
+    console.log("click: "+JSON.stringify(row));
   }
 }
