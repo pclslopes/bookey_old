@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { Validators } from "@angular/forms";
 import { DynamicFormComponent } from "../../dynamic-forms/components/dynamic-form/dynamic-form.component";
@@ -13,7 +13,8 @@ import { AuthParseService } from '../../services/auth.parse.service'
   styleUrls: ['./new-property.component.scss']
 })
 export class NewPropertyComponent implements OnInit {
-
+  @Input() property: PropertyModel;
+  
   isEdit = false;
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
