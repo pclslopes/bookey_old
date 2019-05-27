@@ -14,8 +14,8 @@ import { AuthParseService } from '../../services/auth.parse.service'
 })
 export class NewPropertyComponent implements OnInit {
   @Input() property: PropertyModel;
-  
-  isEdit = false;
+
+  isEdit = (tproperty != undefined);
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
     regConfig: FieldConfig[] = [
