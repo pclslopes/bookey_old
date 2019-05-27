@@ -41,7 +41,7 @@ export class PropertiesComponent implements OnInit {
         
      // }); 
 
-      this.dataSource = data as PropertyModels;
+      this.dataSource = JSON.parse(JSON.stringify(data));
       console.log("dataSource: "+JSON.stringify(this.dataSource));
     });
     console.log('I will not wait until promise is resolved');
