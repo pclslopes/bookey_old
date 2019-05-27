@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthParseService } from '../../services/auth.parse.service';
 import { PropertyService } from '../../services/property.service';
 import { PropertyModel } from '../../models/property.model';
-import { PropertyModels } from '../../models/property.model';
+//import { PropertyModels } from '../../models/property.model';
 import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 import 'rxjs/add/operator/toPromise';
 
@@ -15,7 +15,7 @@ import 'rxjs/add/operator/toPromise';
 export class PropertiesComponent implements OnInit {
 
   displayedColumns: string[] = [ 'propertyName', 'propertyLink'];
-  dataSource: PropertyModels;
+  dataSource: PropertyModel[];
 
   constructor(public authService: AuthParseService,
       private route: ActivatedRoute,

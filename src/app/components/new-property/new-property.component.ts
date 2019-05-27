@@ -6,6 +6,8 @@ import { FieldConfig } from "../../dynamic-forms/interfaces/dynamic-field.interf
 import { MatSnackBar } from '@angular/material';
 import { Router, RouterModule, Params } from '@angular/router';
 import { AuthParseService } from '../../services/auth.parse.service'
+import { PropertyModel } from '../../models/property.model';
+import { PropertyService } from '../../services/property.service';
 
 @Component({
   selector: 'app-new-property',
@@ -15,7 +17,7 @@ import { AuthParseService } from '../../services/auth.parse.service'
 export class NewPropertyComponent implements OnInit {
   @Input() property: PropertyModel;
 
-  isEdit = (tproperty != undefined);
+  isEdit = (this.property != undefined);
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
     regConfig: FieldConfig[] = [
@@ -33,7 +35,8 @@ export class NewPropertyComponent implements OnInit {
         {
           name: "pattern",
           validator: Validators.pattern("^[a-zA-Z ]+$"),
-          message: "Accept only text"
+          message: "Accept only text",
+          
         }
       ]
     },
@@ -55,9 +58,18 @@ export class NewPropertyComponent implements OnInit {
     public authService: AuthParseService,
     private router: Router,
     private snackbar: MatSnackBar,
-    private location: Location) { }
+    private location: Location,
+    private propertyService: PropertyService) { }
 
   ngOnInit() {
+
+    if(this.isEdit){
+      this.form.form.setValue({
+        propertyName: user.username,
+        propertyLink: user.email
+      })
+    }
+
   }
 
   onSubmit(value: any) {

@@ -33,7 +33,6 @@ export class PropertyService {
       query.find().then((results) => {
         console.log("Results -- >"+ JSON.stringify(results));
         resolve(JSON.parse(JSON.stringify(results)));
-        //resolve([results]);
       });
     });
   }
