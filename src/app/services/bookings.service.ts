@@ -59,6 +59,7 @@ export class BookingsService {
       const parseObj = Parse.Object.extend('Bookings');
       const myNewObject = new parseObj();
 
+      myNewObject.setACL(Parse.User.current()); // Set ACL access with current user
       myNewObject.set('propertyId', booking.propertyId);
       myNewObject.set('propertyName', booking.propertyName);
       myNewObject.set('checkinDate', booking.checkinDate);

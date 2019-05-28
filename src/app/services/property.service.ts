@@ -57,7 +57,7 @@ export class PropertyService {
       const properties = Parse.Object.extend('Properties');
       const myNewObject = new properties();
 
-      myNewObject.setACL(Parse.User.current());
+      myNewObject.setACL(Parse.User.current()); // Set ACL access with current user
       myNewObject.set('propertyName', property.propertyName);
       myNewObject.set('propertyLink', property.propertyLink);
 
