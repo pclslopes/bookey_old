@@ -45,7 +45,7 @@ export class NewPropertyComponent implements OnInit {
       type: "input",
       label: "Link",
       inputType: "text",
-      name: "link",
+      name: "propertyLink",
       validations: [
         {
           name: "pattern",
@@ -62,25 +62,26 @@ export class NewPropertyComponent implements OnInit {
     private location: Location,
     private propertyService: PropertyService,
     private route: ActivatedRoute) { 
+      
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {  
+      console.log("Params: "+ JSON.stringify(params));
+      if (params['id']) {
+        this.propertyService.getPropertyById(params['id']).then(data => {
+          console.log("getPropertyById result: "+JSON.stringify(data));
+          this.property = data;
+          console.log("this.property result: "+JSON.stringify(this.property));
+          //console.log("form: "+ JSON.stringify(this.form.form));
+          if(this.property){
+            this.form.form.controls['propertyName'].setValue(this.property.propertyName);
+            this.form.form.controls['propertyLink'].setValue(this.property.propertyLink);
+          }
 
-    this.route.params.subscribe( params => {
-        console.log(params);
-        if (params['id']) {
-          this.property = this.propertyService.getPropertyById(params['id']);
-        }
-    });    
-    
-    console.log("-->"+JSON.stringify(this.property));
-    if(this.property){
-      this.form.setValue({
-        propertyName: this.property.propertyName,
-        propertyLink: this.property.propertyLink
-      })
-    }
-
+        });
+      }
+    });   
   }
 
   onSubmit(value: any) {

@@ -31,8 +31,9 @@ export class PropertyService {
       query.limit = 10;
       query.descending('createdAt');
       query.find().then((results) => {
+        console.log("results: " + JSON.stringify(results));
         resolve(results.map(r => ({
-          objectId: r.get('objectId'),
+          objectId: r.id,
           propertyName: r.get('propertyName'),
           propertyLink: r.get('propertyLink')
         })))
@@ -48,12 +49,8 @@ export class PropertyService {
       var query = new Parse.Query(property)
       query.equalTo("objectId",id)
       query.first().then((results) => {
-        console.log("[service response]: "+JSON.stringify);
-        resolve(results.map(r => ({
-          objectId: r.get('objectId'),
-          propertyName: r.get('propertyName'),
-          propertyLink: r.get('propertyLink')
-        })));
+        console.log("[service response]: "+JSON.stringify(results));
+        resolve(results);
       });
 
     });
