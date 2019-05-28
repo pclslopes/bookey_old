@@ -31,7 +31,8 @@
 <div #contentContainer class="crm-content-container">
   
   <div class="crm-component-title-container">
-    <h2 class="crm-component-title"> New Property </h2>
+    <h2 class="crm-component-title" *ngIf="!id"> New Property </h2>
+    <h2 class="crm-component-title" *ngIf="id"> Update Property </h2>
   </div>
 
   <ng-container>
