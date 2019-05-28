@@ -57,11 +57,14 @@ export class PropertyService {
       const properties = Parse.Object.extend('Properties');
       const myNewObject = new properties();
 
+      myNewObject.setACL(Parse.User.current());
       myNewObject.set('propertyName', property.propertyName);
       myNewObject.set('propertyLink', property.propertyLink);
 
       myNewObject.save().then((result) => {
         console.log('Properties created', result);
+        
+
         resolve(result);
       },(error) => {
         reject(error);
