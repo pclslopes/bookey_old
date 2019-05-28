@@ -75,6 +75,7 @@ export class NewPropertyComponent implements OnInit {
           console.log("this.property result: "+JSON.stringify(this.property));
           //console.log("form: "+ JSON.stringify(this.form.form));
           if(this.property){
+            this.id = this.property.objectId;
             this.form.form.controls['propertyName'].setValue(this.property.propertyName);
             this.form.form.controls['propertyLink'].setValue(this.property.propertyLink);
           }
@@ -87,8 +88,15 @@ export class NewPropertyComponent implements OnInit {
   onSubmit(value: any) {
       
       if(this.form.form.valid){
-        //const formValue = this.questionsForm.value;
-        alert(JSON.stringify(value));
+        
+        if(this.id){
+          value["objectId"] = this.id;
+        }
+        console.log("Form: "+JSON.stringify(value));
+
+        this.propertyService.updateProperty(value).then(data => {
+          this.location.back();
+        });
       }else{
         //form.form.validations
         this.snackbar.open('Please fill all mandatory fields', 'OK', { duration: 3000 });

@@ -11,12 +11,6 @@ declare const Parse: any;
 @Injectable()
 export class PropertyService {
 
-  public properties: Observable<PropertyModel[]>
-  private _properties: BehaviorSubject<PropertyModel[]>;
-  private dataStore: {
-    properties: PropertyModel[]
-  };
-
   constructor(public authService: AuthParseService,) { 
     Parse.initialize(environment.parseServer.PARSE_APP_ID, environment.parseServer.PARSE_JS_KEY);
     Parse.serverURL = environment.parseServer.serverURL;
@@ -50,38 +44,45 @@ export class PropertyService {
       query.equalTo("objectId",id)
       query.first().then((results) => {
         console.log("[service response]: "+JSON.stringify(results));
-        resolve(JSON.parse(JSON.stringify(results));
+        resolve(JSON.parse(JSON.stringify(results)));
       });
 
     });
   }
   
-  createProperty(value: any){
-   
-    //Extend the native Parse.Object class.
-    var itemProperty = Parse.Object.extend("Customers");
-
-    //Instantiate an object of the ListItem class
-    var listItem = new itemProperty();
-
-    //listItem is now the object that we want to save, so we assign the properties that we want on it.
-    listItem.set("PropertyName", text);
-    listItem.set("PropertyLink", false);
-
-    //We call the save method, and pass in success and failure callback functions.
-    listItem.save(null, {       
-        success: function(item) {
-        //Success Callback 
-    },
-    error: function(gameScore, error) {
-        //Failure Callback
-    }
+  createProperty(property: any){
+    return new Promise((resolve, reject) => {
+      const properties = Parse.Object.extend('Properties');
+      const query = new Parse.Query(properties);
+      query.equalTo("propertyName", property.propertyName);
+      query.equalTo("propertyLink", property.propertyLink);
+      query.find().then((results) => {
+        // You can use the "get" method to get the value of an attribute
+        // Ex: response.get("<ATTRIBUTE_NAME>")
+        resolve(results);
+      }, (error) => {
+        reject(error);
+      });
     });
   }
 
-  updateProperty(property: PropertyModel){
-    //delete booking.id;
-    //this.firestore.doc('bookings/' + booking.id).update(booking);
+  updateProperty(property){
+    return new Promise((resolve, reject) => {
+      const properties = Parse.Object.extend('Properties');
+      const query = new Parse.Query(properties);
+      // here you put the objectId that you want to update
+      query.get(property.objectId).then((object) => {
+        object.set('propertyName', property.propertyName);
+        object.set('propertyLink', property.propertyLink);
+        object.save().then((response) => {
+          // You can use the "get" method to get the value of an attribute
+          // Ex: response.get("<ATTRIBUTE_NAME>")
+          resolve(response);
+        }, (error) => {
+          reject(error);
+        });
+      });
+    });
   }
 
   deleteProperty(propertyId: string){
