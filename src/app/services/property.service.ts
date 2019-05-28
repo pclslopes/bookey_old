@@ -53,17 +53,20 @@ export class PropertyService {
   createProperty(property: any){
     return new Promise((resolve, reject) => {
       const properties = Parse.Object.extend('Properties');
-      const query = new Parse.Query(properties);
-      query.equalTo("propertyName", property.propertyName);
-      query.equalTo("propertyLink", property.propertyLink);
-      query.find().then((results) => {
-        // You can use the "get" method to get the value of an attribute
-        // Ex: response.get("<ATTRIBUTE_NAME>")
-        resolve(results);
-      }, (error) => {
-        reject(error);
-      });
-    });
+      const myNewObject = new properties();
+
+      myNewObject.set('propertyName', property.propertyName);
+      myNewObject.set('propertyLink', property.propertyLink);
+
+      myNewObject.save().then((result) => {
+          console.log('Properties created', result);
+          resolve(result);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    })
   }
 
   updateProperty(property){
@@ -85,7 +88,18 @@ export class PropertyService {
     });
   }
 
-  deleteProperty(propertyId: string){
-   // this.firestore.doc('bookings/' + bookingId).delete();
+  deleteProperty(id: string){
+    return new Promise((resolve, reject) => {
+      const Properties = Parse.Object.extend('Properties');
+      const query = new Parse.Query(Properties);
+      // here you put the objectId that you want to delete
+      query.get('xKue915KBG').then((object) => {
+        object.destroy().then((response) => {
+          resolve(response);
+        }, (error) => {
+          reject(error);
+        });
+      });
+    });
   }
 }

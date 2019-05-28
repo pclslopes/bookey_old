@@ -91,12 +91,17 @@ export class NewPropertyComponent implements OnInit {
         
         if(this.id){
           value["objectId"] = this.id;
+          this.propertyService.updateProperty(value).then(data => {
+            this.location.back();
+          });
+        }else{
+          this.propertyService.createProperty(value).then(data => {
+            this.location.back();
+          });
         }
         console.log("Form: "+JSON.stringify(value));
 
-        this.propertyService.updateProperty(value).then(data => {
-          this.location.back();
-        });
+        
       }else{
         //form.form.validations
         this.snackbar.open('Please fill all mandatory fields', 'OK', { duration: 3000 });
