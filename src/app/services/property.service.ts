@@ -50,7 +50,7 @@ export class PropertyService {
       query.equalTo("objectId",id)
       query.first().then((results) => {
         console.log("[service response]: "+JSON.stringify(results));
-        resolve(results);
+        resolve(JSON.parse(JSON.stringify(results));
       });
 
     });
