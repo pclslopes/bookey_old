@@ -25,12 +25,10 @@ export class BookingsService {
         console.log("results: " + JSON.stringify(results));
         resolve(results.map(r => ({
           objectId: r.id,
-          propertyId: r.get('propertyId'),
-          propertyName: r.get('propertyName'),
-          checkinDate: r.get('checkinDate'),
-          checkoutDate: r.get('checkoutDate'),
-          customerId: r.get('customerId'),
-          customerName: r.get('customerName'),
+          property: r.get('property'),
+          checkinDate: r.get('checkInDate'),
+          checkoutDate: r.get('checkOutDate'),
+          customer: r.get('customer')
         })))
       },(error) => {
         reject(error);
