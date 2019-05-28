@@ -38,17 +38,17 @@ export class PropertyService {
   }
 
   public getPropertyById(id:string){
-    return new Promise(resolve => {
-      var item = Parse.Object.extend("Properties");
+    console.log("id: "+id);
+    return new Promise((resolve, reject) => {
 
-      var query = new Parse.Query(item);
-
-      query.limit = 10;
-      query.descending('createdAt');
-      query.find().then((results) => {
-        console.log("Results -- >"+ JSON.stringify(results));
+      var property = Parse.Object.extend("Properties")
+      var query = new Parse.Query(property)
+      query.equalTo(id,"objectId")
+      query.first().then((results) => {
+        console.log(JSON.stringify(results));
         resolve(JSON.parse(JSON.stringify(results)));
       });
+
     });
   }
   
