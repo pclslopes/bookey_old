@@ -18,8 +18,7 @@ export class NewPropertyComponent implements OnInit {
   
   id;
   property;
-  //isEdit = (this.property !== undefined);
-
+  
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
     regConfig: FieldConfig[] = [
     {

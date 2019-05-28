@@ -3,7 +3,6 @@ import { PropertyModel } from '../models/property.model';
 import { AuthParseService } from '../services/auth.parse.service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { map } from 'rxjs/operators';
 
 declare const Parse: any;
@@ -17,7 +16,7 @@ export class PropertyService {
   }
 
   public getProperties(){
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       var item = Parse.Object.extend("Properties");
 
       var query = new Parse.Query(item);
@@ -31,6 +30,8 @@ export class PropertyService {
           propertyName: r.get('propertyName'),
           propertyLink: r.get('propertyLink')
         })))
+      },(error) => {
+        reject(error);
       });
     });
   }
@@ -45,8 +46,9 @@ export class PropertyService {
       query.first().then((results) => {
         console.log("[service response]: "+JSON.stringify(results));
         resolve(JSON.parse(JSON.stringify(results)));
+      },(error) => {
+        reject(error);
       });
-
     });
   }
   
@@ -59,14 +61,12 @@ export class PropertyService {
       myNewObject.set('propertyLink', property.propertyLink);
 
       myNewObject.save().then((result) => {
-          console.log('Properties created', result);
-          resolve(result);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    })
+        console.log('Properties created', result);
+        resolve(result);
+      },(error) => {
+        reject(error);
+      });
+    });
   }
 
   updateProperty(property){
@@ -93,7 +93,7 @@ export class PropertyService {
       const Properties = Parse.Object.extend('Properties');
       const query = new Parse.Query(Properties);
       // here you put the objectId that you want to delete
-      query.get('xKue915KBG').then((object) => {
+      query.get(id).then((object) => {
         object.destroy().then((response) => {
           resolve(response);
         }, (error) => {

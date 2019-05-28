@@ -11,8 +11,8 @@ import { BookingModel } from '../../models/booking.model';
 })
 export class BookingsComponent implements OnInit {
 
-  bookings: BookingModel[];
   displayedColumns: string[] = [ 'customerName', 'checkinDate', 'checkoutDate', 'propertyName'];
+  dataSource: BookingModel[];
 
   constructor(
       public authService: AuthParseService,
@@ -21,21 +21,13 @@ export class BookingsComponent implements OnInit {
       public router: Router) { }
 
   ngOnInit() {
-    console.log('start');
-    this.bookingService.getBookings();
-    //this.bookingService.getBookings().subscribe(data => {
-    //  this.bookings = data.map(e => {
-    //    return {
-    //      id: e.payload.doc.id,
-    //      propertyId:  e.payload.doc.data().propertyId,
-    //      propertyName: e.payload.doc.data().propertyName,
-    //      checkinDate: e.payload.doc.data().checkinDate,
-    //      checkoutDate: e.payload.doc.data().checkoutDate,
-    //      customerId: e.payload.doc.data().customerId,
-    //      customerName: e.payload.doc.data().customerName,
-    //    } as BookingModel;
-    //  })
-    //});
+    this.bookingService.getBookings().then(data => {
+      console.log("test");
+      console.log("promise result: "+JSON.stringify(data));
+
+      this.dataSource = data;
+    });
+    console.log('I will not wait until promise is resolved');
   }
 
   private newBooking(){

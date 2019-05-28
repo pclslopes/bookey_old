@@ -6,4 +6,4 @@ export interface PropertyModel {
     updatedAt:string;
 }
 
-export interface PropertyModels extends Array<PropertyModel>{}
+//export interface PropertyModels extends Array<PropertyModel>{}

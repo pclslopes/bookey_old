@@ -1,5 +1,5 @@
-export class BookingModel {
-    id: string;
+export interface BookingModel {
+    objectId: string;
     propertyId: string;
     propertyName: string;
     checkinDate: Date;

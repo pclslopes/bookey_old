@@ -23,8 +23,6 @@ export class PropertiesComponent implements OnInit {
       public router: Router) { }
 
   ngOnInit() {
-    //this.dataSource = new MatTableDataSource();
-
     this.propertyService.getProperties().then(data => {
       console.log("test");
       console.log("promise result: "+JSON.stringify(data));
