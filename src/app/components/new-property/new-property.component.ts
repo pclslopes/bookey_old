@@ -16,6 +16,7 @@ import { PropertyService } from '../../services/property.service';
 })
 export class NewPropertyComponent implements OnInit {
   
+  id;
   property;
   //isEdit = (this.property !== undefined);
 
@@ -60,18 +61,21 @@ export class NewPropertyComponent implements OnInit {
     private snackbar: MatSnackBar,
     private location: Location,
     private propertyService: PropertyService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { 
+  }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.propertyService.getPropertyById(id).then(data => {
-      this.property = data;
-    });
 
+    this.route.params.subscribe( params => {
+        console.log(params);
+        if (params['id']) {
+          this.property = this.propertyService.getPropertyById(params['id']);
+        }
+    });    
+    
     console.log("-->"+JSON.stringify(this.property));
     if(this.property){
-      console.log("IsEdit: "+ this.isEdit);
-      this.form.form.setValue({
+      this.form.setValue({
         propertyName: this.property.propertyName,
         propertyLink: this.property.propertyLink
       })

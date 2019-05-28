@@ -31,22 +31,29 @@ export class PropertyService {
       query.limit = 10;
       query.descending('createdAt');
       query.find().then((results) => {
-        console.log("Results -- >"+ JSON.stringify(results));
-        resolve(JSON.parse(JSON.stringify(results)));
+        resolve(results.map(r => ({
+          objectId: r.get('objectId'),
+          propertyName: r.get('propertyName'),
+          propertyLink: r.get('propertyLink')
+        })))
       });
     });
   }
 
   public getPropertyById(id:string){
-    console.log("id: "+id);
+    console.log("[service]id: "+id);
     return new Promise((resolve, reject) => {
 
       var property = Parse.Object.extend("Properties")
       var query = new Parse.Query(property)
-      query.equalTo(id,"objectId")
+      query.equalTo("objectId",id)
       query.first().then((results) => {
-        console.log(JSON.stringify(results));
-        resolve(JSON.parse(JSON.stringify(results)));
+        console.log("[service response]: "+JSON.stringify);
+        resolve(results.map(r => ({
+          objectId: r.get('objectId'),
+          propertyName: r.get('propertyName'),
+          propertyLink: r.get('propertyLink')
+        })));
       });
 
     });
