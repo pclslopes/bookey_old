@@ -17,6 +17,7 @@ import { BookingsComponent } from '../components/bookings/bookings.component';
 import { NewBookingComponent } from '../components/new-booking/new-booking.component';
 import { PropertiesComponent } from '../components/properties/properties.component';
 import { NewPropertyComponent } from '../components/new-property/new-property.component';
+import { ExpensesComponent } from '../components/expenses/expenses.component';
 
 // Authentication
 //import { UserResolver } from '../components/user/user.resolver';
@@ -35,6 +36,7 @@ export const rootRouterConfig: Routes = [
   { path: 'new-booking', component: NewBookingComponent, canActivate: [AuthGuard]},
   { path: 'properties', component: PropertiesComponent, canActivate: [AuthGuard]},
   { path: 'new-property', component: NewPropertyComponent, canActivate: [AuthGuard]},
+  { path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'template', component: FormTemplateComponent, canActivate: [AuthGuard] },
   { path: 'template_old', component: TemplateComponent, canActivate: [AuthGuard] },

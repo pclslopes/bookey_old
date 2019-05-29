@@ -28,6 +28,7 @@ import { BookingsComponent } from './components/bookings/bookings.component';
 import { NewBookingComponent } from './components/new-booking/new-booking.component';
 import { PropertiesComponent } from './components/properties/properties.component';
 import { NewPropertyComponent } from './components/new-property/new-property.component';
+import { ExpensesComponent } from './components/expenses/expenses.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -75,6 +76,7 @@ import { PropertyService } from './services/property.service';
     NewBookingComponent,
     PropertiesComponent,
     NewPropertyComponent,
+    ExpensesComponent,
     TemplateComponent,
     CommandBarComponent,
     NavComponent,
