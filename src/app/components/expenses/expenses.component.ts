@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpensesComponent implements OnInit {
 
+  displayedColumns: string[] = [ 'propertyName', 'propertyLink'];
+  dataSource: PropertyModel[];
+  
   constructor() { }
 
   ngOnInit() {

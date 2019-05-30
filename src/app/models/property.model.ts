@@ -2,8 +2,7 @@ export interface PropertyModel {
     objectId : string;
     propertyName: string;
     propertyLink: string;
-    createdAt:string;
-    updatedAt:string;
+    acl: {   }
 }
 
 //export interface PropertyModels extends Array<PropertyModel>{}
