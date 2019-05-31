@@ -4,8 +4,10 @@ import { Validators } from "@angular/forms";
 import { DynamicFormComponent } from "../../dynamic-forms/components/dynamic-form/dynamic-form.component";
 import { FieldConfig } from "../../dynamic-forms/interfaces/dynamic-field.interface";
 import { MatSnackBar } from '@angular/material';
-import { Router, RouterModule, Params } from '@angular/router';
+import { Router, RouterModule, Params, ActivatedRoute } from '@angular/router';
 import { AuthParseService } from '../../services/auth.parse.service'
+import { BookingsService } from '../../services/bookings.service';
+import { PropertyService } from '../../services/property.service';
 
 @Component({
   selector: 'app-new-booking',
@@ -14,7 +16,9 @@ import { AuthParseService } from '../../services/auth.parse.service'
 })
 export class NewBookingComponent implements OnInit {
   
-  isEdit = false;
+  id;
+  booking;
+  properties;
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
     regConfig: FieldConfig[] = [
@@ -37,20 +41,15 @@ export class NewBookingComponent implements OnInit {
       ]
     },
     {
-      type: "input",
+      type: "select",
       label: "Property",
-      inputType: "text",
       name: "property",
+      options: this.propert,
       validations: [
         {
           name: "required",
           validator: Validators.required,
           message: "Property Required"
-        },
-        {
-          name: "pattern",
-          validator: Validators.pattern("^[a-zA-Z ]+$"),
-          message: "Accept only text"
         }
       ]
     },
@@ -84,10 +83,45 @@ export class NewBookingComponent implements OnInit {
     public authService: AuthParseService,
     private router: Router,
     private snackbar: MatSnackBar,
-    private location: Location
+    private location: Location,
+    private propertyService: PropertyService,
+    private bookingService: BookingsService,
+    private route: ActivatedRoute
   ) {
     
   }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {  
+      console.log("Params: "+ JSON.stringify(params));
+      if (params['id']) {
+
+        this.propertyService.getProperties().then(data => {
+          this.properties = data;
+          console.log("this.property result: "+JSON.stringify(this.properties));
+          //console.log("form: "+ JSON.stringify(this.form.form));
+          if(this.property){
+          // this.id = this.property.objectId;
+            this.form.form.controls['property'].options = this.properties;
+          }
+        });
+
+        this.bookingService.getBookingById(params['id']).then(data => {
+          console.log("getBookingById result: "+JSON.stringify(data));
+          this.booking = data;
+          console.log("this.booking result: "+JSON.stringify(this.booking));
+          //console.log("form: "+ JSON.stringify(this.form.form));
+          if(this.booking){
+            this.id = this.booking.objectId;
+            this.form.form.controls['checkInDate'].setValue(this.booking.checkInDate);
+            this.form.form.controls['checkOutDate'].setValue(this.booking.checkOutDate);
+          }
+
+        });      
+      }
+    });
+  }
+
 
   onSubmit(value: any) {
     
@@ -119,10 +153,7 @@ export class NewBookingComponent implements OnInit {
     //}
     //});
   }
-
-  ngOnInit() {
-  }
-
+  
   onCancel(){
     this.location.back();
   }

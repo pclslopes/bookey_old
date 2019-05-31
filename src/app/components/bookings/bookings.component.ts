@@ -21,14 +21,20 @@ export class BookingsComponent implements OnInit {
       public router: Router) { }
 
   ngOnInit() {
+
+
     this.bookingService.getBookings().then(data => {
       console.log("promise result: "+JSON.stringify(data));
       this.dataSource = data;
     });
-    console.log('I will not wait until promise is resolved');
   }
 
   private newBooking(){
     this.router.navigate(['new-booking']);
+  }
+  
+  navBooking(row){
+    console.log("click: "+JSON.stringify(row));
+    this.router.navigate(['new-booking', {id:row.objectId}]);
   }
 }
