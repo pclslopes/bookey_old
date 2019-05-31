@@ -21,7 +21,7 @@ export class NewBookingComponent implements OnInit {
   properties;
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
-    regConfig: FieldConfig[] = [
+  regConfig: FieldConfig[] = [
     {
       type: "input",
       label: "Customer Name",
@@ -44,7 +44,7 @@ export class NewBookingComponent implements OnInit {
       type: "select",
       label: "Property",
       name: "property",
-      options: this.properties,
+      options: [],
       validations: [
         {
           name: "required",
@@ -100,24 +100,27 @@ export class NewBookingComponent implements OnInit {
           this.properties = data;
           console.log("this.property result: "+JSON.stringify(this.properties));
           //console.log("form: "+ JSON.stringify(this.form.form));
-          if(this.property){
-          // this.id = this.property.objectId;
-            this.form.form.controls['property'].options = this.properties;
+          if(this.properties){
+            // this.id = this.property.objectId;
+            this.form.form.controls['property'].options = (this.properties);
+            this.regConfig["property"].options = this.properties;
+
+            this.bookingService.getBookingById(params['id']).then(data => {
+              console.log("getBookingById result: "+JSON.stringify(data));
+              this.booking = data;
+              console.log("this.booking result: "+JSON.stringify(this.booking));
+              //console.log("form: "+ JSON.stringify(this.form.form));
+              if(this.booking){
+                this.id = this.booking.objectId;
+                this.form.form.controls['checkInDate'].setValue(this.booking.checkInDate);
+                this.form.form.controls['checkOutDate'].setValue(this.booking.checkOutDate);
+              }
+
+            });      
           }
         });
 
-        this.bookingService.getBookingById(params['id']).then(data => {
-          console.log("getBookingById result: "+JSON.stringify(data));
-          this.booking = data;
-          console.log("this.booking result: "+JSON.stringify(this.booking));
-          //console.log("form: "+ JSON.stringify(this.form.form));
-          if(this.booking){
-            this.id = this.booking.objectId;
-            this.form.form.controls['checkInDate'].setValue(this.booking.checkInDate);
-            this.form.form.controls['checkOutDate'].setValue(this.booking.checkOutDate);
-          }
-
-        });      
+        
       }
     });
   }

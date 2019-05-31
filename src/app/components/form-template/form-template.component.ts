@@ -86,7 +86,7 @@ export class FormTemplateComponent{
       label: "Country",
       name: "country",
       value: "UK",
-      options: ["India", "UAE", "UK", "US"]
+      options: [{"name":"India"}, {"name":"UAE"}, {"UK":"5"}, {"US":"6"}]
     },
     {
       type: "checkbox",
