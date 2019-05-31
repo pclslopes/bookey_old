@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { BookingModel } from '../models/booking.model';
 import { AuthParseService } from '../services/auth.parse.service';
 import { environment } from '../../environments/environment';
@@ -9,6 +10,8 @@ declare const Parse: any;
 
 @Injectable()
 export class BookingsService {
+
+  pipe = new DatePipe(environment.defaultLanguage);
 
   constructor(public authService: AuthParseService,) { 
     Parse.initialize(environment.parseServer.PARSE_APP_ID, environment.parseServer.PARSE_JS_KEY);
@@ -26,8 +29,8 @@ export class BookingsService {
         resolve(results.map(r => ({
           objectId: r.id,
           property: r.get('property'),
-          checkinDate: r.get('checkInDate'),
-          checkoutDate: r.get('checkOutDate'),
+          checkinDate: this.pipe.transform(r.get('checkInDate'), 'dd-MM-yyyy'),
+          checkoutDate: this.pipe.transform(r.get('checkOutDate'), 'dd-MM-yyyy'),
           customer: r.get('customer')
         })))
       },(error) => {

@@ -22,9 +22,7 @@ export class BookingsComponent implements OnInit {
 
   ngOnInit() {
     this.bookingService.getBookings().then(data => {
-      console.log("test");
       console.log("promise result: "+JSON.stringify(data));
-
       this.dataSource = data;
     });
     console.log('I will not wait until promise is resolved');
