@@ -44,7 +44,7 @@ export class NewBookingComponent implements OnInit {
       type: "select",
       label: "Property",
       name: "property",
-      options: this.propert,
+      options: this.properties,
       validations: [
         {
           name: "required",
