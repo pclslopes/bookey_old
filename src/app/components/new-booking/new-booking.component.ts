@@ -102,8 +102,9 @@ export class NewBookingComponent implements OnInit {
           //console.log("form: "+ JSON.stringify(this.form.form));
           if(this.properties){
             // this.id = this.property.objectId;
-            this.form.form.controls['property'].options = (this.properties);
-            this.regConfig["property"].options = this.properties;
+            //this.form.fields.options = this.properties;
+            this.form.setFormPropertyField("property", "options", this.properties);
+            //this.regConfig["property"].options = this.properties;
 
             this.bookingService.getBookingById(params['id']).then(data => {
               console.log("getBookingById result: "+JSON.stringify(data));

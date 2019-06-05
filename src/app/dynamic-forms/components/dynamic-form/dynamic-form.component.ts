@@ -82,4 +82,12 @@ export class DynamicFormComponent implements OnInit {
       control.markAsTouched({ onlySelf: true });
     });
   }
+
+  setFormPropertyField(fieldName: string, propertyName:string, value:any){
+    for (var i = 0; i < this.fields.length; i++) {
+      if(this.fields[i].name === fieldName){
+        this.fields[i][propertyName] = value;
+      }
+    }
+  }
 }

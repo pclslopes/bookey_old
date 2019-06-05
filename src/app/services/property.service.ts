@@ -27,8 +27,8 @@ export class PropertyService {
         console.log("results: " + JSON.stringify(results));
         resolve(results.map(r => ({
           objectId: r.id,
-          propertyName: r.get('propertyName'),
-          propertyLink: r.get('propertyLink')
+          name: r.get('name'),
+          link: r.get('link')
         })))
       },(error) => {
         reject(error);
@@ -58,8 +58,8 @@ export class PropertyService {
       const myNewObject = new properties();
 
       myNewObject.setACL(Parse.User.current()); // Set ACL access with current user
-      myNewObject.set('propertyName', property.propertyName);
-      myNewObject.set('propertyLink', property.propertyLink);
+      myNewObject.set('name', property.propertyName);
+      myNewObject.set('link', property.propertyLink);
 
       myNewObject.save().then((result) => {
         console.log('Properties created', result);
@@ -78,8 +78,8 @@ export class PropertyService {
       const query = new Parse.Query(properties);
       // here you put the objectId that you want to update
       query.get(property.objectId).then((object) => {
-        object.set('propertyName', property.propertyName);
-        object.set('propertyLink', property.propertyLink);
+        object.set('name', property.propertyName);
+        object.set('link', property.propertyLink);
         object.save().then((response) => {
           // You can use the "get" method to get the value of an attribute
           // Ex: response.get("<ATTRIBUTE_NAME>")

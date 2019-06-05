@@ -75,8 +75,8 @@ export class NewPropertyComponent implements OnInit {
           //console.log("form: "+ JSON.stringify(this.form.form));
           if(this.property){
             this.id = this.property.objectId;
-            this.form.form.controls['propertyName'].setValue(this.property.propertyName);
-            this.form.form.controls['propertyLink'].setValue(this.property.propertyLink);
+            this.form.form.controls['name'].setValue(this.property.name);
+            this.form.form.controls['link'].setValue(this.property.link);
           }
 
         });
