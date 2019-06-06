@@ -19,6 +19,56 @@ export class NewBookingComponent implements OnInit {
   id;
   booking;
   properties;
+  times: [
+    {id:"0000", name:"00:00"},
+    {id:"0030", name:"00:30"},
+    {id:"0100", name:"01:00"},
+    {id:"0130", name:"01:30"},
+    {id:"0200", name:"02:00"},
+    {id:"0230", name:"02:30"},
+    {id:"0300", name:"03:00"},
+    {id:"0330", name:"03:30"},
+    {id:"0400", name:"04:00"},
+    {id:"0430", name:"04:30"},
+    {id:"0500", name:"05:00"},
+    {id:"0530", name:"05:30"},
+    {id:"0600", name:"06:00"},
+    {id:"0630", name:"06:30"},
+    {id:"0700", name:"07:00"},
+    {id:"0730", name:"07:30"},
+    {id:"0800", name:"08:00"},
+    {id:"0830", name:"08:30"},
+    {id:"0900", name:"09:00"},
+    {id:"0930", name:"09:30"},
+    {id:"1000", name:"10:00"},
+    {id:"1030", name:"10:30"},
+    {id:"1100", name:"11:00"},
+    {id:"1130", name:"11:30"},
+    {id:"1200", name:"12:00"},
+    {id:"1230", name:"12:30"},
+    {id:"1300", name:"13:00"},
+    {id:"1330", name:"13:30"},
+    {id:"1400", name:"14:00"},
+    {id:"1430", name:"14:30"},
+    {id:"1500", name:"15:00"},
+    {id:"1530", name:"15:30"},
+    {id:"1600", name:"16:00"},
+    {id:"1630", name:"16:30"},
+    {id:"1700", name:"17:00"},
+    {id:"1730", name:"17:30"},
+    {id:"1800", name:"18:00"},
+    {id:"1830", name:"18:30"},
+    {id:"1900", name:"19:00"},
+    {id:"1930", name:"19:30"},
+    {id:"2000", name:"20:00"},
+    {id:"2030", name:"20:30"},
+    {id:"2100", name:"21:00"},
+    {id:"2130", name:"21:30"},
+    {id:"2200", name:"22:00"},
+    {id:"2230", name:"22:30"},
+    {id:"2300", name:"23:00"},
+    {id:"2330", name:"23:30"}
+  ];
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
   regConfig: FieldConfig[] = [
@@ -76,6 +126,12 @@ export class NewBookingComponent implements OnInit {
           message: "Check-Out Date Required"
         }
       ]
+    },
+    {
+      type: "select",
+      label: "Check-In Time",
+      name: "checkInTime",
+      options: this.times
     }
   ];
 
@@ -103,6 +159,7 @@ export class NewBookingComponent implements OnInit {
           // this.id = this.property.objectId;
           //this.form.fields.options = this.properties;
           this.form.setFormPropertyField("property", "options", this.properties);
+          this.form.setFormPropertyField("checkInTime", "options", this.times);
           //this.regConfig["property"].options = this.properties;
 
           if (params['id']) {
@@ -117,7 +174,7 @@ export class NewBookingComponent implements OnInit {
                 this.form.form.controls['checkOutDate'].setValue(this.booking.checkOutDate);
               }
             });      
-            
+          }
         }
       });
         
@@ -128,32 +185,27 @@ export class NewBookingComponent implements OnInit {
   onSubmit(value: any) {
     
     if(this.form.form.valid){
-      //const formValue = this.questionsForm.value;
-      alert(JSON.stringify(value));
-    }else{
-      //form.form.validations
-      this.snackbar.open('Please fill all mandatory fields', 'OK', { duration: 3000 });
-      return;
-    }
-    //Extend the native Parse.Object class.
-    //var ListItem = Parse.Object.extend("ListItem");
+        
+        console.log("Is this update? id:"+this.id);
 
-    //Instantiate an object of the ListItem class
-    //var listItem = new ListItem();
+        if(this.id){
+          value["id"] = this.id;
+          this.bookingService.updateBooking(value).then(data => {
+            this.location.back();
+          });
+        }else{
+          this.bookingService.createBooking(value).then(data => {
+            this.location.back();
+          });
+        }
+        console.log("Form: "+JSON.stringify(value));
 
-    //listItem is now the object that we want to save, so we assign the properties that we want on it.
-    //listItem.set("content", text);
-    //listItem.set("isComplete", false);
-
-    //We call the save method, and pass in success and failure callback functions.
-    //listItem.save(null, {       
-    //    success: function(item) {
-        //Success Callback 
-    //},
-    //error: function(gameScore, error) {
-        //Failure Callback
-    //}
-    //});
+        
+      }else{
+        //form.form.validations
+        this.snackbar.open('Please fill all mandatory fields', 'OK', { duration: 3000 });
+        return;
+      }
   }
   
   onCancel(){

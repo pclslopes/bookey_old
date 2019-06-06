@@ -83,12 +83,11 @@ export class BookingsService {
       const query = new Parse.Query(properties);
       // here you put the objectId that you want to update
       query.get(booking.id).then((object) => {
-        object.set('propertyId', booking.propertyId);
-        object.set('propertyName', booking.propertyName);
-        object.set('checkinDate', booking.checkinDate);
-        object.set('checkoutDate', booking.checkoutDate);
-        object.set('customerId', booking.customerId);
-        object.set('customerName', booking.customerName);
+        object.set('property', booking.property);
+        object.set('checkInDate', booking.checkinDate);
+        object.set('checkOutDate', booking.checkoutDate);
+        object.set('checkInTime', booking.checkinDate);
+        object.set('customer', booking.customerName);
         object.save().then((response) => {
           // You can use the "get" method to get the value of an attribute
           // Ex: response.get("<ATTRIBUTE_NAME>")
