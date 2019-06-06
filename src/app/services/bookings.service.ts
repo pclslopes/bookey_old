@@ -28,10 +28,11 @@ export class BookingsService {
         console.log("results: " + JSON.stringify(results));
         resolve(results.map(r => ({
           id: r.id,
-          property: r.get('property'),
-          checkinDate: this.pipe.transform(r.get('checkInDate'), 'dd-MM-yyyy'),
-          checkoutDate: this.pipe.transform(r.get('checkOutDate'), 'dd-MM-yyyy'),
-          customer: r.get('customer')
+          property: r.get("property"),
+          checkinDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
+          checkoutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
+          customer: r.get("customerName"),
+          checkInTime: r.get("checkInTime")
         })))
       },(error) => {
         reject(error);
@@ -48,7 +49,17 @@ export class BookingsService {
       query.equalTo("objectId",id)
       query.first().then((results) => {
         console.log("[service response]: "+JSON.stringify(results));
-        resolve(JSON.parse(JSON.stringify(results)));
+        const propertyResult: BookingModel = {
+          id: results.id,
+          property: results.get("property"),
+          checkInDate: results.get("checkInDate"),
+          checkOutDate: results.get("checkOutDate"),
+          customer: results.get("customerName"),
+          checkInTime: results.get("checkInTime")
+        };
+
+        resolve(propertyResult);
+
       },(error) => {
         reject(error);
       });
@@ -59,15 +70,15 @@ export class BookingsService {
     return new Promise((resolve, reject) => {
       const parseObj = Parse.Object.extend('Bookings');
       const myNewObject = new parseObj();
-      var relation = parseObj.relation("property");
+      var relation = myNewObject.relation("property");
       var property = new Parse.Object("Property");
-      property.id = booking.property;
+      property.id = booking.property.id;
 
       myNewObject.setACL(Parse.User.current()); // Set ACL access with current user
-      myNewObject.set('property', property);
+      //myNewObject.set('property', property);
       myNewObject.set('checkInDate', booking.checkInDate);
       myNewObject.set('checkOutDate', booking.checkOutDate);
-      myNewObject.set('customer', booking.customer);
+      myNewObject.set('customerName', booking.customer);
       myNewObject.set('checkInTime', booking.checkInTime);
 
       myNewObject.save().then((result) => {
