@@ -34,7 +34,7 @@ export class NewPropertyComponent implements OnInit {
         },
         {
           name: "pattern",
-          validator: Validators.pattern("^[a-zA-Z ]+$"),
+          validator: Validators.pattern("^[a-zA-Z0-9_ ]*$"),
           message: "Accept only text",
           
         }
@@ -48,8 +48,8 @@ export class NewPropertyComponent implements OnInit {
       validations: [
         {
           name: "pattern",
-          validator: Validators.pattern("^[a-zA-Z ]+$"),
-          message: "Accept only text"
+          validator: Validators.pattern("^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"),
+          message: "Accept only url"
         }
       ]
     }
@@ -88,6 +88,8 @@ export class NewPropertyComponent implements OnInit {
       
       if(this.form.form.valid){
         
+        console.log("Is this update? id:"+this.id);
+
         if(this.id){
           value["id"] = this.id;
           this.propertyService.updateProperty(value).then(data => {
