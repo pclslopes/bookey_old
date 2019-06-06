@@ -94,18 +94,18 @@ export class NewBookingComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {  
       console.log("Params: "+ JSON.stringify(params));
-      if (params['id']) {
 
-        this.propertyService.getProperties().then(data => {
-          this.properties = data;
-          console.log("this.property result: "+JSON.stringify(this.properties));
-          //console.log("form: "+ JSON.stringify(this.form.form));
-          if(this.properties){
-            // this.id = this.property.objectId;
-            //this.form.fields.options = this.properties;
-            this.form.setFormPropertyField("property", "options", this.properties);
-            //this.regConfig["property"].options = this.properties;
+      this.propertyService.getProperties().then(data => {
+        this.properties = data;
+        console.log("this.property result: "+JSON.stringify(this.properties));
+        //console.log("form: "+ JSON.stringify(this.form.form));
+        if(this.properties){
+          // this.id = this.property.objectId;
+          //this.form.fields.options = this.properties;
+          this.form.setFormPropertyField("property", "options", this.properties);
+          //this.regConfig["property"].options = this.properties;
 
+          if (params['id']) {
             this.bookingService.getBookingById(params['id']).then(data => {
               console.log("getBookingById result: "+JSON.stringify(data));
               this.booking = data;
@@ -116,13 +116,11 @@ export class NewBookingComponent implements OnInit {
                 this.form.form.controls['checkInDate'].setValue(this.booking.checkInDate);
                 this.form.form.controls['checkOutDate'].setValue(this.booking.checkOutDate);
               }
-
             });      
-          }
-        });
-
+            
+        }
+      });
         
-      }
     });
   }
 
