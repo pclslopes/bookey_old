@@ -1,5 +1,5 @@
 export interface PropertyModel {
-    objectId : string;
+    id : string;
     propertyName: string;
     propertyLink: string;
     acl: {}

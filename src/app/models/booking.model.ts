@@ -1,5 +1,5 @@
 export interface BookingModel {
-    objectId: string;
+    id: string;
     propertyId: string;
     propertyName: string;
     checkinDate: Date;

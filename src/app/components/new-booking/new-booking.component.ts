@@ -112,7 +112,7 @@ export class NewBookingComponent implements OnInit {
               console.log("this.booking result: "+JSON.stringify(this.booking));
               //console.log("form: "+ JSON.stringify(this.form.form));
               if(this.booking){
-                this.id = this.booking.objectId;
+                this.id = this.booking.id;
                 this.form.form.controls['checkInDate'].setValue(this.booking.checkInDate);
                 this.form.form.controls['checkOutDate'].setValue(this.booking.checkOutDate);
               }

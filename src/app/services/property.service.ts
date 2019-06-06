@@ -26,7 +26,7 @@ export class PropertyService {
       query.find().then((results) => {
         console.log("results: " + JSON.stringify(results));
         resolve(results.map(r => ({
-          objectId: r.id,
+          id: r.id,
           name: r.get('name'),
           link: r.get('link')
         })))
@@ -45,7 +45,14 @@ export class PropertyService {
       query.equalTo("objectId",id)
       query.first().then((results) => {
         console.log("[service response]: "+JSON.stringify(results));
-        resolve(JSON.parse(JSON.stringify(results)));
+        //resolve(JSON.parse(JSON.stringify(results)));
+        const propertyResult: PropertyModel = {
+            id: results.id,
+            name: results.get("name"),
+            link: results.get("link
+        };
+
+        resolve(propertyResult);
       },(error) => {
         reject(error);
       });
@@ -77,7 +84,7 @@ export class PropertyService {
       const properties = Parse.Object.extend('Properties');
       const query = new Parse.Query(properties);
       // here you put the objectId that you want to update
-      query.get(property.objectId).then((object) => {
+      query.get(property.id).then((object) => {
         object.set('name', property.propertyName);
         object.set('link', property.propertyLink);
         object.save().then((response) => {

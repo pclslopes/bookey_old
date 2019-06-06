@@ -25,7 +25,7 @@ export class NewPropertyComponent implements OnInit {
       type: "input",
       label: "Property Name",
       inputType: "text",
-      name: "propertyName",
+      name: "name",
       validations: [
         {
           name: "required",
@@ -44,7 +44,7 @@ export class NewPropertyComponent implements OnInit {
       type: "input",
       label: "Link",
       inputType: "text",
-      name: "propertyLink",
+      name: "link",
       validations: [
         {
           name: "pattern",
@@ -74,7 +74,7 @@ export class NewPropertyComponent implements OnInit {
           console.log("this.property result: "+JSON.stringify(this.property));
           //console.log("form: "+ JSON.stringify(this.form.form));
           if(this.property){
-            this.id = this.property.objectId;
+            this.id = this.property.id;
             this.form.form.controls['name'].setValue(this.property.name);
             this.form.form.controls['link'].setValue(this.property.link);
           }
@@ -89,7 +89,7 @@ export class NewPropertyComponent implements OnInit {
       if(this.form.form.valid){
         
         if(this.id){
-          value["objectId"] = this.id;
+          value["id"] = this.id;
           this.propertyService.updateProperty(value).then(data => {
             this.location.back();
           });

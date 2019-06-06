@@ -27,7 +27,7 @@ export class BookingsService {
       query.find().then((results) => {
         console.log("results: " + JSON.stringify(results));
         resolve(results.map(r => ({
-          objectId: r.id,
+          id: r.id,
           property: r.get('property'),
           checkinDate: this.pipe.transform(r.get('checkInDate'), 'dd-MM-yyyy'),
           checkoutDate: this.pipe.transform(r.get('checkOutDate'), 'dd-MM-yyyy'),
@@ -82,7 +82,7 @@ export class BookingsService {
       const properties = Parse.Object.extend('Bookings');
       const query = new Parse.Query(properties);
       // here you put the objectId that you want to update
-      query.get(booking.objectId).then((object) => {
+      query.get(booking.id).then((object) => {
         object.set('propertyId', booking.propertyId);
         object.set('propertyName', booking.propertyName);
         object.set('checkinDate', booking.checkinDate);

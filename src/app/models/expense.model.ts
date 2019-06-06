@@ -1,7 +1,7 @@
 
 
 export interface ExpenseModel {
-  objectId: string;
+  id: string;
   property: PropertyModel;
   description: string;
   value: number;
