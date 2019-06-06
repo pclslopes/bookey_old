@@ -59,14 +59,16 @@ export class BookingsService {
     return new Promise((resolve, reject) => {
       const parseObj = Parse.Object.extend('Bookings');
       const myNewObject = new parseObj();
+      var relation = parseObj.relation("property");
+      var property = new Parse.Object("Property");
+      property.id = booking.property;
 
       myNewObject.setACL(Parse.User.current()); // Set ACL access with current user
-      myNewObject.set('propertyId', booking.propertyId);
-      myNewObject.set('propertyName', booking.propertyName);
-      myNewObject.set('checkinDate', booking.checkinDate);
-      myNewObject.set('checkoutDate', booking.checkoutDate);
-      myNewObject.set('customerId', booking.customerId);
-      myNewObject.set('customerName', booking.customerName);
+      myNewObject.set('property', property);
+      myNewObject.set('checkInDate', booking.checkInDate);
+      myNewObject.set('checkOutDate', booking.checkOutDate);
+      myNewObject.set('customer', booking.customer);
+      myNewObject.set('checkInTime', booking.checkInTime);
 
       myNewObject.save().then((result) => {
         console.log('Properties created', result);
@@ -84,10 +86,10 @@ export class BookingsService {
       // here you put the objectId that you want to update
       query.get(booking.id).then((object) => {
         object.set('property', booking.property);
-        object.set('checkInDate', booking.checkinDate);
-        object.set('checkOutDate', booking.checkoutDate);
-        object.set('checkInTime', booking.checkinDate);
-        object.set('customer', booking.customerName);
+        object.set('checkInDate', booking.checkInDate);
+        object.set('checkOutDate', booking.checkOutDate);
+        object.set('customer', booking.customer);
+        object.set('checkInTime', booking.checkInTime);
         object.save().then((response) => {
           // You can use the "get" method to get the value of an attribute
           // Ex: response.get("<ATTRIBUTE_NAME>")

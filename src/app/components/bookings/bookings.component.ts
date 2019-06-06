@@ -35,6 +35,6 @@ export class BookingsComponent implements OnInit {
   
   navBooking(row){
     console.log("click: "+JSON.stringify(row));
-    this.router.navigate(['new-booking', {id:row.objectId}]);
+    this.router.navigate(['new-booking', {id:row.id}]);
   }
 }

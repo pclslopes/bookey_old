@@ -19,7 +19,26 @@ export class NewBookingComponent implements OnInit {
   id;
   booking;
   properties;
-  times: [
+  times: any = [
+    
+    {id:"1500", name:"15:00"},
+    {id:"1530", name:"15:30"},
+    {id:"1600", name:"16:00"},
+    {id:"1630", name:"16:30"},
+    {id:"1700", name:"17:00"},
+    {id:"1730", name:"17:30"},
+    {id:"1800", name:"18:00"},
+    {id:"1830", name:"18:30"},
+    {id:"1900", name:"19:00"},
+    {id:"1930", name:"19:30"},
+    {id:"2000", name:"20:00"},
+    {id:"2030", name:"20:30"},
+    {id:"2100", name:"21:00"},
+    {id:"2130", name:"21:30"},
+    {id:"2200", name:"22:00"},
+    {id:"2230", name:"22:30"},
+    {id:"2300", name:"23:00"},
+    {id:"2330", name:"23:30"},
     {id:"0000", name:"00:00"},
     {id:"0030", name:"00:30"},
     {id:"0100", name:"01:00"},
@@ -49,25 +68,7 @@ export class NewBookingComponent implements OnInit {
     {id:"1300", name:"13:00"},
     {id:"1330", name:"13:30"},
     {id:"1400", name:"14:00"},
-    {id:"1430", name:"14:30"},
-    {id:"1500", name:"15:00"},
-    {id:"1530", name:"15:30"},
-    {id:"1600", name:"16:00"},
-    {id:"1630", name:"16:30"},
-    {id:"1700", name:"17:00"},
-    {id:"1730", name:"17:30"},
-    {id:"1800", name:"18:00"},
-    {id:"1830", name:"18:30"},
-    {id:"1900", name:"19:00"},
-    {id:"1930", name:"19:30"},
-    {id:"2000", name:"20:00"},
-    {id:"2030", name:"20:30"},
-    {id:"2100", name:"21:00"},
-    {id:"2130", name:"21:30"},
-    {id:"2200", name:"22:00"},
-    {id:"2230", name:"22:30"},
-    {id:"2300", name:"23:00"},
-    {id:"2330", name:"23:30"}
+    {id:"1430", name:"14:30"}
   ];
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
@@ -76,7 +77,7 @@ export class NewBookingComponent implements OnInit {
       type: "input",
       label: "Customer Name",
       inputType: "text",
-      name: "customerName",
+      name: "customer",
       validations: [
         {
           name: "required",
@@ -159,7 +160,7 @@ export class NewBookingComponent implements OnInit {
           // this.id = this.property.objectId;
           //this.form.fields.options = this.properties;
           this.form.setFormPropertyField("property", "options", this.properties);
-          this.form.setFormPropertyField("checkInTime", "options", this.times);
+          //this.form.setFormPropertyField("checkInTime", "options", this.times);
           //this.regConfig["property"].options = this.properties;
 
           if (params['id']) {
