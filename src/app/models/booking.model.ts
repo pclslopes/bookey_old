@@ -5,4 +5,5 @@ export interface BookingModel {
     checkOutDate: Date;
     checkInTime: string;
     customer: string;
+    propertyId: string;
 }

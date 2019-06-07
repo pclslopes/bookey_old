@@ -174,7 +174,7 @@ export class NewBookingComponent implements OnInit {
                 this.form.form.controls['checkInDate'].setValue(this.booking.checkInDate);
                 this.form.form.controls['checkOutDate'].setValue(this.booking.checkOutDate);
                 this.form.form.controls["customer"].setValue(this.booking.customer);
-                this.form.form.controls["checkInTime"].setValue(this.booking.checkIn);
+                this.form.form.controls["checkInTime"].setValue(this.booking.checkInTime);
               }
             });      
           }
