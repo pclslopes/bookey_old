@@ -30,7 +30,7 @@ export class BookingsService {
         resolve(results.map(r => ({
           id: r.id,
           property: {
-              id: r.get("property").name,
+              id: r.get("property").get(name,
           },
           checkinDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
           checkoutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
@@ -54,7 +54,7 @@ export class BookingsService {
         console.log("[service response]: "+JSON.stringify(results));
         const propertyResult: BookingModel = {
           id: results.id,
-          property: results.get("property").get("name"),
+          property: results.get("property") !== null ? results.get("property").get("name"): null,
           checkInDate: results.get("checkInDate"),
           checkOutDate: results.get("checkOutDate"),
           customer: results.get("customerName"),
@@ -73,9 +73,10 @@ export class BookingsService {
     return new Promise((resolve, reject) => {
       const parseObj = Parse.Object.extend('Bookings');
       const myNewObject = new parseObj();
-      var relation = myNewObject.pointer("property");
-      var property = new Parse.Object("Properties");
-      property.id = booking.property.id;
+      // pointer
+      var pointerProperty = Parse.Object.extend("properties");
+      //var property = new Parse.Object("Properties");
+      pointerProperty.id = booking.property;
 
       myNewObject.setACL(Parse.User.current()); // Set ACL access with current user
       //myNewObject.set('property', property);
@@ -83,6 +84,7 @@ export class BookingsService {
       myNewObject.set('checkOutDate', booking.checkOutDate);
       myNewObject.set('customerName', booking.customer);
       myNewObject.set('checkInTime', booking.checkInTime);
+      myNewObject.set('property', pointerProperty);
 
       myNewObject.save().then((result) => {
         console.log('Properties created', result);
