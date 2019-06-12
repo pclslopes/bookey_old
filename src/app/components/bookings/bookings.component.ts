@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material';
 import { AuthParseService } from '../../services/auth.parse.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookingsService } from '../../services/bookings.service';

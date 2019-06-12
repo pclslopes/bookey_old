@@ -30,6 +30,7 @@ import { NewBookingComponent } from './components/new-booking/new-booking.compon
 import { PropertiesComponent } from './components/properties/properties.component';
 import { NewPropertyComponent } from './components/new-property/new-property.component';
 import { ExpensesComponent } from './components/expenses/expenses.component';
+import { NewExpenseComponent } from './components/new-expense/new-expense.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -78,6 +79,7 @@ import { PropertyService } from './services/property.service';
     PropertiesComponent,
     NewPropertyComponent,
     ExpensesComponent,
+    
     TemplateComponent,
     CommandBarComponent,
     NavComponent,
