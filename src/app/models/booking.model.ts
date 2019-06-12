@@ -1,6 +1,9 @@
 export interface BookingModel {
     id: string;
-    property: string;
+    property: {
+      id: string,
+      name: string
+    };
     checkInDate: Date;
     checkOutDate: Date;
     checkInTime: string;

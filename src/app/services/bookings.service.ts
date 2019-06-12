@@ -30,7 +30,8 @@ export class BookingsService {
         resolve(results.map(r => ({
           id: r.id,
           property: {
-              id: r.get("property").get(name,
+              id: r.has("property") ? r.get("property").get("objectId") : null,
+              name: r.has("property") ? r.get("property").get("name") : "",
           },
           checkinDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
           checkoutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
@@ -49,12 +50,16 @@ export class BookingsService {
 
       var parseObj = Parse.Object.extend("Bookings")
       var query = new Parse.Query(parseObj)
+      query.include("property");
       query.equalTo("objectId",id)
       query.first().then((results) => {
         console.log("[service response]: "+JSON.stringify(results));
         const propertyResult: BookingModel = {
           id: results.id,
-          property: results.get("property") !== null ? results.get("property").get("name"): null,
+          property: {
+            id: results.has("property") ? results.get("property").get("objectId") : null,
+            name: results.has("property") ? results.get("property").get("name") : null,
+          },
           checkInDate: results.get("checkInDate"),
           checkOutDate: results.get("checkOutDate"),
           customer: results.get("customerName"),
