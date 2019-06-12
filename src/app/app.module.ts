@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatTableModule } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material';
 
 // Modules
 import { RouterModule } from '@angular/router';
@@ -61,7 +62,7 @@ import { PropertyService } from './services/property.service';
     AppMaterialModule,
     BrowserAnimationsModule,
     MatTableModule,
-    
+    MatPaginatorModule
   ],
   declarations: [
     AppComponent, 

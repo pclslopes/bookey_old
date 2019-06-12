@@ -8,15 +8,7 @@ export const environment = {
   version: '1.0.0-beta.1',
   defaultLanguage: 'en-GB',
   socialLogins: false,
-  // Initialize Firebase
-  firebase: {
-    apiKey: "AIzaSyBfH63MEZZCE7_8YkExetcviJxwn8eNaSY",
-    authDomain: "bookey-dev.firebaseapp.com",
-    databaseURL: "https://bookey-dev.firebaseio.com",
-    projectId: "bookey-dev",
-    storageBucket: "bookey-dev.appspot.com",
-    messagingSenderId: "319067930874"
-  },
+  listItemsPerPage: 5,
   parseServer: {
     PARSE_APP_ID: 'hVu6Jo2ExNwBnY1XovS8c8crncqWHjxVnHmPt3VQ',
     PARSE_JS_KEY: 'r8SgEsW6gOCFGK3UwBGPLiP0x3Y0cwP3TMOjAcuc',
@@ -32,4 +24,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+ import 'zone.js/dist/zone-error';  // Included with Angular CLI.

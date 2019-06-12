@@ -44,10 +44,10 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navBooking(row)"
-             ></tr>
-
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navBooking(row)"></tr>
+        
       </table>
+      <mat-paginator  showFirstLastButtons></mat-paginator>
 
     </div>
     

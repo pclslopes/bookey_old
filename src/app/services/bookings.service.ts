@@ -18,12 +18,13 @@ export class BookingsService {
     Parse.serverURL = environment.parseServer.serverURL;
   }
 
-  public getBookings(){
+  public getBookings(page:number = 0){
     return new Promise((resolve, reject) => {
       var parseObj = Parse.Object.extend("Bookings");
       var query = new Parse.Query(parseObj);
       query.include("property");
-      query.limit = 10;
+      query.limit(environment.listItemsPerPage);
+      query.skip(page * environment.listItemsPerPage);
       query.descending('createdAt');
       query.find().then((results) => {
         console.log("results: " + JSON.stringify(results));
