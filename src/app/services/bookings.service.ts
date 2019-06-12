@@ -31,10 +31,10 @@ export class BookingsService {
           id: r.id,
           property: {
               id: r.has("property") ? r.get("property").get("objectId") : null,
-              name: r.has("property") ? r.get("property").get("name") : "",
+              name: r.has("property") ? r.get("property").get("name") : null,
           },
-          checkinDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
-          checkoutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
+          checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
+          checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
           customer: r.get("customerName"),
           checkInTime: r.get("checkInTime")
         })))
@@ -52,18 +52,18 @@ export class BookingsService {
       var query = new Parse.Query(parseObj)
       query.include("property");
       query.equalTo("objectId",id)
-      query.first().then((results) => {
-        console.log("[service response]: "+JSON.stringify(results));
-        const propertyResult: BookingModel = {
-          id: results.id,
+      query.first().then((r) => {
+        console.log("[service response]: "+JSON.stringify(r));
+        const propertyResult: a = {
+          id: r.id,
           property: {
-            id: results.has("property") ? results.get("property").get("objectId") : null,
-            name: results.has("property") ? results.get("property").get("name") : null,
+            id: r.has("property") ? r.get("property").get("objectId") : null,
+            name: r.has("property") ? r.get("property").get("name") : null,
           },
-          checkInDate: results.get("checkInDate"),
-          checkOutDate: results.get("checkOutDate"),
-          customer: results.get("customerName"),
-          checkInTime: results.get("checkInTime")
+          checkInDate: r.get("checkInDate"),
+          checkOutDate: r.get("checkOutDate"),
+          customer: r.get("customerName"),
+          checkInTime: r.get("checkInTime")
         };
 
         resolve(propertyResult);
