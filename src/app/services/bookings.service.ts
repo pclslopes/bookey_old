@@ -117,7 +117,7 @@ export class BookingsService {
         object.set('property', propertyObj);
         object.set('checkInDate', booking.checkInDate);
         object.set('checkOutDate', booking.checkOutDate);
-        object.set('customer', booking.customer);
+        object.set('customerName', booking.customer);
         object.set('checkInTime', booking.checkInTime);
         object.save().then((response) => {
           // You can use the "get" method to get the value of an attribute
