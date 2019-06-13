@@ -20,27 +20,35 @@ export class BookingsService {
 
   public getBookings(page:number = 0){
     return new Promise((resolve, reject) => {
+      // Setup Parse
       var parseObj = Parse.Object.extend("Bookings");
       var query = new Parse.Query(parseObj);
+      // Query
       query.include("property");
       query.limit(environment.listItemsPerPage);
       query.skip(page * environment.listItemsPerPage);
       query.descending('createdAt');
-      query.find().then((results) => {
-        console.log("results: " + JSON.stringify(results));
-        resolve(results.map(r => ({
-          id: r.id,
-          property: {
-              id: r.has("property") ? r.get("property").id : null,
-              name: r.has("property") ? r.get("property").get("name") : null,
-          },
-          checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
-          checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
-          customer: r.get("customerName"),
-          checkInTime: r.get("checkInTime")
-        })))
-      },(error) => {
-        reject(error);
+      // Count
+      query.count().then((count) => { 
+        console.log("COUNT 1:"+count);
+        // Find
+        query.find().then((results) => {
+          console.log("results: " + JSON.stringify(results));
+          resolve(results.map(r => ({
+            id: r.id,
+            property: {
+                id: r.has("property") ? r.get("property").id : null,
+                name: r.has("property") ? r.get("property").get("name") : null,
+            },
+            checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
+            checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
+            customer: r.get("customerName"),
+            checkInTime: r.get("checkInTime"),
+            rowCount: count
+          })))
+        },(error) => {
+          reject(error);
+        });
       });
     });
   }

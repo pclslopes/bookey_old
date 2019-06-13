@@ -6,6 +6,7 @@ import { AuthParseService } from '../../services/auth.parse.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookingsService } from '../../services/bookings.service';
 import { BookingModel } from '../../models/booking.model';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-bookings',
@@ -17,6 +18,8 @@ export class BookingsComponent implements OnInit {
   @ViewChild(MatPaginatorModule, {static: false}) paginator: MatPaginatorModule;
   displayedColumns: string[] = [ 'customerName', 'checkinDate', 'checkoutDate', 'propertyName'];
   dataSource;
+  limit:number = environment.listItemsPerPage;
+  totalLength: number = 0;
 
   constructor(
       public authService: AuthParseService,
@@ -27,9 +30,11 @@ export class BookingsComponent implements OnInit {
   ngOnInit() {
 
 
-    this.bookingService.getBookings().then(data => {
+    this.bookingService.getBookings().then((data) => {
       console.log("promise result: "+JSON.stringify(data));
       //this.dataSource = data;
+      
+      this.totalLength = count;
       this.dataSource = new MatTableDataSource<any>(data);
       this.dataSource.paginator = this.paginator;
     });
