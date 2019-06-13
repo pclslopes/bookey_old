@@ -31,6 +31,7 @@ import { PropertiesComponent } from './components/properties/properties.componen
 import { NewPropertyComponent } from './components/new-property/new-property.component';
 import { ExpensesComponent } from './components/expenses/expenses.component';
 import { NewExpenseComponent } from './components/new-expense/new-expense.component';
+import { CustomersComponent } from './components/customers/customers.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -79,7 +80,8 @@ import { PropertyService } from './services/property.service';
     PropertiesComponent,
     NewPropertyComponent,
     ExpensesComponent,
-    
+    NewExpenseComponent,
+    CustomersComponent,
     TemplateComponent,
     CommandBarComponent,
     NavComponent,

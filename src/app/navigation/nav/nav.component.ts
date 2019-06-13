@@ -54,7 +54,7 @@ anonymousRoutes: ROUTE[] = [
       title: 'Prices',
     }, {
       icon: 'contacts',
-      route: 'guest-crm',
+      route: 'customers',
       title: 'Guest CRM',
     }
   ];
