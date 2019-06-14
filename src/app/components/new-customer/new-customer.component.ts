@@ -60,7 +60,7 @@ export class NewCustomerComponent implements OnInit {
       validations: [
         {
           name: "pattern",
-          validator: Validators.pattern("^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"),
+          validator: Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"),
           message: "Accept only email"
         }
       ]
@@ -73,7 +73,7 @@ export class NewCustomerComponent implements OnInit {
       validations: [
         {
           name: "pattern",
-          validator: Validators.pattern("\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$"),
+          validator: Validators.pattern("(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})"),
           message: "Accept only phone number"
         }
       ]
