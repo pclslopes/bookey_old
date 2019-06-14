@@ -6,6 +6,13 @@
       <mat-icon>add</mat-icon>
       NEW BOOKING
     </button>
+    <span class="fill-space"></span>
+    <button mat-button class="crm-command-bar-button" (click)="previousPage()">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button mat-button class="crm-command-bar-button" (click)="nextPage()">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
 
   </ng-container>
 
@@ -47,7 +54,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navBooking(row)"></tr>
         
       </table>
-      <mat-paginator [pageSize]="limit" [length]="totalLength" showFirstLastButtons></mat-paginator>
 
     </div>
     

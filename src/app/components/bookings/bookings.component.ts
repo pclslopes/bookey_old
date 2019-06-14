@@ -19,7 +19,8 @@ export class BookingsComponent implements OnInit {
   displayedColumns: string[] = [ 'customerName', 'checkinDate', 'checkoutDate', 'propertyName'];
   dataSource;
   limit:number = environment.listItemsPerPage;
-  totalLength: number = 0;
+  currentPage = 0;
+  currentCount = 0;
 
   constructor(
       public authService: AuthParseService,
@@ -28,16 +29,7 @@ export class BookingsComponent implements OnInit {
       public router: Router) { }
 
   ngOnInit() {
-
-
-    this.bookingService.getBookings().then((data) => {
-      console.log("promise result: "+JSON.stringify(data));
-      //this.dataSource = data;
-      
-      this.totalLength = count;
-      this.dataSource = new MatTableDataSource<any>(data);
-      this.dataSource.paginator = this.paginator;
-    });
+    this.getBookings(this.currentPage);
   }
 
   private newBooking(){
@@ -48,4 +40,29 @@ export class BookingsComponent implements OnInit {
     console.log("click: "+JSON.stringify(row));
     this.router.navigate(['new-booking', {id:row.id}]);
   }
+
+  nextPage(){
+    if(this.currentCount >= environment.listItemsPerPage){
+      this.currentPage++;
+      this.getBookings(this.currentPage);
+    }
+  }
+
+  previousPage(){
+    if(this.currentPage > 0){
+      this.currentPage--;
+      this.getBookings(this.currentPage);
+    }
+  }
+
+  getBookings(page:number = 0){
+    this.bookingService.getBookings(page).then((data) => {
+      console.log("promise result: "+JSON.stringify(data));
+      
+      this.currentCount = Object.keys(data).length;
+      this.dataSource = new MatTableDataSource<any>(data);
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
 }

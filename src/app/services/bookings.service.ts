@@ -28,27 +28,22 @@ export class BookingsService {
       query.limit(environment.listItemsPerPage);
       query.skip(page * environment.listItemsPerPage);
       query.descending('createdAt');
-      // Count
-      query.count().then((count) => { 
-        console.log("COUNT 1:"+count);
-        // Find
-        query.find().then((results) => {
-          console.log("results: " + JSON.stringify(results));
-          resolve(results.map(r => ({
-            id: r.id,
-            property: {
-                id: r.has("property") ? r.get("property").id : null,
-                name: r.has("property") ? r.get("property").get("name") : null,
-            },
-            checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
-            checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
-            customer: r.get("customerName"),
-            checkInTime: r.get("checkInTime"),
-            rowCount: count
-          })))
-        },(error) => {
-          reject(error);
-        });
+      // Find
+      query.find().then((results) => {
+        console.log("results: " + JSON.stringify(results));
+        resolve(results.map(r => ({
+          id: r.id,
+          property: {
+              id: r.has("property") ? r.get("property").id : null,
+              name: r.has("property") ? r.get("property").get("name") : null,
+          },
+          checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
+          checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
+          customer: r.get("customerName"),
+          checkInTime: r.get("checkInTime")
+        })))
+      },(error) => {
+        reject(error);
       });
     });
   }
