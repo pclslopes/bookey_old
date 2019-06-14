@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthParseService } from '../../services/auth.parse.service';
 import { PropertyService } from '../../services/property.service';
 import { PropertyModel } from '../../models/property.model';
-import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
-import 'rxjs/add/operator/toPromise';
+import { MatSort } from "@angular/material";
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -19,6 +19,7 @@ export class PropertiesComponent implements OnInit {
   limit:number = environment.listItemsPerPage;
   currentPage = 0;
   currentCount = 0;
+  isLastPage = false;
 
   constructor(
       public authService: AuthParseService,
@@ -54,13 +55,14 @@ export class PropertiesComponent implements OnInit {
   }
 
   getProperties(page:number = 0){
-    this.propertyService.getProperties().then(data => {
-      console.log("promise result: "+JSON.stringify(data));
-      if(Object.keys(data).length === 0 && this.currentPage > 0){
-        this.currentPage--;
-      }
+    this.propertyService.getProperties(page).then(data => {
       this.currentCount = Object.keys(data).length;
       this.dataSource = new MatTableDataSource<any>(data);
+      if(this.currentCount < environment.listItemsPerPage){
+        this.isLastPage = true;
+      }else{
+        this.isLastPage = false;
+      }
     });
   }
 }

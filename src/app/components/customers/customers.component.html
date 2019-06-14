@@ -10,7 +10,7 @@
     <button mat-button class="crm-command-bar-button" (click)="previousPage()" [disabled]="currentPage === 0">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <button mat-button class="crm-command-bar-button" (click)="nextPage()">
+    <button mat-button class="crm-command-bar-button" (click)="nextPage()" [disabled]="isLastPage">
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </ng-container>
