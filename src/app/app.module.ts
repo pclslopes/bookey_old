@@ -32,6 +32,7 @@ import { NewPropertyComponent } from './components/new-property/new-property.com
 import { ExpensesComponent } from './components/expenses/expenses.component';
 import { NewExpenseComponent } from './components/new-expense/new-expense.component';
 import { CustomersComponent } from './components/customers/customers.component';
+import { NewCustomerComponent } from './components/new-customer/new-customer.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -83,6 +84,7 @@ import { CustomerService } from './services/customer.service';
     ExpensesComponent,
     NewExpenseComponent,
     CustomersComponent,
+    NewCustomerComponent,
     TemplateComponent,
     CommandBarComponent,
     NavComponent,

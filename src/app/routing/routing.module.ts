@@ -20,6 +20,7 @@ import { NewPropertyComponent } from '../components/new-property/new-property.co
 import { ExpensesComponent } from '../components/expenses/expenses.component';
 import { NewExpenseComponent } from '../components/new-expense/new-expense.component';
 import { CustomersComponent } from '../components/customers/customers.component';
+import { NewCustomerComponent } from '../components/new-customer/new-customer.component';
 
 // Authentication
 //import { UserResolver } from '../components/user/user.resolver';
@@ -41,6 +42,7 @@ export const rootRouterConfig: Routes = [
   { path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard]},
   { path: 'new-expense', component: NewExpenseComponent, canActivate: [AuthGuard]},
   { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard]},
+  { path: 'new-customer', component: NewCustomerComponent, canActivate: [AuthGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'template', component: FormTemplateComponent, canActivate: [AuthGuard] },
   { path: 'template_old', component: TemplateComponent, canActivate: [AuthGuard] },
