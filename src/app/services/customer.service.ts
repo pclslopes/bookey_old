@@ -18,10 +18,15 @@ export class CustomerService {
     Parse.serverURL = environment.parseServer.serverURL;
   }
 
-  public getCustomers(page:number = 0){
+  public getCustomers(page:number = 0, search:string = null){
     return new Promise((resolve, reject) => {
+      // Setup Parse
       var parseObj = Parse.Object.extend("Customers");
       var query = new Parse.Query(parseObj);
+      // Query
+      if(search !== null){
+        query.matches("name", search, 'i');
+      }
       query.limit(environment.listItemsPerPage);
       query.skip(page * environment.listItemsPerPage);
       query.descending('createdAt');

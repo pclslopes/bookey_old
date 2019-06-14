@@ -18,12 +18,15 @@ export class PropertyService {
     Parse.serverURL = environment.parseServer.serverURL;
   }
 
-  public getProperties(page:number = 0){
+  public getProperties(page:number = 0, search:string = null){
     return new Promise((resolve, reject) => {
       // Setup Parse
       var parseObj = Parse.Object.extend("Properties");
       var query = new Parse.Query(parseObj);
       // Query
+      if(search !== null){
+        query.matches("name", search, 'i');
+      }
       query.limit(environment.listItemsPerPage);
       query.skip(page * environment.listItemsPerPage);
       query.descending('createdAt');

@@ -56,7 +56,7 @@ export class PropertiesComponent implements OnInit {
   getProperties(page:number = 0){
     this.propertyService.getProperties().then(data => {
       console.log("promise result: "+JSON.stringify(data));
-      if(Object.keys(data).length === 0 && this.> 0){
+      if(Object.keys(data).length === 0 && this.currentPage > 0){
         this.currentPage--;
       }
       this.currentCount = Object.keys(data).length;
