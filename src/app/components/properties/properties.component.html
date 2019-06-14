@@ -6,7 +6,13 @@
       <mat-icon>add</mat-icon>
       NEW PROPERTY
     </button>
-
+    <span class="fill-space"></span>
+    <button mat-button class="crm-command-bar-button" (click)="previousPage()" [disabled]="currentPage === 0">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button mat-button class="crm-command-bar-button" (click)="nextPage()">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
   </ng-container>
 
 </command-bar>

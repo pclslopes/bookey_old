@@ -6,7 +6,13 @@
       <mat-icon>add</mat-icon>
       NEW CUSTOMER
     </button>
-
+    <span class="fill-space"></span>
+    <button mat-button class="crm-command-bar-button" (click)="previousPage()" [disabled]="currentPage === 0">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button mat-button class="crm-command-bar-button" (click)="nextPage()">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
   </ng-container>
 
 </command-bar>
@@ -47,7 +53,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navCustomer(row)"></tr>
         
       </table>
-      <mat-paginator [pageSize]="5" [length]="11" showFirstLastButtons></mat-paginator>
 
     </div>
     

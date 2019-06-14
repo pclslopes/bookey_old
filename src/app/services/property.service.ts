@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { PropertyModel } from '../models/property.model';
 import { AuthParseService } from '../services/auth.parse.service';
 import { environment } from '../../environments/environment';
@@ -10,25 +11,29 @@ declare const Parse: any;
 @Injectable()
 export class PropertyService {
 
+  pipe = new DatePipe(environment.defaultLanguage);
+
   constructor(public authService: AuthParseService,) { 
     Parse.initialize(environment.parseServer.PARSE_APP_ID, environment.parseServer.PARSE_JS_KEY);
     Parse.serverURL = environment.parseServer.serverURL;
   }
 
-  public getProperties(){
+  public getProperties(page:number = 0){
     return new Promise((resolve, reject) => {
-      var item = Parse.Object.extend("Properties");
-
-      var query = new Parse.Query(item);
-
-      query.limit = 10;
+      // Setup Parse
+      var parseObj = Parse.Object.extend("Properties");
+      var query = new Parse.Query(parseObj);
+      // Query
+      query.limit(environment.listItemsPerPage);
+      query.skip(page * environment.listItemsPerPage);
       query.descending('createdAt');
+      // Find
       query.find().then((results) => {
         console.log("results: " + JSON.stringify(results));
         resolve(results.map(r => ({
           id: r.id,
-          name: r.get('name'),
-          link: r.get('link')
+          name: r.get("name"),
+          link: r.get("link")
         })))
       },(error) => {
         reject(error);
@@ -39,20 +44,19 @@ export class PropertyService {
   public getPropertyById(id:string){
     console.log("[service]id: "+id);
     return new Promise((resolve, reject) => {
-
-      var property = Parse.Object.extend("Properties")
-      var query = new Parse.Query(property)
+      // Setup Parse
+      var parseObj = Parse.Object.extend("Properties")
+      var query = new Parse.Query(parseObj)
+      // Query
       query.equalTo("objectId",id)
-      query.first().then((results) => {
-        console.log("[service response]: "+JSON.stringify(results));
-        //resolve(JSON.parse(JSON.stringify(results)));
-        const propertyResult: PropertyModel = {
-            id: results.id,
-            name: results.get("name"),
-            link: results.get("link")
-        };
+      query.first().then((r) => {
+        console.log("[service response]: "+JSON.stringify(r));
+        resolve({
+          id: r.id,
+          name: r.get("name"),
+          link: r.get("link"),
+        });
 
-        resolve(propertyResult);
       },(error) => {
         reject(error);
       });
@@ -61,17 +65,17 @@ export class PropertyService {
   
   createProperty(property: any){
     return new Promise((resolve, reject) => {
-      const properties = Parse.Object.extend('Properties');
-      const myNewObject = new properties();
-
+      // Create Parse Object
+      const parseObj = Parse.Object.extend('Properties');
+      const myNewObject = new parseObj();
+      // Set ACL
       myNewObject.setACL(Parse.User.current()); // Set ACL access with current user
+      // Set Fields
       myNewObject.set('name', property.name);
       myNewObject.set('link', property.link);
 
       myNewObject.save().then((result) => {
         console.log('Properties created', result);
-        
-
         resolve(result);
       },(error) => {
         reject(error);
@@ -81,8 +85,9 @@ export class PropertyService {
 
   updateProperty(property){
     return new Promise((resolve, reject) => {
-      const properties = Parse.Object.extend('Properties');
-      const query = new Parse.Query(properties);
+      const parseObj = Parse.Object.extend('Properties');
+      const query = new Parse.Query(parseObj);
+
       // here you put the objectId that you want to update
       query.get(property.id).then((object) => {
         object.set('name', property.name);

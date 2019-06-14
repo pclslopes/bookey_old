@@ -5,6 +5,7 @@ import { PropertyService } from '../../services/property.service';
 import { PropertyModel } from '../../models/property.model';
 import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 import 'rxjs/add/operator/toPromise';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-properties',
@@ -14,21 +15,19 @@ import 'rxjs/add/operator/toPromise';
 export class PropertiesComponent implements OnInit {
 
   displayedColumns: string[] = [ 'propertyName', 'propertyLink'];
-  dataSource: PropertyModel[];
+  dataSource;
+  limit:number = environment.listItemsPerPage;
+  currentPage = 0;
+  currentCount = 0;
 
-  constructor(public authService: AuthParseService,
+  constructor(
+      public authService: AuthParseService,
       private route: ActivatedRoute,
       private propertyService: PropertyService,
       public router: Router) { }
 
   ngOnInit() {
-    this.propertyService.getProperties().then(data => {
-      console.log("test");
-      console.log("promise result: "+JSON.stringify(data));
-
-      this.dataSource = data;
-    });
-    console.log('I will not wait until promise is resolved');
+    this.getProperties(this.currentPage);
   }
 
   private newProperty(){
@@ -38,5 +37,30 @@ export class PropertiesComponent implements OnInit {
   navProperty(row){
     console.log("click: "+JSON.stringify(row));
     this.router.navigate(['new-property', {id:row.id}]);
+  }
+
+  nextPage(){
+    if(this.currentCount >= environment.listItemsPerPage){
+      this.currentPage++;
+      this.getProperties(this.currentPage);
+    }
+  }
+
+  previousPage(){
+    if(this.currentPage > 0){
+      this.currentPage--;
+      this.getProperties(this.currentPage);
+    }
+  }
+
+  getProperties(page:number = 0){
+    this.propertyService.getProperties().then(data => {
+      console.log("promise result: "+JSON.stringify(data));
+      if(Object.keys(data).length === 0 && this.> 0){
+        this.currentPage--;
+      }
+      this.currentCount = Object.keys(data).length;
+      this.dataSource = new MatTableDataSource<any>(data);
+    });
   }
 }

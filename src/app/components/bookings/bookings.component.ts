@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material';
 import { AuthParseService } from '../../services/auth.parse.service';
@@ -15,7 +14,6 @@ import { environment } from '../../../environments/environment';
 })
 export class BookingsComponent implements OnInit {
 
-  @ViewChild(MatPaginatorModule, {static: false}) paginator: MatPaginatorModule;
   displayedColumns: string[] = [ 'customerName', 'checkinDate', 'checkoutDate', 'propertyName'];
   dataSource;
   limit:number = environment.listItemsPerPage;
@@ -61,7 +59,6 @@ export class BookingsComponent implements OnInit {
       
       this.currentCount = Object.keys(data).length;
       this.dataSource = new MatTableDataSource<any>(data);
-      this.dataSource.paginator = this.paginator;
     });
   }
 

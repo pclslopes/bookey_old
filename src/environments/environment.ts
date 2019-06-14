@@ -8,7 +8,7 @@ export const environment = {
   version: '1.0.0-beta.1',
   defaultLanguage: 'en-GB',
   socialLogins: false,
-  listItemsPerPage: 5,
+  listItemsPerPage: 10,
   parseServer: {
     PARSE_APP_ID: 'hVu6Jo2ExNwBnY1XovS8c8crncqWHjxVnHmPt3VQ',
     PARSE_JS_KEY: 'r8SgEsW6gOCFGK3UwBGPLiP0x3Y0cwP3TMOjAcuc',
