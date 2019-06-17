@@ -128,13 +128,19 @@ export class PropertyService {
       // Query
       query.equalTo("objectId",id)
       query.first().then((r) => {
-        console.log("[service response]: "+JSON.stringify(r));
-        for (let entry of r.get("ACL")) {
-          console.log("netre"+entry); // 1, "string", false
-        }
-        resolve({
-          ACL: r.get("ACL")]
-        });
+        let aclList=[];
+        let aclObj = r.get("ACL").permissionsById;
+        Object.keys(aclObj).forEach(
+          key => aclList.push(
+            {
+              id: key,
+              read: aclObj[key].read,
+              write: aclObj[key].write
+            }
+          )
+        );
+        
+        resolve(aclList);
       }
       ,(error) => {
         reject(error);
