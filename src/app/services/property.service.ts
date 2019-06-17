@@ -120,4 +120,22 @@ export class PropertyService {
       });
     });
   }
+
+  getPropertyACLUsers(id: string){
+    return new Promise((resolve, reject) => {
+      const Properties = Parse.Object.extend('Properties');
+      const query = new Parse.Query(Properties);
+      // Query
+      query.equalTo("objectId",id)
+      query.first().then((r) => {
+        console.log("[service response]: "+JSON.stringify(r));
+        resolve(r.get("ACL").map(x => ({
+          id: x.id
+        })))
+      }
+      ,(error) => {
+        reject(error);
+      });
+    });
+  }
 }
