@@ -129,9 +129,12 @@ export class PropertyService {
       query.equalTo("objectId",id)
       query.first().then((r) => {
         console.log("[service response]: "+JSON.stringify(r));
-        resolve(r.get("ACL").map(x => ({
-          id: x.id
-        })))
+        for (let entry of r.get("ACL")) {
+          console.log("netre"+entry); // 1, "string", false
+        }
+        resolve({
+          ACL: r.get("ACL")]
+        });
       }
       ,(error) => {
         reject(error);

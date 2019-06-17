@@ -66,6 +66,11 @@ export class NewPropertyComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {  
+
+      this.propertyService.getPropertyACLUsers(params['id']).then(data => {
+        console.log("getPropertyACLUsers: "+ JSON.stringify(data));
+      });
+
       console.log("Params: "+ JSON.stringify(params));
       if (params['id']) {
         this.propertyService.getPropertyById(params['id']).then(data => {
