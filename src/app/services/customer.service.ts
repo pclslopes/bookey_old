@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { CustomerModel } from '../models/customer.model';
 import { AuthParseService } from '../services/auth.parse.service';
+import { PropertyService } from '../services/property.service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
@@ -13,7 +14,10 @@ export class CustomerService {
 
   pipe = new DatePipe(environment.defaultLanguage);
 
-  constructor(public authService: AuthParseService,) { 
+  constructor(
+      public authService: AuthParseService,
+      public propertyService: PropertyService,
+    ) { 
     Parse.initialize(environment.parseServer.PARSE_APP_ID, environment.parseServer.PARSE_JS_KEY);
     Parse.serverURL = environment.parseServer.serverURL;
   }
@@ -24,6 +28,7 @@ export class CustomerService {
       var parseObj = Parse.Object.extend("Customers");
       var query = new Parse.Query(parseObj);
       // Query
+      query.include("property");
       if(search !== null){
         query.matches("name", search, 'i');
       }
@@ -35,6 +40,10 @@ export class CustomerService {
         resolve(results.map(r => ({
           id: r.id,
           name: r.get("name"),
+          property: {
+              id: r.has("property") ? r.get("property").id : null,
+              name: r.has("property") ? r.get("property").get("name") : null,
+          },
           country: r.get("country"),
           email: r.get("email"),
           phone: r.get("phone")
@@ -53,11 +62,16 @@ export class CustomerService {
       var query = new Parse.Query(parseObj)
       // Query
       query.equalTo("objectId",id)
+      query.include("property");
       query.first().then((r) => {
         console.log("[service response]: "+JSON.stringify(r));
         resolve({
           id: r.id,
           name: r.get("name"),
+          property: {
+            id: r.has("property") ? r.get("property").id : null,
+            name: r.has("property") ? r.get("property").get("name") : null,
+          },
           country: r.get("country"),
           email: r.get("email"),
           phone: r.get("phone")
@@ -74,17 +88,37 @@ export class CustomerService {
       // Create Parse Object
       const parseObj = Parse.Object.extend('Customers');
       const myNewObject = new parseObj();
-      // Set ACL
-      myNewObject.setACL(Parse.User.current()); // Set ACL access with current user
-      // Set Fields
-      myNewObject.set('name', customer.name);
-      myNewObject.set('country', customer.country);
-      myNewObject.set('email', customer.email);
-      myNewObject.set('phone', customer.phone);
-      // Save
-      myNewObject.save().then((result) => {
-        console.log('Properties created', result);
-        resolve(result);
+
+      // Set pointer
+      var pointerProperty = Parse.Object.extend("Properties");
+      const propertyObj = new pointerProperty();
+      propertyObj.set('objectId', customer.property);
+
+      // Get Property ACL
+      this.propertyService.getPropertyACLUsers(customer.property).then(data => {
+        console.log("getPropertyACLUsers: "+ JSON.stringify(data));
+
+        // Set ACL Users
+        var acl = new Parse.ACL();
+        acl.setPublicReadAccess(false);
+        Object.keys(data).forEach(key => {
+          acl.setWriteAccess(data[key].id, true);
+          acl.setReadAccess(data[key].id, true);
+        });
+        myNewObject.setACL(acl);
+
+        // Set Fields
+        myNewObject.set('name', customer.name);
+        myNewObject.set('country', customer.country);
+        myNewObject.set('email', customer.email);
+        myNewObject.set('phone', customer.phone);
+        myNewObject.set('property', propertyObj);
+
+        // Save
+        myNewObject.save().then((result) => {
+          console.log('Properties created', result);
+          resolve(result);
+      });
       },(error) => {
         reject(error);
       });
@@ -98,7 +132,14 @@ export class CustomerService {
       const query = new Parse.Query(parseObj);
       // Query
       query.get(customer.id).then((object) => {
+
+        // Set pointer
+        var pointerProperty = Parse.Object.extend("Properties");
+        const propertyObj = new pointerProperty();
+        propertyObj.set('objectId', customer.property);
+
         // Update Fields
+        object.set('property', propertyObj);
         object.set('name', customer.name);
         object.set('country', customer.country);
         object.set('email', customer.email);

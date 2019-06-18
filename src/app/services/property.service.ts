@@ -71,13 +71,14 @@ export class PropertyService {
       // Create Parse Object
       const parseObj = Parse.Object.extend('Properties');
       const myNewObject = new parseObj();
+      
       // Set ACL (Current User)
       var acl = new Parse.ACL();
       acl.setPublicReadAccess(false);
       acl.setWriteAccess(Parse.User.current(), true);
       acl.setReadAccess(Parse.User.current(), true);
       myNewObject.setACL(acl);
-      
+
       // Set Fields
       myNewObject.set('name', property.name);
       myNewObject.set('link', property.link);
