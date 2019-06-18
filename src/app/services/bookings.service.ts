@@ -101,7 +101,6 @@ export class BookingsService {
         // Set ACL Users
         var acl = new Parse.ACL();
         acl.setPublicReadAccess(false);
-        let users = "";
         Object.keys(data).forEach(key => {
           acl.setWriteAccess(data[key].id, true);
           acl.setReadAccess(data[key].id, true);
