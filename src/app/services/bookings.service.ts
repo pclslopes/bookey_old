@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { BookingModel } from '../models/booking.model';
 import { AuthParseService } from '../services/auth.parse.service';
+import { PropertyService } from '../services/property.service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
@@ -13,7 +14,10 @@ export class BookingsService {
 
   pipe = new DatePipe(environment.defaultLanguage);
 
-  constructor(public authService: AuthParseService,) { 
+  constructor(
+    public authService: AuthParseService,
+    public propertyService: PropertyService,
+    ) { 
     Parse.initialize(environment.parseServer.PARSE_APP_ID, environment.parseServer.PARSE_JS_KEY);
     Parse.serverURL = environment.parseServer.serverURL;
   }
@@ -90,20 +94,33 @@ export class BookingsService {
       const propertyObj = new pointerProperty();
       propertyObj.set('objectId', booking.property);
 
-      // Set ACL
-      myNewObject.setACL(Parse.User.current()); // Set ACL access with current user
-      // Set Fields
-      myNewObject.set('checkInDate', booking.checkInDate);
-      myNewObject.set('checkOutDate', booking.checkOutDate);
-      myNewObject.set('customerName', booking.customer);
-      myNewObject.set('checkInTime', booking.checkInTime);
-      myNewObject.set('property', propertyObj);
+      // Get Property ACL
+      this.propertyService.getPropertyACLUsers(booking.property).then(data => {
+        console.log("getPropertyACLUsers: "+ JSON.stringify(data));
+        
+        // Set ACL Users
+        var acl = new Parse.ACL();
+        acl.setPublicReadAccess(false);
+        let users = "";
+        Object.keys(data).forEach(key => {
+          acl.setWriteAccess(data[key].id, true);
+          acl.setReadAccess(data[key].id, true);
+        });
+        myNewObject.setACL(acl);
 
-      myNewObject.save().then((result) => {
-        console.log('Properties created', result);
-        resolve(result);
-      },(error) => {
-        reject(error);
+        // Set Fields
+        myNewObject.set('checkInDate', booking.checkInDate);
+        myNewObject.set('checkOutDate', booking.checkOutDate);
+        myNewObject.set('customerName', booking.customer);
+        myNewObject.set('checkInTime', booking.checkInTime);
+        myNewObject.set('property', propertyObj);
+
+        myNewObject.save().then((result) => {
+          console.log('Properties created', result);
+          resolve(result);
+        },(error) => {
+          reject(error);
+        });
       });
     });
   }

@@ -67,16 +67,12 @@ export class NewPropertyComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {  
 
-      this.propertyService.getPropertyACLUsers(params['id']).then(data => {
-        console.log("getPropertyACLUsers: "+ JSON.stringify(data));
-      });
-
       console.log("Params: "+ JSON.stringify(params));
+
       if (params['id']) {
         this.propertyService.getPropertyById(params['id']).then(data => {
           console.log("getPropertyById result: "+JSON.stringify(data));
           this.property = data;
-          console.log("this.property result: "+JSON.stringify(this.property));
           //console.log("form: "+ JSON.stringify(this.form.form));
           if(this.property){
             this.id = this.property.id;
@@ -93,8 +89,6 @@ export class NewPropertyComponent implements OnInit {
       
       if(this.form.form.valid){
         
-        console.log("Is this update? id:"+this.id);
-
         if(this.id){
           value["id"] = this.id;
           this.propertyService.updateProperty(value).then(data => {
