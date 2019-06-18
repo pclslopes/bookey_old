@@ -56,6 +56,15 @@ export class AuthParseService {
     
     try {
       await user.signUp();
+      // Set ACL for User
+      var acl = new Parse.ACL();
+      acl.setPublicReadAccess(false);
+      acl.setWriteAccess(user, true);
+      acl.setReadAccess(user, true);
+      u.setACL(acl);
+      // old code
+      //myNewObject.setACL(acl);
+
       user.setACL(new Parse.ACL(user));
     } catch (e) {
       return new Promise<string>((error) => {
