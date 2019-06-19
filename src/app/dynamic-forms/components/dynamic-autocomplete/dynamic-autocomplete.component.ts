@@ -13,7 +13,7 @@ import { FieldConfig } from "../../interfaces/dynamic-field.interface";
 `,
   styles: []
 })
-export class DynamicSelectComponent implements OnInit {
+export class DynamicAutoCompleteComponent implements OnInit {
   field: FieldConfig;
   group: FormGroup;
   constructor() {}

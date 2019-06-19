@@ -44,6 +44,7 @@ import { DynamicRadiobuttonComponent } from "./dynamic-forms/components/dynamic-
 import { DynamicCheckboxComponent } from "./dynamic-forms/components/dynamic-checkbox/dynamic-checkbox.component";
 import { DynamicFieldDirective } from "./dynamic-forms/components/dynamic-field/dynamic-field.directive";
 import { DynamicFormComponent } from "./dynamic-forms/components/dynamic-form/dynamic-form.component";
+import { DynamicAutoCompleteComponent } from "./dynamic-forms/components/dynamic-autocomplete/dynamic-autocomplete.component";
 
 // Environment
 import { environment } from '../environments/environment';
@@ -98,7 +99,8 @@ import { CustomerService } from './services/customer.service';
     DynamicRadiobuttonComponent,
     DynamicCheckboxComponent,
     DynamicFieldDirective,
-    DynamicFormComponent
+    DynamicFormComponent,
+    DynamicAutoCompleteComponent
   ],
   entryComponents: [
     DialogContentComponent,
@@ -108,7 +110,8 @@ import { CustomerService } from './services/customer.service';
     DynamicSelectComponent,
     DynamicDateComponent,
     DynamicRadiobuttonComponent,
-    DynamicCheckboxComponent
+    DynamicCheckboxComponent,
+    DynamicAutoCompleteComponent
   ],
   bootstrap: [AppComponent],
   providers: [
