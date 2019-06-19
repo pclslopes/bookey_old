@@ -15,7 +15,7 @@ import { DynamicSelectComponent } from "../dynamic-select/dynamic-select.compone
 import { DynamicDateComponent } from "../dynamic-date/dynamic-date.component";
 import { DynamicRadiobuttonComponent } from "../dynamic-radiobutton/dynamic-radiobutton.component";
 import { DynamicCheckboxComponent } from "../dynamic-checkbox/dynamic-checkbox.component";
-import { DynamicAutoCompleteComponent } from "../dynamic-autocomplete/dynamic-autocomplete.componen";
+import { DynamicAutoCompleteComponent } from "../dynamic-autocomplete/dynamic-autocomplete.component";
 
 const componentMapper = {
   input: DynamicInputComponent,
@@ -25,7 +25,7 @@ const componentMapper = {
   date: DynamicDateComponent,
   radiobutton: DynamicRadiobuttonComponent,
   checkbox: DynamicCheckboxComponent,
-  autocomplete: DynamicAutoCompleteComponent
+  autocomplete: DynamicAutoCompleteComponent,
 };
 @Directive({
   selector: "[dynamicField]"
