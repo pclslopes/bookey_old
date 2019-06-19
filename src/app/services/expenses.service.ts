@@ -47,11 +47,35 @@ export class ExpensesService {
           },
           expenseType: {
               id: r.has("expenseType") ? r.get("expenseType").id : null,
-              name: r.has("expenseType") ? r.get("expenseType").get("expenseType") : null,
+              name: r.has("expenseType") ? r.get("expenseType").get("name") : null,
           },
           description: r.get("description"),
           dateOfExpense: this.pipe.transform(r.get("dateOfExpense"), "dd-MM-yyyy"),
           value: r.get("value")
+        })))
+      },(error) => {
+        reject(error);
+      });
+    });
+  }
+
+  public getExpenseTypes(page:number = 0, search:string = null){
+    return new Promise((resolve, reject) => {
+      // Setup Parse
+      var parseObj = Parse.Object.extend("ExpenseTypes");
+      var query = new Parse.Query(parseObj);
+      // Query
+      if(search !== null){
+        query.matches("name", search, 'i');
+      }
+      query.limit(environment.listItemsPerPage);
+      query.skip(page * environment.listItemsPerPage);
+      query.descending('name');
+      // Find
+      query.find().then((results) => {
+        resolve(results.map(r => ({
+          id: r.id,
+          name: r.get("name")
         })))
       },(error) => {
         reject(error);
@@ -106,54 +130,61 @@ export class ExpensesService {
       const expenseTypeObj = new pointerExpenseType();
       expenseTypeObj.set('objectId', expense.expenseType);
 
-      // Get Property ACL
-      this.propertyService.getPropertyACLUsers(expense.property).then(data => {
-        console.log("getPropertyACLUsers: "+ JSON.stringify(data));
+      //this.getExpenseTypes(0, expense.expenseType).then(dataExpenseType => {
         
-        // Set ACL Users
-        var acl = new Parse.ACL();
-        acl.setPublicReadAccess(false);
-        Object.keys(data).forEach(key => {
-          acl.setWriteAccess(data[key].id, true);
-          acl.setReadAccess(data[key].id, true);
-        });
-        myNewObject.setACL(acl);
+      //  if(!dataExpenseType){
 
-        // Set Fields
-        myNewObject.set('description', expense.description);
-        myNewObject.set('value', expense.value);
-        myNewObject.set('dateOfExpense', expense.dateOfExpense);
-        myNewObject.set('property', propertyObj);
-        myNewObject.set('expenseType', expenseTypeObj);
+      //  }
+        // Get Property ACL
+        this.propertyService.getPropertyACLUsers(expense.property).then(data => {
+          console.log("getPropertyACLUsers: "+ JSON.stringify(data));
+          
+          // Set ACL Users
+          var acl = new Parse.ACL();
+          acl.setPublicReadAccess(false);
+          Object.keys(data).forEach(key => {
+            acl.setWriteAccess(data[key].id, true);
+            acl.setReadAccess(data[key].id, true);
+          });
+          myNewObject.setACL(acl);
 
-        myNewObject.save().then((result) => {
-          console.log('Expense created', result);
-          resolve(result);
-        },(error) => {
-          reject(error);
+          // Set Fields
+          myNewObject.set('description', expense.description);
+          myNewObject.set('value', expense.value);
+          myNewObject.set('dateOfExpense', expense.dateOfExpense);
+          myNewObject.set('property', propertyObj);
+          myNewObject.set('expenseType', expenseTypeObj);
+
+          myNewObject.save().then((result) => {
+            console.log('Expense created', result);
+            resolve(result);
+          },(error) => {
+            reject(error);
+          });
         });
-      });
+      
+      //});
     });
   }
 
-  updateBooking(booking){
+  updateExpense(expense){
     return new Promise((resolve, reject) => {
-      const bookings = Parse.Object.extend('Bookings');
+      const bookings = Parse.Object.extend('Expenses');
       const query = new Parse.Query(bookings);
 
       // here you put the objectId that you want to update
-      query.get(booking.id).then((object) => {
+      query.get(expense.id).then((object) => {
 
         // Set pointer
         var pointerProperty = Parse.Object.extend("Properties");
         const propertyObj = new pointerProperty();
-        propertyObj.set('objectId', booking.property);
+        propertyObj.set('objectId', expense.property);
         
         object.set('property', propertyObj);
-        object.set('checkInDate', booking.checkInDate);
-        object.set('checkOutDate', booking.checkOutDate);
-        object.set('customerName', booking.customer);
-        object.set('checkInTime', booking.checkInTime);
+        object.set('expenseType', expense.expenseType);
+        object.set('dateOfExpense', expense.dateOfExpense);
+        object.set('description', expense.description);
+        object.set('value', expense.value);
         object.save().then((response) => {
           // You can use the "get" method to get the value of an attribute
           // Ex: response.get("<ATTRIBUTE_NAME>")
@@ -165,10 +196,10 @@ export class ExpensesService {
     });
   }
 
-  deleteProperty(id: string){
+  deleteExpense(id: string){
     return new Promise((resolve, reject) => {
-      const Properties = Parse.Object.extend('Properties');
-      const query = new Parse.Query(Properties);
+      const parseObj = Parse.Object.extend('Expenses');
+      const query = new Parse.Query(parseObj);
       // here you put the objectId that you want to delete
       query.get(id).then((object) => {
         object.destroy().then((response) => {

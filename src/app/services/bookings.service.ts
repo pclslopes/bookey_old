@@ -153,10 +153,10 @@ export class BookingsService {
     });
   }
 
-  deleteProperty(id: string){
+  deleteBooking(id: string){
     return new Promise((resolve, reject) => {
-      const Properties = Parse.Object.extend('Properties');
-      const query = new Parse.Query(Properties);
+      const parseObj = Parse.Object.extend('Bookings');
+      const query = new Parse.Query(parseObj);
       // here you put the objectId that you want to delete
       query.get(id).then((object) => {
         object.destroy().then((response) => {
