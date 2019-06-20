@@ -179,4 +179,10 @@ export class NewExpenseComponent implements OnInit {
   onCancel(){
     this.location.back();
   }
+
+  displayFn(value: any): string {
+    alert("yay");
+    return value && typeof value === 'object' ? value.name : value;
+  }
+
 }

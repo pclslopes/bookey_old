@@ -7,11 +7,11 @@ import { FieldConfig } from "../../interfaces/dynamic-field.interface";
 <mat-form-field class="demo-full-width margin-top" [formGroup]="group"  appearance="outline" floatLabel="always" hideRequiredMarker="false">
   <mat-label>{{field.label}}</mat-label>
   <input type="text" [placeholder]="field.label" aria-label="Number" matInput [formControlName]="field.name" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let item of field.options" [value]="item.id">
-        {{item.name}}
-      </mat-option>
-    </mat-autocomplete>
+  <mat-autocomplete #auto="matAutocomplete" [(displayWith)]="displayFn">
+    <mat-option *ngFor="let item of field.options" [value]="item.name">
+      {{item.name}}
+    </mat-option>
+  </mat-autocomplete>
 </mat-form-field>
 `,
   styles: []
