@@ -59,49 +59,6 @@ export class ExpensesService {
     });
   }
 
-  public getExpenseTypes(page:number = 0, search:string = null){
-    return new Promise((resolve, reject) => {
-      // Setup Parse
-      var parseObj = Parse.Object.extend("ExpenseTypes");
-      var query = new Parse.Query(parseObj);
-      // Query
-      if(search !== null){
-        query.matches("name", search, 'i');
-      }
-      query.limit(environment.listItemsPerPage);
-      query.skip(page * environment.listItemsPerPage);
-      query.descending('name');
-      // Find
-      query.find().then((results) => {
-        resolve(results.map(r => ({
-          id: r.id,
-          name: r.get("name")
-        })))
-      },(error) => {
-        reject(error);
-      });
-    });
-  }
-
-  public getExpenseTypeByName(name:string){
-    return new Promise((resolve, reject) => {
-      // Setup Parse
-      var parseObj = Parse.Object.extend("ExpenseTypes");
-      var query = new Parse.Query(parseObj);
-      // Query
-      query.matches("name", name, 'i');
-      // Find
-      query.find().then((results) => {
-        resolve(results.map(r => ({
-          id: r.id,
-          name: r.get("name")
-        })))
-      },(error) => {
-        reject(error);
-      });
-    });
-  }
-
   public getExpenseById(id:string){
     console.log("[service]id: "+id);
     return new Promise((resolve, reject) => {
