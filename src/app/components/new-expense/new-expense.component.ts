@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material';
 import { Router, RouterModule, Params, ActivatedRoute } from '@angular/router';
 import { AuthParseService } from '../../services/auth.parse.service'
 import { ExpensesService } from '../../services/expenses.service';
+import { ExpenseTypesService } from '../../services/expensetypes.service';
 import { PropertyService } from '../../services/property.service';
 
 @Component({
@@ -100,6 +101,7 @@ export class NewExpenseComponent implements OnInit {
     private location: Location,
     private propertyService: PropertyService,
     private expensesService: ExpensesService,
+    private expenseTypesService: ExpenseTypesService,
     private route: ActivatedRoute
   ) {
     
@@ -118,7 +120,7 @@ export class NewExpenseComponent implements OnInit {
           // Set combo options
           this.form.setFormPropertyField("property", "options", this.properties);
 
-          this.expensesService.getExpenseTypes().then(dataExpenseTypes => {
+          this.expenseTypesService.getExpenseTypes().then(dataExpenseTypes => {
             // set properties
             this.expenseTypes = dataExpenseTypes;
 

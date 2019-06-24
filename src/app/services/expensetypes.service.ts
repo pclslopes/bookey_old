@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 declare const Parse: any;
 
 @Injectable()
-export class ExpensesService {
+export class ExpenseTypesService {
 
   pipe = new DatePipe(environment.defaultLanguage);
 
@@ -28,6 +28,7 @@ export class ExpensesService {
       var parseObj = Parse.Object.extend("ExpenseTypes");
       var query = new Parse.Query(parseObj);
       // Query
+      query.include("property");
       if(search !== null){
         query.matches("name", search, 'i');
       }
@@ -52,6 +53,7 @@ export class ExpensesService {
       var parseObj = Parse.Object.extend("ExpenseTypes");
       var query = new Parse.Query(parseObj);
       // Query
+      query.include("property");
       query.matches("name", name, 'i');
       // Find
       query.find().then((results) => {
@@ -65,16 +67,52 @@ export class ExpensesService {
     });
   }
 
-  public validateInsertExpenseType(expenseTypeName){
+  public createExpenseType(expenseType){
+    return new Promise((resolve, reject) => {
+      // Create Parse Object
+      const parseObj = Parse.Object.extend('ExpenseTypes');
+      const myNewObject = new parseObj();
+
+      // Set pointers
+      var pointerProperty = Parse.Object.extend("Properties");
+      const propertyObj = new pointerProperty();
+      propertyObj.set('objectId', expenseType.property);
+
+      this.propertyService.getPropertyACLUsers(expenseType.property).then((aclResults) => {
+
+        // Set ACL Users
+        var acl = new Parse.ACL();
+        acl.setPublicReadAccess(false);
+        Object.keys(aclResults).forEach(key => {
+          acl.setWriteAccess(aclResults[key].id, true);
+          acl.setReadAccess(aclResults[key].id, true);
+        });
+        myNewObject.setACL(acl);
+
+        // Set Fields
+        myNewObject.set('name', expenseType.name);
+
+        myNewObject.save().then((result) => {
+          console.log('Expense type created', result);
+          resolve(result);
+        },(error) => {
+          reject(error);
+        });
+      });
+    });
+  }
+
+  public validateInsertExpenseType(expenseType){
     return new Promise((resolve, reject) => {
       // Search for the expense type
-      this.getExpenseTypeByName(expenseTypeName).then((results) => {
+      this.getExpenseTypeByName(expenseType.name).then((results) => {
         if(results){
-          resolve(results.map(r => ({
-            id: r.id,
-            name: r.get("name")
-          })))
-        }els
+          resolve(results);
+        }else{
+          this.createExpenseType(expenseType).then((resultCreate) => {
+            resolve(resultCreate);
+          });
+        }
       });
     });
   }

@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { ExpenseModel } from '../models/expense.model';
 import { AuthParseService } from '../services/auth.parse.service';
 import { PropertyService } from '../services/property.service';
+import { ExpenseTypesService } from '../services/expensetypes.service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
@@ -17,6 +18,7 @@ export class ExpensesService {
   constructor(
     public authService: AuthParseService,
     public propertyService: PropertyService,
+    public expenseTypesService: ExpenseTypesService,
     ) { 
     Parse.initialize(environment.parseServer.PARSE_APP_ID, environment.parseServer.PARSE_JS_KEY);
     Parse.serverURL = environment.parseServer.serverURL;
@@ -102,15 +104,12 @@ export class ExpensesService {
       const propertyObj = new pointerProperty();
       propertyObj.set('objectId', expense.property);
 
-      var pointerExpenseType = Parse.Object.extend("ExpenseTypes");
-      const expenseTypeObj = new pointerExpenseType();
-      expenseTypeObj.set('objectId', expense.expenseType);
+      this.expenseTypesService.validateInsertExpenseType().then(dataExpenseType => {
 
-      //this.getExpenseTypes(0, expense.expenseType).then(dataExpenseType => {
-        
-      //  if(!dataExpenseType){
+        var pointerExpenseType = Parse.Object.extend("ExpenseTypes");
+        const expenseTypeObj = new pointerExpenseType();
+        expenseTypeObj.set('objectId', dataExpenseType.id);
 
-      //  }
         // Get Property ACL
         this.propertyService.getPropertyACLUsers(expense.property).then(data => {
           console.log("getPropertyACLUsers: "+ JSON.stringify(data));
@@ -138,8 +137,7 @@ export class ExpensesService {
             reject(error);
           });
         });
-      
-      //});
+      });
     });
   }
 
