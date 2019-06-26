@@ -16,6 +16,7 @@ import { rootRouterConfig } from './routing/routing.module';
 import { AppComponent } from './app.component';
 import { TemplateComponent, DialogContentComponent } from './templates_old/templates.component';
 import { CommandBarComponent } from './navigation/command-bar/command-bar.component';
+import { FooterBarComponent } from './navigation/footer-bar/footer-bar.component';
 import { NavComponent } from './navigation/nav/nav.component';
 import { NavigationBarComponent } from './navigation/navigation-bar/navigation-bar.component';
 import { PlaceholderComponent } from './navigation/placeholder/placeholder.component';
@@ -90,6 +91,7 @@ import { ExpenseTypesService } from './services/expensetypes.service';
     NewCustomerComponent,
     TemplateComponent,
     CommandBarComponent,
+    FooterBarComponent,
     NavComponent,
     NavigationBarComponent,
     PlaceholderComponent,
