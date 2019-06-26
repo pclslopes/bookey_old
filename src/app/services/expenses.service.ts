@@ -26,6 +26,7 @@ export class ExpensesService {
 
   public getExpenses(page:number = 0, search:string = null){
     return new Promise((resolve, reject) => {
+      console.log("Get Expenses");
       // Setup Parse
       var parseObj = Parse.Object.extend("Expenses");
       var query = new Parse.Query(parseObj);
@@ -104,17 +105,16 @@ export class ExpensesService {
       const propertyObj = new pointerProperty();
       propertyObj.set('objectId', expense.property);
 
-      this.expenseTypesService.validateInsertExpenseType().then(dataExpenseType => {
-
-        var pointerExpenseType = Parse.Object.extend("ExpenseTypes");
-        const expenseTypeObj = new pointerExpenseType();
-        expenseTypeObj.set('objectId', dataExpenseType.id);
-
-        // Get Property ACL
-        this.propertyService.getPropertyACLUsers(expense.property).then(data => {
-          console.log("getPropertyACLUsers: "+ JSON.stringify(data));
-          
-          // Set ACL Users
+      var pointerExpenseType = Parse.Object.extend("ExpenseTypes");
+      const expenseTypeObj = new pointerExpenseType();
+      expenseTypeObj.set('objectId', expense.expenseType);
+      
+      // Get Property ACL
+      this.propertyService.getPropertyACLUsers(expense.property).then(data => {
+        console.log("getPropertyACLUsers: "+ JSON.stringify(data));
+        
+        // Set ACL Users
+        if(data){
           var acl = new Parse.ACL();
           acl.setPublicReadAccess(false);
           Object.keys(data).forEach(key => {
@@ -122,20 +122,20 @@ export class ExpensesService {
             acl.setReadAccess(data[key].id, true);
           });
           myNewObject.setACL(acl);
+        }
 
-          // Set Fields
-          myNewObject.set('description', expense.description);
-          myNewObject.set('value', expense.value);
-          myNewObject.set('dateOfExpense', expense.dateOfExpense);
-          myNewObject.set('property', propertyObj);
-          myNewObject.set('expenseType', expenseTypeObj);
+        // Set Fields
+        myNewObject.set('description', expense.description);
+        myNewObject.set('value', expense.value);
+        myNewObject.set('dateOfExpense', expense.dateOfExpense);
+        myNewObject.set('property', propertyObj);
+        myNewObject.set('expenseType', expenseTypeObj);
 
-          myNewObject.save().then((result) => {
-            console.log('Expense created', result);
-            resolve(result);
-          },(error) => {
-            reject(error);
-          });
+        myNewObject.save().then((result) => {
+          console.log('Expense created', result);
+          resolve(result);
+        },(error) => {
+          reject(error);
         });
       });
     });

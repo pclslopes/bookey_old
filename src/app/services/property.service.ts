@@ -134,8 +134,9 @@ export class PropertyService {
       // Query
       query.equalTo("objectId",id)
       query.first().then((r) => {
+        console.log(r);
         let aclList=[];
-        let aclObj = r.get("ACL").permissionsById;
+        let aclObj = r.has("ACL") ? r.get("ACL").permissionsById : [];
         Object.keys(aclObj).forEach(
           key => aclList.push(
             {

@@ -24,6 +24,7 @@ export class ExpenseTypesService {
 
    public getExpenseTypes(page:number = 0, search:string = null){
     return new Promise((resolve, reject) => {
+      console.log("Get Expense Types");
       // Setup Parse
       var parseObj = Parse.Object.extend("ExpenseTypes");
       var query = new Parse.Query(parseObj);
@@ -41,6 +42,45 @@ export class ExpenseTypesService {
           id: r.id,
           name: r.get("name")
         })))
+      },(error) => {
+        reject(error);
+      });
+    });
+  }
+
+  public getAllExpenseTypes(){
+    return new Promise((resolve, reject) => {
+      // Setup Parse
+      var parseObj = Parse.Object.extend("ExpenseTypes");
+      var query = new Parse.Query(parseObj);
+      // Query
+      query.include("property");
+      query.descending('name');
+      // Find
+      query.find().then((results) => {
+        resolve(results.map(r => ({
+          id: r.id,
+          name: r.get("name")
+        })))
+      },(error) => {
+        reject(error);
+      });
+    });
+  }
+
+  public getExpenseTypeById(id:string){
+    console.log("[service]id: "+id);
+    return new Promise((resolve, reject) => {
+
+      var parseObj = Parse.Object.extend("ExpenseTypes")
+      var query = new Parse.Query(parseObj)
+      query.equalTo("objectId",id)
+      query.first().then((r) => {
+        resolve({
+          id: r.id,
+          name: r.get("name")
+        });
+
       },(error) => {
         reject(error);
       });

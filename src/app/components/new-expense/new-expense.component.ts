@@ -38,7 +38,7 @@ export class NewExpenseComponent implements OnInit {
       ]
     },
     {
-      type: "autocomplete",
+      type: "select",
       label: "Type",
       name: "expenseType",
       options: [],
@@ -46,7 +46,7 @@ export class NewExpenseComponent implements OnInit {
         {
           name: "required",
           validator: Validators.required,
-          message: "Type Required"
+          message: "Expense Type Required"
         }
       ]
     },
@@ -120,7 +120,7 @@ export class NewExpenseComponent implements OnInit {
           // Set combo options
           this.form.setFormPropertyField("property", "options", this.properties);
 
-          this.expenseTypesService.getExpenseTypes().then(dataExpenseTypes => {
+          this.expenseTypesService.getAllExpenseTypes().then(dataExpenseTypes => {
             // set properties
             this.expenseTypes = dataExpenseTypes;
 
