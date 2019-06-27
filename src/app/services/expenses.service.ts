@@ -32,7 +32,7 @@ export class ExpensesService {
       var query = new Parse.Query(parseObj);
       // Query
       query.include("property");
-      query.include("propertyType");
+      query.include("expenseType");
       if(search !== null){
         query.matches("description", search, 'i');
       }
@@ -54,7 +54,7 @@ export class ExpensesService {
           },
           description: r.get("description"),
           dateOfExpense: this.pipe.transform(r.get("dateOfExpense"), "dd-MM-yyyy"),
-          value: r.get("value")
+          value: r.has("value") ? r.get("value") : null
         })))
       },(error) => {
         reject(error);
@@ -84,7 +84,7 @@ export class ExpensesService {
               name: r.has("expenseType") ? r.get("expenseType").get("expenseType") : null,
           },
           description: r.get("description"),
-          dateOfExpense: this.pipe.transform(r.get("dateOfExpense"), "dd-MM-yyyy"),
+          dateOfExpense: r.get("dateOfExpense"),
           value: r.get("value")
         });
 
@@ -126,7 +126,7 @@ export class ExpensesService {
 
         // Set Fields
         myNewObject.set('description', expense.description);
-        myNewObject.set('value', expense.value);
+        myNewObject.set('value', Number(expense.value));
         myNewObject.set('dateOfExpense', expense.dateOfExpense);
         myNewObject.set('property', propertyObj);
         myNewObject.set('expenseType', expenseTypeObj);
@@ -149,16 +149,20 @@ export class ExpensesService {
       // here you put the objectId that you want to update
       query.get(expense.id).then((object) => {
 
-        // Set pointer
+        // Set pointers
         var pointerProperty = Parse.Object.extend("Properties");
         const propertyObj = new pointerProperty();
         propertyObj.set('objectId', expense.property);
         
+        var pointerExpenseType = Parse.Object.extend("ExpenseTypes");
+        const expenseTypeObj = new pointerExpenseType();
+        expenseTypeObj.set('objectId', expense.expenseType);
+        
         object.set('property', propertyObj);
-        object.set('expenseType', expense.expenseType);
+        object.set('expenseType', expenseTypeObj);
         object.set('dateOfExpense', expense.dateOfExpense);
         object.set('description', expense.description);
-        object.set('value', expense.value);
+        object.set('value', Number(expense.value));
         object.save().then((response) => {
           // You can use the "get" method to get the value of an attribute
           // Ex: response.get("<ATTRIBUTE_NAME>")

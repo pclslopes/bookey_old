@@ -83,7 +83,8 @@ export class NewExpenseComponent implements OnInit {
     {
       type: "input",
       label: "value",
-      name: "checkOutvalueDate",
+      inputType: "number",
+      name: "value",
       validations: [
         {
           name: "required",
