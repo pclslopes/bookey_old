@@ -29,6 +29,7 @@ export class BookingsService {
       var query = new Parse.Query(parseObj);
       // Query
       query.include("property");
+      query.include("status");
       if(search !== null){
         query.matches("name", search, 'i');
       }
@@ -43,6 +44,10 @@ export class BookingsService {
           property: {
               id: r.has("property") ? r.get("property").id : null,
               name: r.has("property") ? r.get("property").get("name") : null,
+          },
+          status: {
+            id: r.has("status") ? r.get("status").id : null,
+            name: r.has("status") ? r.get("status").get("name") : null,
           },
           checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
           checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
@@ -62,6 +67,7 @@ export class BookingsService {
       var parseObj = Parse.Object.extend("Bookings")
       var query = new Parse.Query(parseObj)
       query.include("property");
+      query.include("status");
       query.equalTo("objectId",id)
       query.first().then((r) => {
         console.log("[service response]: "+JSON.stringify(r));
@@ -70,6 +76,10 @@ export class BookingsService {
           property: {
             id: r.has("property") ? r.get("property").id : null,
             name: r.has("property") ? r.get("property").get("name") : null,
+          },
+          status: {
+            id: r.has("status") ? r.get("status").id : null,
+            name: r.has("status") ? r.get("status").get("name") : null,
           },
           checkInDate: r.get("checkInDate"),
           checkOutDate: r.get("checkOutDate"),
@@ -82,6 +92,26 @@ export class BookingsService {
       });
     });
   }
+
+  public getAllBookingStatus(){
+    return new Promise((resolve, reject) => {
+      // Setup Parse
+      var parseObj = Parse.Object.extend("BookingStatus");
+      var query = new Parse.Query(parseObj);
+      // Query
+      query.ascending('name');
+      // Find
+      query.find().then((results) => {
+        console.log("results: " + JSON.stringify(results));
+        resolve(results.map(r => ({
+          id: r.id,
+          name: r.get("name")
+        })))
+      },(error) => {
+        reject(error);
+      });
+    });
+  }
   
   createBooking(booking: any){
     return new Promise((resolve, reject) => {
@@ -89,10 +119,14 @@ export class BookingsService {
       const parseObj = Parse.Object.extend('Bookings');
       const myNewObject = new parseObj();
 
-      // Set pointer
+      // Set pointers
       var pointerProperty = Parse.Object.extend("Properties");
       const propertyObj = new pointerProperty();
       propertyObj.set('objectId', booking.property);
+
+      var pointerStatus = Parse.Object.extend("BookingStatus");
+      const statusObj = new pointerStatus();
+      statusObj.set('objectId', booking.status);
 
       // Get Property ACL
       this.propertyService.getPropertyACLUsers(booking.property).then(data => {
@@ -113,6 +147,7 @@ export class BookingsService {
         myNewObject.set('customerName', booking.customer);
         myNewObject.set('checkInTime', booking.checkInTime);
         myNewObject.set('property', propertyObj);
+        myNewObject.set('status', statusObj);
 
         myNewObject.save().then((result) => {
           console.log('Properties created', result);
@@ -137,7 +172,12 @@ export class BookingsService {
         const propertyObj = new pointerProperty();
         propertyObj.set('objectId', booking.property);
         
+        var pointerStatus = Parse.Object.extend("BookingStatus");
+        const statusObj = new pointerStatus();
+        statusObj.set('objectId', booking.status);
+
         object.set('property', propertyObj);
+        object.set('status', statusObj);
         object.set('checkInDate', booking.checkInDate);
         object.set('checkOutDate', booking.checkOutDate);
         object.set('customerName', booking.customer);

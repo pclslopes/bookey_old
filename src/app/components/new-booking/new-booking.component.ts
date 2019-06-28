@@ -19,6 +19,7 @@ export class NewBookingComponent implements OnInit {
   id;
   booking;
   properties;
+  bookingStatus;
   times: any = [
     
     {id:"1500", name:"15:00"},
@@ -133,6 +134,19 @@ export class NewBookingComponent implements OnInit {
       label: "Check-In Time",
       name: "checkInTime",
       options: this.times
+    },
+    {
+      type: "select",
+      label: "Status",
+      name: "status",
+      options: [],
+      validations: [
+        {
+          name: "required",
+          validator: Validators.required,
+          message: "Status Required"
+        }
+      ]
     }
   ];
 
@@ -161,21 +175,30 @@ export class NewBookingComponent implements OnInit {
           // Set combo options
           this.form.setFormPropertyField("property", "options", this.properties);
 
-          if (params['id']) {
-            this.bookingService.getBookingById(params['id']).then(data => {
-              console.log("getBookingById result: "+JSON.stringify(data));
-              this.booking = data;
+          this.bookingService.getAllBookingStatus().then(dataStatus => {
+            
+            this.bookingStatus = dataStatus;
 
-              if(this.booking){
-                this.id = this.booking.id;
-                this.form.form.controls['checkInDate'].setValue(this.booking.checkInDate);
-                this.form.form.controls['checkOutDate'].setValue(this.booking.checkOutDate);
-                this.form.form.controls["customer"].setValue(this.booking.customer);
-                this.form.form.controls["checkInTime"].setValue(this.booking.checkInTime);
-                this.form.form.controls["property"].setValue(this.booking.property.id);
-              }
-            });      
-          }
+            // Set combo options
+            this.form.setFormPropertyField("status", "options", this.bookingStatus);
+
+            if (params['id']) {
+              this.bookingService.getBookingById(params['id']).then(data => {
+                console.log("getBookingById result: "+JSON.stringify(data));
+                this.booking = data;
+
+                if(this.booking){
+                  this.id = this.booking.id;
+                  this.form.form.controls['checkInDate'].setValue(this.booking.checkInDate);
+                  this.form.form.controls['checkOutDate'].setValue(this.booking.checkOutDate);
+                  this.form.form.controls["customer"].setValue(this.booking.customer);
+                  this.form.form.controls["checkInTime"].setValue(this.booking.checkInTime);
+                  this.form.form.controls["property"].setValue(this.booking.property.id);
+                  this.form.form.controls["status"].setValue(this.booking.status.id);
+                }
+              });      
+            }
+          });
         }
       });
         
