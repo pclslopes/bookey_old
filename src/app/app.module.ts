@@ -60,6 +60,7 @@ import { PropertyService } from './services/property.service';
 import { CustomerService } from './services/customer.service';
 import { ExpensesService } from './services/expenses.service';
 import { ExpenseTypesService } from './services/expensetypes.service';
+import { CountryService } from './services/country.service';
 
 @NgModule({
   imports: [
@@ -127,7 +128,8 @@ import { ExpenseTypesService } from './services/expensetypes.service';
     PropertyService, 
     CustomerService,
     ExpensesService,
-    ExpenseTypesService
+    ExpenseTypesService,
+    CountryService
   ],
 })
 export class AppModule { }

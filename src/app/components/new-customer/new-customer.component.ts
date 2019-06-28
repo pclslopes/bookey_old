@@ -9,6 +9,7 @@ import { AuthParseService } from '../../services/auth.parse.service'
 import { CustomerModel } from '../../models/customer.model';
 import { CustomerService } from '../../services/customer.service';
 import { PropertyService } from '../../services/property.service';
+import { CountryService } from '../../services/country.service';
 
 @Component({
   selector: 'app-new-customer',
@@ -20,6 +21,7 @@ export class NewCustomerComponent implements OnInit {
   id;
   customer;
   properties;
+  countries;
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
     regConfig: FieldConfig[] = [
@@ -55,15 +57,15 @@ export class NewCustomerComponent implements OnInit {
       ]
     },
     {
-      type: "input",
+      type: "select",
       label: "Coutry",
-      inputType: "text",
       name: "country",
+      options: [],
       validations: [
         {
-          name: "pattern",
-          validator: Validators.pattern("^[a-zA-Z0-9_ ]*$"),
-          message: "Accept only text"
+          name: "required",
+          validator: Validators.required,
+          message: "Country Required"
         }
       ]
     },
@@ -102,6 +104,7 @@ export class NewCustomerComponent implements OnInit {
     private location: Location,
     private customerService: CustomerService,
     private propertyService: PropertyService,
+    private countryService: CountryService,
     private route: ActivatedRoute
   ) { }
 
@@ -118,23 +121,31 @@ export class NewCustomerComponent implements OnInit {
           // Set combo options
           this.form.setFormPropertyField("property", "options", this.properties);
 
-          if (params['id']) {
-            this.customerService.getCustomerById(params['id']).then(data => {
-              console.log("getCustomerById result: "+JSON.stringify(data));
-              this.customer = data;
-              console.log("this.property result: "+JSON.stringify(this.customer));
-              //console.log("form: "+ JSON.stringify(this.form.form));
-              if(this.customer){
-                this.id = this.customer.id;
-                this.form.form.controls['name'].setValue(this.customer.name);
-                this.form.form.controls['country'].setValue(this.customer.country);
-                this.form.form.controls['email'].setValue(this.customer.email);
-                this.form.form.controls['phone'].setValue(this.customer.phone);
-                this.form.form.controls["property"].setValue(this.customer.property.id);
-              }
+          this.countryService.getAllCountries().then(dataCountries => {
+            
+            this.countries = dataCountries;
 
-            });
-          }
+            // Set combo options
+            this.form.setFormPropertyField("country", "options", this.countries);
+
+            if (params['id']) {
+              this.customerService.getCustomerById(params['id']).then(data => {
+                console.log("getCustomerById result: "+JSON.stringify(data));
+                this.customer = data;
+                console.log("this.property result: "+JSON.stringify(this.customer));
+                //console.log("form: "+ JSON.stringify(this.form.form));
+                if(this.customer){
+                  this.id = this.customer.id;
+                  this.form.form.controls['name'].setValue(this.customer.name);
+                  this.form.form.controls['country'].setValue(this.customer.country.id);
+                  this.form.form.controls['email'].setValue(this.customer.email);
+                  this.form.form.controls['phone'].setValue(this.customer.phone);
+                  this.form.form.controls["property"].setValue(this.customer.property.id);
+                }
+
+              });
+            }
+          });
         }
       });
     });   

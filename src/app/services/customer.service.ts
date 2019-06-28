@@ -29,6 +29,7 @@ export class CustomerService {
       var query = new Parse.Query(parseObj);
       // Query
       query.include("property");
+      query.include("country");
       if(search !== null){
         query.matches("name", search, 'i');
       }
@@ -44,7 +45,10 @@ export class CustomerService {
               id: r.has("property") ? r.get("property").id : null,
               name: r.has("property") ? r.get("property").get("name") : null,
           },
-          country: r.get("country"),
+          country: {
+            id: r.has("country") ? r.get("country").id : null,
+            name: r.has("country") ? r.get("country").get("name") : null,
+          },
           email: r.get("email"),
           phone: r.get("phone")
         })))
@@ -63,6 +67,7 @@ export class CustomerService {
       // Query
       query.equalTo("objectId",id)
       query.include("property");
+      query.include("country");
       query.first().then((r) => {
         console.log("[service response]: "+JSON.stringify(r));
         resolve({
@@ -72,7 +77,10 @@ export class CustomerService {
             id: r.has("property") ? r.get("property").id : null,
             name: r.has("property") ? r.get("property").get("name") : null,
           },
-          country: r.get("country"),
+          country: {
+            id: r.has("country") ? r.get("country").id : null,
+            name: r.has("country") ? r.get("country").get("name") : null,
+          },
           email: r.get("email"),
           phone: r.get("phone")
         });
@@ -89,10 +97,14 @@ export class CustomerService {
       const parseObj = Parse.Object.extend('Customers');
       const myNewObject = new parseObj();
 
-      // Set pointer
+      // Set pointers
       var pointerProperty = Parse.Object.extend("Properties");
       const propertyObj = new pointerProperty();
       propertyObj.set('objectId', customer.property);
+
+      var pointerCountry = Parse.Object.extend("Countries");
+      const countryObj = new pointerCountry();
+      countryObj.set('objectId', customer.country);
 
       // Get Property ACL
       this.propertyService.getPropertyACLUsers(customer.property).then(data => {
@@ -109,14 +121,14 @@ export class CustomerService {
 
         // Set Fields
         myNewObject.set('name', customer.name);
-        myNewObject.set('country', customer.country);
+        myNewObject.set('country', countryObj);
         myNewObject.set('email', customer.email);
         myNewObject.set('phone', customer.phone);
         myNewObject.set('property', propertyObj);
 
         // Save
         myNewObject.save().then((result) => {
-          console.log('Properties created', result);
+          console.log('Customer created', result);
           resolve(result);
       });
       },(error) => {
@@ -133,15 +145,19 @@ export class CustomerService {
       // Query
       query.get(customer.id).then((object) => {
 
-        // Set pointer
+        // Set pointers
         var pointerProperty = Parse.Object.extend("Properties");
         const propertyObj = new pointerProperty();
         propertyObj.set('objectId', customer.property);
 
+        var pointerCountry = Parse.Object.extend("Countries");
+        const countryObj = new pointerCountry();
+        countryObj.set('objectId', customer.country);
+
         // Update Fields
         object.set('property', propertyObj);
         object.set('name', customer.name);
-        object.set('country', customer.country);
+        object.set('country', countryObj);
         object.set('email', customer.email);
         object.set('phone', customer.phone);
         // Save

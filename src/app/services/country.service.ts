@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CustomerModel } from '../models/customer.model';
 import { AuthParseService } from '../services/auth.parse.service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
@@ -23,7 +22,7 @@ export class CountryService {
       var parseObj = Parse.Object.extend("Countries");
       var query = new Parse.Query(parseObj);
       // Query
-      query.descending('name');
+      query.ascending('name');
       query.find().then((results) => {
         resolve(results.map(r => ({
           id: r.id,
