@@ -72,7 +72,7 @@ import { DataService } from './services/data.service';
     AppMaterialModule,
     BrowserAnimationsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   declarations: [
     AppComponent, 
