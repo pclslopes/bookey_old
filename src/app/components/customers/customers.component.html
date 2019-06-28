@@ -6,6 +6,12 @@
       <mat-icon>add</mat-icon>
       NEW CUSTOMER
     </button>
+    
+  </ng-container>
+
+</command-bar>
+<footer-bar class="crm-footer-bar" fxHide.xs>
+  <ng-container>
     <span class="fill-space"></span>
     <button mat-button class="crm-command-bar-button" (click)="previousPage()" [disabled]="currentPage === 0">
       <mat-icon>keyboard_arrow_left</mat-icon>
@@ -14,8 +20,7 @@
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </ng-container>
-
-</command-bar>
+</footer-bar>
 
 <div #contentContainer class="crm-content-container">
 
