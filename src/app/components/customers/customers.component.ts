@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material';
 import { AuthParseService } from '../../services/auth.parse.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from '../../services/customer.service';
+import { PropertyService } from '../../services/property.service';
 import { CustomerModel } from '../../models/customer.model';
 import { environment } from '../../../environments/environment';
 
@@ -20,15 +21,22 @@ export class CustomersComponent implements OnInit {
   currentPage = 0;
   currentCount = 0;
   isLastPage = false;
+  propertyCount = 0;
 
   constructor(
       public authService: AuthParseService,
       private route: ActivatedRoute,
       private customerService: CustomerService,
+      private propertyService: PropertyService,
       public router: Router) { }
 
   ngOnInit() {
-    this.getCustomers(this.currentPage);
+    this.propertyService.getPropertyCount().then((result) => {
+      this.propertyCount = result;
+      if(this.propertyCount > 0){
+        this.getCustomers(this.currentPage);
+      }
+    });
   }
 
   private newCustomer(){
@@ -38,6 +46,10 @@ export class CustomersComponent implements OnInit {
   navCustomer(row){
     console.log("click: "+JSON.stringify(row));
     this.router.navigate(['new-customer', {id:row.id}]);
+  }
+
+  navNewProperty(){
+    this.router.navigate(['new-property']);
   }
 
   nextPage(){

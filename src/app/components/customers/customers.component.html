@@ -2,7 +2,7 @@
 
   <ng-container>
 
-    <button mat-button class="crm-command-bar-button" (click)="newCustomer()">
+    <button mat-button class="crm-command-bar-button" (click)="newCustomer()" *ngIf="propertyCount !== 0">
       <mat-icon>add</mat-icon>
       NEW CUSTOMER
     </button>
@@ -10,7 +10,7 @@
   </ng-container>
 
 </command-bar>
-<footer-bar class="crm-footer-bar" fxHide.xs>
+<footer-bar class="crm-footer-bar" fxHide.xs *ngIf="propertyCount !== 0">
   <ng-container>
     <span class="fill-space"></span>
     <button mat-button class="crm-command-bar-button" (click)="previousPage()" [disabled]="currentPage === 0">
@@ -30,7 +30,14 @@
 
   <ng-container>
 
-    <div class="table-container">
+    <div class="crm-component-title-container" *ngIf="propertyCount === 0">
+      <h4 class="crm-component-title"> No Property Exists </h4>
+      <h4 class="crm-component-title"> Please insert one </h4>
+      <br/>
+      <button mat-flat-button color="accent" (click)="navNewProperty()">Insert New Property</button>
+    </div>
+
+    <div class="table-container" *ngIf="propertyCount !== 0">
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

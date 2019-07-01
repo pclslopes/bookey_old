@@ -154,4 +154,19 @@ export class PropertyService {
       });
     });
   }
+
+  getPropertyCount(){
+    return new Promise((resolve, reject) => {
+      // Setup Parse
+      var parseObj = Parse.Object.extend("Properties");
+      var query = new Parse.Query(parseObj);
+      // Query
+      query.count().then((numberOfProperties) => {
+        console.log("Property Count: " + JSON.stringify(numberOfProperties));
+        resolve(numberOfProperties)
+      },(error) => {
+        reject(error);
+      });
+    });
+  }
 }

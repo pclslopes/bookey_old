@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material';
 import { AuthParseService } from '../../services/auth.parse.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExpensesService } from '../../services/expenses.service';
+import { PropertyService } from '../../services/property.service';
 import { ExpenseModel } from '../../models/expense.model';
 import { environment } from '../../../environments/environment';
 
@@ -20,15 +21,22 @@ export class ExpensesComponent implements OnInit {
   currentPage = 0;
   currentCount = 0;
   isLastPage = false;
+  propertyCount = 0;
 
   constructor(
       public authService: AuthParseService,
       private route: ActivatedRoute,
       private expenseService: ExpensesService,
+      private propertyService: PropertyService,
       public router: Router) { }
 
   ngOnInit() {
-    this.getExpenses(this.currentPage);
+    this.propertyService.getPropertyCount().then((result) => {
+      this.propertyCount = result;
+      if(this.propertyCount > 0){
+        this.getExpenses(this.currentPage);
+      }
+    });
   }
 
   private newExpense(){
@@ -38,6 +46,10 @@ export class ExpensesComponent implements OnInit {
   navExpense(row){
     console.log("click: "+JSON.stringify(row));
     this.router.navigate(['new-expense', {id:row.id}]);
+  }
+
+  navNewProperty(){
+    this.router.navigate(['new-property']);
   }
 
   nextPage(){

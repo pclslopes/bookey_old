@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material';
 import { AuthParseService } from '../../services/auth.parse.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookingsService } from '../../services/bookings.service';
+import { PropertyService } from '../../services/property.service';
 import { BookingModel } from '../../models/booking.model';
 import { environment } from '../../../environments/environment';
 
@@ -20,15 +21,22 @@ export class BookingsComponent implements OnInit {
   currentPage = 0;
   currentCount = 0;
   isLastPage = false;
+  propertyCount = 0;
 
   constructor(
       public authService: AuthParseService,
       private route: ActivatedRoute,
       private bookingService: BookingsService,
+      private propertyService: PropertyService,
       public router: Router) { }
 
   ngOnInit() {
-    this.getBookings(this.currentPage);
+    this.propertyService.getPropertyCount().then((result) => {
+      this.propertyCount = result;
+      if(this.propertyCount > 0){
+        this.getBookings(this.currentPage);
+      }
+    });
   }
 
   private newBooking(){
@@ -38,6 +46,10 @@ export class BookingsComponent implements OnInit {
   navBooking(row){
     console.log("click: "+JSON.stringify(row));
     this.router.navigate(['new-booking', {id:row.id}]);
+  }
+
+  navNewProperty(){
+    this.router.navigate(['new-property']);
   }
 
   nextPage(){
