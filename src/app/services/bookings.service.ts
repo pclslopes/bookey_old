@@ -29,6 +29,7 @@ export class BookingsService {
       var query = new Parse.Query(parseObj);
       // Query
       query.include("property");
+      query.include("customer");
       query.include("status");
       if(search !== null){
         query.matches("name", search, 'i');
@@ -45,14 +46,27 @@ export class BookingsService {
               id: r.has("property") ? r.get("property").id : null,
               name: r.has("property") ? r.get("property").get("name") : null,
           },
+          customer: {
+            id: r.has("customer") ? r.get("customer").id : null,
+            email: r.has("customer") ? r.get("customer").get("email") : null,
+            phone: r.has("customer") ? r.get("customer").get("phone") : null,
+          },
           status: {
             id: r.has("status") ? r.get("status").id : null,
             name: r.has("status") ? r.get("status").get("name") : null,
           },
           checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
           checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
-          customer: r.get("customerName"),
-          checkInTime: r.get("checkInTime")
+          checkInTime: r.get("checkInTime"),
+          platform: r.get("platform"),
+          commissionableAmount: r.get("commissionableAmount"),
+          commission: r.get("commission"),
+          cleaningFee: r.get("cleaningFee"),
+          cityTax: r.get("cityTax"),
+          receivedTotal: r.get("receivedTotal"),
+          adultGuests: r.get("adultGuests"),
+          childGuests: r.get("childGuests"),
+          isReceived: r.get("isReceived"),
         })))
       },(error) => {
         reject(error);
@@ -74,17 +88,30 @@ export class BookingsService {
         resolve({
           id: r.id,
           property: {
-            id: r.has("property") ? r.get("property").id : null,
-            name: r.has("property") ? r.get("property").get("name") : null,
+              id: r.has("property") ? r.get("property").id : null,
+              name: r.has("property") ? r.get("property").get("name") : null,
+          },
+          customer: {
+            id: r.has("customer") ? r.get("customer").id : null,
+            email: r.has("customer") ? r.get("customer").get("email") : null,
+            phone: r.has("customer") ? r.get("customer").get("phone") : null,
           },
           status: {
             id: r.has("status") ? r.get("status").id : null,
             name: r.has("status") ? r.get("status").get("name") : null,
           },
-          checkInDate: r.get("checkInDate"),
-          checkOutDate: r.get("checkOutDate"),
-          customer: r.get("customerName"),
-          checkInTime: r.get("checkInTime")
+          checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
+          checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
+          checkInTime: r.get("checkInTime"),
+          platform: r.get("platform"),
+          commissionableAmount: r.get("commissionableAmount"),
+          commission: r.get("commission"),
+          cleaningFee: r.get("cleaningFee"),
+          cityTax: r.get("cityTax"),
+          receivedTotal: r.get("receivedTotal"),
+          adultGuests: r.get("adultGuests"),
+          childGuests: r.get("childGuests"),
+          isReceived: r.get("isReceived"),
         });
 
       },(error) => {
@@ -128,6 +155,9 @@ export class BookingsService {
       const statusObj = new pointerStatus();
       statusObj.set('objectId', booking.status);
 
+      // Create Customer
+      // ??
+
       // Get Property ACL
       this.propertyService.getPropertyACLUsers(booking.property).then(data => {
         console.log("getPropertyACLUsers: "+ JSON.stringify(data));
@@ -142,12 +172,23 @@ export class BookingsService {
         myNewObject.setACL(acl);
 
         // Set Fields
+        myNewObject.set('property', propertyObj);
+        myNewObject.set('status', statusObj);
+        //myNewObject.set('customer', propertyObj);
         myNewObject.set('checkInDate', booking.checkInDate);
         myNewObject.set('checkOutDate', booking.checkOutDate);
         myNewObject.set('customerName', booking.customer);
         myNewObject.set('checkInTime', booking.checkInTime);
-        myNewObject.set('property', propertyObj);
-        myNewObject.set('status', statusObj);
+        myNewObject.set('platform', booking.platform);
+        myNewObject.set('commissionableAmount', Number(booking.commissionableAmount));
+        myNewObject.set('commission', Number(booking.commission));
+        myNewObject.set('cleaningFee', Number(booking.cleaningFee));
+        myNewObject.set('cityTax', Number(booking.cityTax));
+        myNewObject.set('receivedTotal', Number(booking.receivedTotal));
+        myNewObject.set('adultGuests', Number(booking.adultGuests));
+        myNewObject.set('childGuests', Number(booking.childGuests));
+        myNewObject.set('isReceived', booking.isReceived);
+
 
         myNewObject.save().then((result) => {
           console.log('Properties created', result);
@@ -178,10 +219,21 @@ export class BookingsService {
 
         object.set('property', propertyObj);
         object.set('status', statusObj);
+        //object.set('customer', statusObj);
         object.set('checkInDate', booking.checkInDate);
         object.set('checkOutDate', booking.checkOutDate);
         object.set('customerName', booking.customer);
         object.set('checkInTime', booking.checkInTime);
+        object.set('platform', booking.platform);
+        object.set('commissionableAmount', booking.commissionableAmount);
+        object.set('commission', booking.commission);
+        object.set('cleaningFee', booking.cleaningFee);
+        object.set('cityTax', booking.cityTax);
+        object.set('receivedTotal', booking.receivedTotal);
+        object.set('adultGuests', booking.adultGuests);
+        object.set('childGuests', booking.childGuests);
+        object.set('isReceived', booking.isReceived);
+
         object.save().then((response) => {
           // You can use the "get" method to get the value of an attribute
           // Ex: response.get("<ATTRIBUTE_NAME>")
