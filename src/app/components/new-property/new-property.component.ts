@@ -91,7 +91,7 @@ export class NewPropertyComponent implements OnInit {
             if(this.property){
               this.id = this.property.id;
               this.form.form.controls['name'].setValue(this.property.name);
-              this.form.form.controls['currency'].setValue(this.property.currency.);
+              this.form.form.controls['currency'].setValue(this.property.currency.id);
               this.form.form.controls['link'].setValue(this.property.link);
             }
 
