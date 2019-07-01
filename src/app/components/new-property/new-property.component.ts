@@ -26,6 +26,7 @@ export class NewPropertyComponent implements OnInit {
       label: "Property Name",
       inputType: "text",
       name: "name",
+      disabled: "true",
       validations: [
         {
           name: "required",
