@@ -24,6 +24,7 @@ export class PropertyService {
       var parseObj = Parse.Object.extend("Properties");
       var query = new Parse.Query(parseObj);
       // Query
+      query.include("currency");
       if(search !== null){
         query.matches("name", search, 'i');
       }
@@ -36,6 +37,10 @@ export class PropertyService {
         resolve(results.map(r => ({
           id: r.id,
           name: r.get("name"),
+          currency: {
+              id: r.has("currency") ? r.get("currency").id : null,
+              name: r.has("currency") ? r.get("currency").get("name") : null,
+          },
           link: r.get("link")
         })))
       },(error) => {
@@ -51,15 +56,40 @@ export class PropertyService {
       var parseObj = Parse.Object.extend("Properties")
       var query = new Parse.Query(parseObj)
       // Query
+      query.include("currency");
       query.equalTo("objectId",id)
       query.first().then((r) => {
         console.log("[service response]: "+JSON.stringify(r));
         resolve({
           id: r.id,
           name: r.get("name"),
+          currency: {
+              id: r.has("currency") ? r.get("currency").id : null,
+              name: r.has("currency") ? r.get("currency").get("name") : null,
+          },
           link: r.get("link"),
         });
 
+      },(error) => {
+        reject(error);
+      });
+    });
+  }
+
+  public getAllCurrencies(){
+    return new Promise((resolve, reject) => {
+      // Setup Parse
+      var parseObj = Parse.Object.extend("Currencies");
+      var query = new Parse.Query(parseObj);
+      // Query
+      query.ascending('name');
+      // Find
+      query.find().then((results) => {
+        console.log("results: " + JSON.stringify(results));
+        resolve(results.map(r => ({
+          id: r.id,
+          name: r.get("name")
+        })))
       },(error) => {
         reject(error);
       });
@@ -72,6 +102,11 @@ export class PropertyService {
       const parseObj = Parse.Object.extend('Properties');
       const myNewObject = new parseObj();
       
+      // Set pointers
+      var pointerCurrency = Parse.Object.extend("Currencies");
+      const currencyObj = new pointerCurrency();
+      currencyObj.set('objectId', property.currency);
+
       // Set ACL (Current User)
       var acl = new Parse.ACL();
       acl.setPublicReadAccess(false);
@@ -81,6 +116,7 @@ export class PropertyService {
 
       // Set Fields
       myNewObject.set('name', property.name);
+      myNewObject.set('currency', currencyObj);
       myNewObject.set('link', property.link);
 
       myNewObject.save().then((result) => {
@@ -97,9 +133,15 @@ export class PropertyService {
       const parseObj = Parse.Object.extend('Properties');
       const query = new Parse.Query(parseObj);
 
+      // Set pointers
+      var pointerCurrency = Parse.Object.extend("Currencies");
+      const currencyObj = new pointerCurrency();
+      currencyObj.set('objectId', property.currency);
+
       // here you put the objectId that you want to update
       query.get(property.id).then((object) => {
         object.set('name', property.name);
+        object.set('currency', currencyObj);
         object.set('link', property.link);
         object.save().then((response) => {
           // You can use the "get" method to get the value of an attribute

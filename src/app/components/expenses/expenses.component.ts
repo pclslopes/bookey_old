@@ -21,7 +21,7 @@ export class ExpensesComponent implements OnInit {
   currentPage = 0;
   currentCount = 0;
   isLastPage = false;
-  propertyCount = 0;
+  propertyCount = undefined;
 
   constructor(
       public authService: AuthParseService,

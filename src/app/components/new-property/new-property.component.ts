@@ -18,7 +18,8 @@ export class NewPropertyComponent implements OnInit {
   
   id;
   property;
-  
+  currencies;
+
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
     regConfig: FieldConfig[] = [
     {
@@ -39,6 +40,12 @@ export class NewPropertyComponent implements OnInit {
           
         }
       ]
+    },
+    {
+      type: "select",
+      label: "Currency",
+      name: "currency",
+      options: []
     },
     {
       type: "input",
@@ -69,19 +76,28 @@ export class NewPropertyComponent implements OnInit {
 
       console.log("Params: "+ JSON.stringify(params));
 
-      if (params['id']) {
-        this.propertyService.getPropertyById(params['id']).then(data => {
-          console.log("getPropertyById result: "+JSON.stringify(data));
-          this.property = data;
-          //console.log("form: "+ JSON.stringify(this.form.form));
-          if(this.property){
-            this.id = this.property.id;
-            this.form.form.controls['name'].setValue(this.property.name);
-            this.form.form.controls['link'].setValue(this.property.link);
-          }
+      this.propertyService.getAllCurrencies().then(dataCurrencies => {
+            
+        this.currencies = dataCurrencies;
 
-        });
-      }
+        // Set combo options
+        this.form.setFormPropertyField("currency", "options", this.currencies);
+
+        if (params['id']) {
+          this.propertyService.getPropertyById(params['id']).then(data => {
+            console.log("getPropertyById result: "+JSON.stringify(data));
+            this.property = data;
+            //console.log("form: "+ JSON.stringify(this.form.form));
+            if(this.property){
+              this.id = this.property.id;
+              this.form.form.controls['name'].setValue(this.property.name);
+              this.form.form.controls['currency'].setValue(this.property.currency.);
+              this.form.form.controls['link'].setValue(this.property.link);
+            }
+
+          });
+        }
+      });
     });   
   }
 

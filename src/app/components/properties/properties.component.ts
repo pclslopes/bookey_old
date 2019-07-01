@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment';
 })
 export class PropertiesComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'propertyName', 'propertyLink'];
+  displayedColumns: string[] = [ 'propertyName', 'currency'];
   dataSource;
   limit:number = environment.listItemsPerPage;
   currentPage = 0;
