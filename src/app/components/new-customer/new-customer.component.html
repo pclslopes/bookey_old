@@ -2,6 +2,13 @@
 
   <ng-container>
 
+
+  </ng-container>
+
+</command-bar>
+
+<footer-bar class="crm-footer-bar" fxHide.xs>
+  <ng-container>
     <button mat-button type="submit" class="crm-command-bar-button"
             [disabled]="false"
             (click)="onSubmit(form.value)">
@@ -22,11 +29,8 @@
       <mat-icon>delete</mat-icon>
       DELETE
     </button>
-
   </ng-container>
-
-</command-bar>
-
+</footer-bar>
 
 <div #contentContainer class="crm-content-container">
   

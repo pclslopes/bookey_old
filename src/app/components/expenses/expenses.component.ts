@@ -18,8 +18,8 @@ export class ExpensesComponent implements OnInit {
   displayedColumns: string[] = [ 'expenseType', 'propertyName', 'dateOfExpense', 'value'];
   dataSource;
   limit:number = environment.listItemsPerPage;
-  currentPage = 0;
-  currentCount = 0;
+  currentPage;
+  currentCount;
   isLastPage = false;
   propertyCount = undefined;
 
@@ -68,6 +68,7 @@ export class ExpensesComponent implements OnInit {
 
   getExpenses(page:number = 0){
     this.expenseService.getExpenses(page).then((data) => {
+      this.currentPage = page;
       this.currentCount = Object.keys(data).length;
       this.dataSource = new MatTableDataSource<any>(data);
       if(this.currentCount < environment.listItemsPerPage){

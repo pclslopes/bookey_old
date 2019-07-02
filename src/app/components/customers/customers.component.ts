@@ -18,8 +18,8 @@ export class CustomersComponent implements OnInit {
   displayedColumns: string[] = [ 'name', 'country', 'email', 'phone'];
   dataSource;
   limit:number = environment.listItemsPerPage;
-  currentPage = 0;
-  currentCount = 0;
+  currentPage;
+  currentCount;
   isLastPage = false;
   propertyCount = undefined;
 
@@ -68,6 +68,7 @@ export class CustomersComponent implements OnInit {
 
   getCustomers(page:number = 0){
     this.customerService.getCustomers(page).then(data => {
+      this.currentPage = page;
       this.currentCount = Object.keys(data).length;
       this.dataSource = new MatTableDataSource<any>(data);
       if(this.currentCount < environment.listItemsPerPage){

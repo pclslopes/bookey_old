@@ -14,11 +14,12 @@ import { environment } from '../../../environments/environment';
 })
 export class PropertiesComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'propertyName', 'currency'];
+  displayedColumns: string[] = [ 'propertyName' ];
   dataSource;
   limit:number = environment.listItemsPerPage;
-  currentPage = 0;
-  currentCount = 0;
+  currentPage;
+  currentCount;
+  myData;
   isLastPage = false;
 
   constructor(
@@ -56,7 +57,9 @@ export class PropertiesComponent implements OnInit {
 
   getProperties(page:number = 0){
     this.propertyService.getProperties(page).then(data => {
+      this.currentPage = page;
       this.currentCount = Object.keys(data).length;
+      this.myData = data;
       this.dataSource = new MatTableDataSource<any>(data);
       if(this.currentCount < environment.listItemsPerPage){
         this.isLastPage = true;

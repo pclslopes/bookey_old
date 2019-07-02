@@ -14,10 +14,10 @@
 <footer-bar class="crm-footer-bar" fxHide.xs *ngIf="propertyCount !== 0">
   <ng-container>
     <span class="fill-space"></span>
-    <button mat-button class="crm-command-bar-button" (click)="previousPage()" [disabled]="currentPage === 0">
+    <button mat-button class="crm-command-bar-button" (click)="previousPage()" [disabled]="currentPage === 0 || currentPage === undefined">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
-    <button mat-button class="crm-command-bar-button" (click)="nextPage()" [disabled]="isLastPage">
+    <button mat-button class="crm-command-bar-button" (click)="nextPage()" [disabled]="isLastPage || currentPage === undefined">
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </ng-container>

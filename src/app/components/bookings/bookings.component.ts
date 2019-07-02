@@ -18,8 +18,8 @@ export class BookingsComponent implements OnInit {
   displayedColumns: string[] = [ 'customerName', 'checkinDate', 'checkoutDate', 'propertyName'];
   dataSource;
   limit:number = environment.listItemsPerPage;
-  currentPage = 0;
-  currentCount = 0;
+  currentPage;
+  currentCount;
   isLastPage = false;
   propertyCount = undefined;
 
@@ -68,6 +68,7 @@ export class BookingsComponent implements OnInit {
 
   getBookings(page:number = 0){
     this.bookingService.getBookings(page).then((data) => {
+      this.currentPage = page;
       this.currentCount = Object.keys(data).length;
       this.dataSource = new MatTableDataSource<any>(data);
       if(this.currentCount < environment.listItemsPerPage){
