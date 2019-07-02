@@ -6,6 +6,12 @@
       <mat-icon>add</mat-icon>
       NEW PROPERTY
     </button>
+    
+  </ng-container>
+
+</command-bar>
+<footer-bar class="crm-footer-bar" fxHide.xs *ngIf="propertyCount !== 0">
+  <ng-container>
     <span class="fill-space"></span>
     <button mat-button class="crm-command-bar-button" (click)="previousPage()" [disabled]="currentPage === 0">
       <mat-icon>keyboard_arrow_left</mat-icon>
@@ -14,8 +20,7 @@
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </ng-container>
-
-</command-bar>
+</footer-bar>
 
 <div #contentContainer class="crm-content-container">
 
@@ -35,7 +40,7 @@
         </ng-container>
 
         <ng-container matColumnDef="currency">
-          <th mat-header-cell *matHeaderCellDef> Link </th>
+          <th mat-header-cell *matHeaderCellDef> Currency </th>
           <td mat-cell *matCellDef="let element"> {{element.currency.name}} </td>
         </ng-container>
 
