@@ -1,0 +1,51 @@
+<command-bar class="crm-command-bar" fxHide.xs>
+
+  <ng-container>
+
+    <button mat-button class="crm-command-bar-button" (click)="newCustomer()" *ngIf="propertyCount !== 0">
+      <mat-icon>add</mat-icon>
+      NEW --
+    </button>
+    
+  </ng-container>
+
+</command-bar>
+
+
+<div #contentContainer class="crm-content-container">
+
+  <div class="crm-component-title-container">
+    <h2 class="crm-component-title"> Calendar </h2>
+  </div>
+
+  <ng-container>
+
+    <div class="table-container" >
+
+      <mat-grid-list cols="7" rowHeight="2:2">
+        <mat-grid-tile *ngFor>1</mat-grid-tile>
+        <mat-grid-tile>2</mat-grid-tile>
+        <mat-grid-tile>3</mat-grid-tile>
+        <mat-grid-tile>4</mat-grid-tile>
+        <mat-grid-tile>5</mat-grid-tile>
+        <mat-grid-tile>5</mat-grid-tile>
+        <mat-grid-tile>5</mat-grid-tile>
+        <mat-grid-tile>5</mat-grid-tile>
+      </mat-grid-list>
+
+    </div>
+    
+    <ng-container *ngIf="item; then skeleton"> </ng-container>
+
+    <!-- Skeleton template -->
+
+    <ng-template #skeleton>
+      <div class="crm-spinner-container" [style.height.px]="containerHeight">
+        <mat-spinner color="accent"></mat-spinner>
+      </div>
+    </ng-template>
+
+  </ng-container>
+
+</div>
+

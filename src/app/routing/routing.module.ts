@@ -21,6 +21,7 @@ import { ExpensesComponent } from '../components/expenses/expenses.component';
 import { NewExpenseComponent } from '../components/new-expense/new-expense.component';
 import { CustomersComponent } from '../components/customers/customers.component';
 import { NewCustomerComponent } from '../components/new-customer/new-customer.component';
+import { CalendarComponent } from '../components/calendar/calendar.component';
 
 // Authentication
 //import { UserResolver } from '../components/user/user.resolver';
@@ -46,4 +47,5 @@ export const rootRouterConfig: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'template', component: FormTemplateComponent, canActivate: [AuthGuard] },
   { path: 'template_old', component: TemplateComponent, canActivate: [AuthGuard] },
+  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
 ];

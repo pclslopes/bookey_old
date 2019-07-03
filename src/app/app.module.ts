@@ -34,6 +34,7 @@ import { ExpensesComponent } from './components/expenses/expenses.component';
 import { NewExpenseComponent } from './components/new-expense/new-expense.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { NewCustomerComponent } from './components/new-customer/new-customer.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -62,6 +63,9 @@ import { ExpensesService } from './services/expenses.service';
 import { ExpenseTypesService } from './services/expensetypes.service';
 import { CountryService } from './services/country.service';
 import { DataService } from './services/data.service';
+
+// Store / Redux
+//import { appStoreProviders } from './store/store';
 
 @NgModule({
   imports: [
@@ -92,6 +96,7 @@ import { DataService } from './services/data.service';
     CustomersComponent,
     NewCustomerComponent,
     TemplateComponent,
+    CalendarComponent,
     CommandBarComponent,
     FooterBarComponent,
     NavComponent,
@@ -131,7 +136,8 @@ import { DataService } from './services/data.service';
     ExpensesService,
     ExpenseTypesService,
     CountryService,
-    DataService
+    DataService,
+    //appStoreProviders
   ],
 })
 export class AppModule { }
