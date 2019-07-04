@@ -16,6 +16,8 @@ export class CalendarComponent implements OnInit {
   daysInCurrentMonth;
   currentMonthWeekDayStart;
   currentMonthDaysArray;
+  selectedDay;
+  selectedMonth;
 
   constructor() { }
 
@@ -55,7 +57,17 @@ export class CalendarComponent implements OnInit {
   }
 
   previousMonth(){
-    this.currentDate = newthis.currentDate.setMonth(this.currentDate.getMonth()-1);
+    this.currentDate = new Date(this.currentDate.setMonth(this.currentDate.getMonth()-1));
     this.calculateCalendar();
+  }
+
+  onClick(test){
+    alert(test);
+  }
+
+  dayClick(day){
+    console.log("day click: "+day);
+    this.selectedDay = day;
+    this.selectedMonth = this.currentMonth;
   }
 }
