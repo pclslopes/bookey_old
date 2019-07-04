@@ -18,6 +18,8 @@ export class CalendarComponent implements OnInit {
   currentMonthDaysArray;
   selectedDay;
   selectedMonth;
+  calendarType = "single_select";
+  ranges = [{from:"10 July 2019", to:"15 July 2019", name:"Pedro Lopes"}, {from:"20 July 2019", to:"25 July 2019", name:"Johnny Lopes"}];
 
   constructor() { }
 
