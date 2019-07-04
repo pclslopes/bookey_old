@@ -28,7 +28,7 @@
       </div>
       <mat-grid-list cols="7" rowHeight="2:2">
         <mat-grid-tile *ngFor="let name of dayNames">{{name}}</mat-grid-tile>
-        <mat-grid-tile [style.background]="'#ff5a5f '" *ngFor="let day of currentMonthDaysArray" onClick="onClick(test)">
+        <mat-grid-tile [style.background]="'#ff5a5f'" *ngFor="let day of currentMonthDaysArray" onClick="onClick(test)">
           <button mat-button color="primary" 
             (click)="dayClick(day)"
             [style.background-color]="selectedDay === day && selectedMonth === currentMonth ? '#ccdbdc' : ''"
