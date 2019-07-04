@@ -23,14 +23,8 @@
     <div class="table-container" >
 
       <mat-grid-list cols="7" rowHeight="2:2">
-        <mat-grid-tile *ngFor>1</mat-grid-tile>
-        <mat-grid-tile>2</mat-grid-tile>
-        <mat-grid-tile>3</mat-grid-tile>
-        <mat-grid-tile>4</mat-grid-tile>
-        <mat-grid-tile>5</mat-grid-tile>
-        <mat-grid-tile>5</mat-grid-tile>
-        <mat-grid-tile>5</mat-grid-tile>
-        <mat-grid-tile>5</mat-grid-tile>
+        <mat-grid-tile *ngFor="let name of dayNames">{{name}}</mat-grid-tile>
+        <mat-grid-tile *ngFor="let day of currentMonthDaysArray">{{day}}</mat-grid-tile>
       </mat-grid-list>
 
     </div>
