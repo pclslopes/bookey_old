@@ -21,7 +21,11 @@
   <ng-container>
 
     <div class="table-container" >
-
+      <div>
+        <button mat-button color="primary" (click)="previousMonth();">Previous</button>
+        {{monthNames[currentMonth]}} {{currentYear}}
+        <button mat-button color="primary" (click)="nextMonth();">Next</button>
+      </div>
       <mat-grid-list cols="7" rowHeight="2:2">
         <mat-grid-tile *ngFor="let name of dayNames">{{name}}</mat-grid-tile>
         <mat-grid-tile *ngFor="let day of currentMonthDaysArray">{{day}}</mat-grid-tile>

@@ -10,6 +10,7 @@ export class CalendarComponent implements OnInit {
   dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   dayNamesFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  currentDate;
   currentMonth;
   currentYear;
   daysInCurrentMonth;
@@ -19,11 +20,16 @@ export class CalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.currentMonth = new Date().getUTCMonth();
-    this.currentYear = new Date().getUTCFullYear();
+    this.currentDate = new Date();
+    this.calculateCalendar();
+  }
+
+  calculateCalendar(){
+    this.currentMonth = new Date(this.currentDate).getUTCMonth();
+    this.currentYear = new Date(this.currentDate).getUTCFullYear();
     this.currentMonthWeekDayStart = this.getWeekDayFromDate(new Date("01 "+ this.monthNames[this.currentMonth]+" "+this.currentYear));
     this.daysInCurrentMonth = this.getDaysInMonth(this.currentMonth+1, this.currentYear);
-    this.currentMonthDaysArray = Array(this.daysInCurrentMonth+).fill(0).map((x,i)=>(i+1 > this.dayNamesFull.indexOf(this.currentMonthWeekDayStart) ? i+1-(this.dayNamesFull.indexOf(this.currentMonthWeekDayStart)): null));
+    this.currentMonthDaysArray = Array(this.daysInCurrentMonth+this.dayNamesFull.indexOf(this.currentMonthWeekDayStart)).fill(0).map((x,i)=>(i+1 > this.dayNamesFull.indexOf(this.currentMonthWeekDayStart) ? i+1-(this.dayNamesFull.indexOf(this.currentMonthWeekDayStart)): null));
     console.log("date: "+new Date());
     console.log("month: "+this.currentMonth);
     console.log("year: "+this.currentMonth);
@@ -44,10 +50,12 @@ export class CalendarComponent implements OnInit {
   }
 
   nextMonth(){
-    this.currentMonth++;
+    this.currentDate = new Date(this.currentDate.setMonth(this.currentDate.getMonth()+1));
+    this.calculateCalendar();
   }
 
   previousMonth(){
-    this.currentMonth--;
+    this.currentDate = newthis.currentDate.setMonth(this.currentDate.getMonth()-1);
+    this.calculateCalendar();
   }
 }
