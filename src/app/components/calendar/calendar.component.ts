@@ -18,8 +18,8 @@ export class CalendarComponent implements OnInit {
   currentMonthDaysArray;
   selectedDay;
   selectedMonth;
-  calendarType = "single_select";
-  ranges = [{from:"10 July 2019", to:"15 July 2019", name:"Pedro Lopes"}, {from:"20 July 2019", to:"25 July 2019", name:"Johnny Lopes"}];
+  calendarType = "ranges";
+  ranges = [{from:"10 Jul 2019", to:"15 Jul 2019", name:"Pedro Lopes", id:""}, {from:"20 Jul 2019", to:"25 Jul 2019", name:"Johnny Lopes", id:""}];
 
   constructor() { }
 
@@ -71,5 +71,41 @@ export class CalendarComponent implements OnInit {
     console.log("day click: "+day);
     this.selectedDay = day;
     this.selectedMonth = this.currentMonth;
+  }
+
+  publicgetDayColor(day, month): any{
+    if(this.ranges && this.calendarType === "ranges"){
+      this.ranges.forEach((range) => {
+        let rangeDate = new Date(range.from);
+        let rangeFromDay = new Date(range.from).getUTCDate()+1;
+        let rangeFromMonth = new Date(range.from).getUTCMonth()+1;
+        let rangeToDay = new Date(range.to).getUTCDate()+1;
+        let rangeToMonth = new Date(range.to).getUTCMonth()+1;
+
+        // Start of range
+        if(rangeFromDay === day && rangeFromMonth === month){
+          console.log("day: "+day);
+          console.log("month: "+month);
+          console.log("rangeDate: "+rangeDate);
+          console.log("rangeFromDay: "+rangeFromDay);
+          console.log("rangeFromMonth: "+rangeFromMonth);
+          console.log("start_range: "+ day);
+          return 'start_range'; //'#ff5a5f'
+        }
+        
+        // Inside range
+        if((day > rangeFromDay && rangeFromMonth >= month)
+        && (day < rangeToDay && rangeToMonth <= month)){
+          console.log("mid_range: "+ day);
+          return "mid_range".toString(); //#ff5a5f'
+        }
+
+        // End of Range
+
+
+        return "";
+
+      });
+     }
   }
 }
