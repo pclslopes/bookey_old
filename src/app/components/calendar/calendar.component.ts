@@ -73,39 +73,55 @@ export class CalendarComponent implements OnInit {
     this.selectedMonth = this.currentMonth;
   }
 
-  publicgetDayColor(day, month): any{
+  getDayColor(day, month):string{
+    let returnValue;
+    var BreakException = {};
+
     if(this.ranges && this.calendarType === "ranges"){
       this.ranges.forEach((range) => {
-        let rangeDate = new Date(range.from);
-        let rangeFromDay = new Date(range.from).getUTCDate()+1;
-        let rangeFromMonth = new Date(range.from).getUTCMonth()+1;
-        let rangeToDay = new Date(range.to).getUTCDate()+1;
-        let rangeToMonth = new Date(range.to).getUTCMonth()+1;
+        try{
+          let rangeDate = new Date(range.from);
+          let rangeFromDay = new Date(range.from).getUTCDate()+1;
+          let rangeFromMonth = new Date(range.from).getUTCMonth()+1;
+          let rangeToDay = new Date(range.to).getUTCDate()+1;
+          let rangeToMonth = new Date(range.to).getUTCMonth()+1;
 
-        // Start of range
-        if(rangeFromDay === day && rangeFromMonth === month){
-          console.log("day: "+day);
-          console.log("month: "+month);
-          console.log("rangeDate: "+rangeDate);
-          console.log("rangeFromDay: "+rangeFromDay);
-          console.log("rangeFromMonth: "+rangeFromMonth);
-          console.log("start_range: "+ day);
-          return 'start_range'; //'#ff5a5f'
+          // Start of range
+          if(rangeFromDay === day && rangeFromMonth === month){
+            returnValue = "start_range"; //'#ff5a5f'
+            throw BreakException;
+          }
+          
+          // Inside range
+          if((day > rangeFromDay && rangeFromMonth >= month)
+          && (day < rangeToDay && rangeToMonth <= month)){
+            returnValue = "mid_range"; //#ff5a5f'
+            throw BreakException;
+          }
+          
+          // End of Range
+          if(rangeToDay === day && rangeToMonth === month){
+            returnValue = "end_range"; //'#ff5a5f'
+            throw BreakException;
+          }
+
+          //returnValue = "";
+          //throw BreakException;
+        } catch (e) {
+          if (e !== BreakException) throw e;
         }
-        
-        // Inside range
-        if((day > rangeFromDay && rangeFromMonth >= month)
-        && (day < rangeToDay && rangeToMonth <= month)){
-          console.log("mid_range: "+ day);
-          return "mid_range".toString(); //#ff5a5f'
-        }
-
-        // End of Range
-
-
-        return "";
-
       });
-     }
+    }
+    return returnValue;
+  }
+
+  setStyles(day, month) {
+
+    let dayColorType = this.getDayColor(day, month);
+      ///console.log("dayColorType: "+dayColorType + " day: " +day + " month: "+month);
+    let styles = {
+      'background-color': dayColorType === 'start_range' || dayColorType === 'end_range' ? '#ff5a5f' : dayColorType === 'mid_range' ? '#E39695' : '',
+    };
+    return styles;
   }
 }

@@ -28,11 +28,11 @@
       </div>
       <mat-grid-list cols="7" rowHeight="2:2">
         <mat-grid-tile *ngFor="let name of dayNames">{{name}}</mat-grid-tile>
-        <mat-grid-tile *ngFor="let day of currentMonthDaysArray">
+        <mat-grid-tile *ngFor="let day of currentMonthDaysArray" >
           <button mat-button color="primary" 
             (click)="dayClick(day)"
-            [style.background-color]= "getDayColor(day, currentMonth+1) === 'start_range' ? '#000000' : ''" 
-            *ngIf="calendarType === 'ranges'"
+            [ngStyle]="setStyles(day, currentMonth+1)"
+            style="height: 100%"
             >{{day}}
           </button>
           <!--"selectedDay === day && selectedMonth === currentMonth ? '#ccdbdc' : ''"-->
