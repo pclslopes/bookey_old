@@ -19,7 +19,7 @@ export class CalendarComponent implements OnInit {
   selectedDay;
   selectedMonth;
   calendarType = "ranges";
-  ranges = [{from:"10 Jul 2019", to:"15 Jul 2019", name:"Pedro Lopes", id:""}, {from:"20 Jul 2019", to:"25 Jul 2019", name:"Johnny Lopes", id:""},{from:"25 Jul 2019", to:"29 Jul 2019", name:"Johnny Lopes", id:""},{from:"31 Jul 2019", to:"05 Aug 2019", name:"Johnny Lopes", id:""},{from:"25 Dec 2019", to:"15 Jan 20", name:"Johnny Lopes", id:""}];
+  ranges = [{from:"10 Jul 2019", to:"15 Jul 2019", name:"Pedro Lopes", id:""}, {from:"20 Jul 2019", to:"25 Jul 2019", name:"Johnny Lopes", id:""},{from:"25 Jul 2019", to:"29 Jul 2019", name:"Johnny Lopes", id:""},{from:"31 Jul 2019", to:"05 Aug 2019", name:"Johnny Lopes", id:""},{from:"25 Dec 2019", to:"15 Jan 2020", name:"Johnny Lopes", id:""},{from:"25 Nov 2019", to:"15 Dec 2019", name:"Johnny Lopes", id:""}];
 
   constructor() { }
 
