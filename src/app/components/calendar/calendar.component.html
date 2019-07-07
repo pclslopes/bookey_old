@@ -28,10 +28,10 @@
       </div>
       <mat-grid-list cols="7" rowHeight="2:2">
         <mat-grid-tile *ngFor="let name of dayNames">{{name}}</mat-grid-tile>
-        <mat-grid-tile *ngFor="let day of currentMonthDaysArray" >
+        <mat-grid-tile *ngFor="let day of currentMonthDaysArray">
           <button mat-button color="primary" 
             (click)="dayClick(day)"
-            [ngStyle]="setStyles(day, currentMonth+1)"
+            [ngStyle]="setStyles(day, currentMonth, currentYear)"
             style="height: 100%"
             >{{day}}
           </button>

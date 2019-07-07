@@ -19,7 +19,7 @@ export class CalendarComponent implements OnInit {
   selectedDay;
   selectedMonth;
   calendarType = "ranges";
-  ranges = [{from:"10 Jul 2019", to:"15 Jul 2019", name:"Pedro Lopes", id:""}, {from:"20 Jul 2019", to:"25 Jul 2019", name:"Johnny Lopes", id:""}];
+  ranges = [{from:"10 Jul 2019", to:"15 Jul 2019", name:"Pedro Lopes", id:""}, {from:"20 Jul 2019", to:"25 Jul 2019", name:"Johnny Lopes", id:""},{from:"25 Jul 2019", to:"29 Jul 2019", name:"Johnny Lopes", id:""},{from:"31 Jul 2019", to:"05 Aug 2019", name:"Johnny Lopes", id:""},{from:"25 Dec 2019", to:"15 Jan 20", name:"Johnny Lopes", id:""}];
 
   constructor() { }
 
@@ -56,6 +56,7 @@ export class CalendarComponent implements OnInit {
   nextMonth(){
     this.currentDate = new Date(this.currentDate.setMonth(this.currentDate.getMonth()+1));
     this.calculateCalendar();
+    console.log("Current Date: "+this.currentDate);
   }
 
   previousMonth(){
@@ -73,40 +74,41 @@ export class CalendarComponent implements OnInit {
     this.selectedMonth = this.currentMonth;
   }
 
-  getDayColor(day, month):string{
+  getDayColor(day, month, year):string{
     let returnValue;
     var BreakException = {};
 
-    if(this.ranges && this.calendarType === "ranges"){
+    if(this.ranges && this.calendarType === "ranges" && day > 0){
       this.ranges.forEach((range) => {
         try{
-          let rangeDate = new Date(range.from);
+          let tileDate = new Date(day+' '+this.monthNames[month]+' '+year);
+          let rangeDateFrom = new Date(range.from);
+          let rangeDateTo = new Date(range.to);
           let rangeFromDay = new Date(range.from).getUTCDate()+1;
           let rangeFromMonth = new Date(range.from).getUTCMonth()+1;
+          let rangeFromYear = new Date(range.from).getFullYear();
           let rangeToDay = new Date(range.to).getUTCDate()+1;
           let rangeToMonth = new Date(range.to).getUTCMonth()+1;
+          let rangeToYear = new Date(range.to).getFullYear();
 
           // Start of range
-          if(rangeFromDay === day && rangeFromMonth === month){
+          if(rangeFromDay === day && rangeFromMonth === month+1 && rangeFromYear === year){
             returnValue = "start_range"; //'#ff5a5f'
             throw BreakException;
           }
           
           // Inside range
-          if((day > rangeFromDay && rangeFromMonth >= month)
-          && (day < rangeToDay && rangeToMonth <= month)){
-            returnValue = "mid_range"; //#ff5a5f'
+          if(tileDate > rangeDateFrom && tileDate < rangeDateTo){
+            returnValue = "mid_range";
             throw BreakException;
           }
           
           // End of Range
-          if(rangeToDay === day && rangeToMonth === month){
-            returnValue = "end_range"; //'#ff5a5f'
+          if(rangeToDay === day && rangeToMonth === month+1 && rangeToYear === year){
+            returnValue = "end_range";
             throw BreakException;
           }
 
-          //returnValue = "";
-          //throw BreakException;
         } catch (e) {
           if (e !== BreakException) throw e;
         }
@@ -115,9 +117,9 @@ export class CalendarComponent implements OnInit {
     return returnValue;
   }
 
-  setStyles(day, month) {
+  setStyles(day, month, year) {
 
-    let dayColorType = this.getDayColor(day, month);
+    let dayColorType = this.getDayColor(day, month, year);
       ///console.log("dayColorType: "+dayColorType + " day: " +day + " month: "+month);
     let styles = {
       'background-color': dayColorType === 'start_range' || dayColorType === 'end_range' ? '#ff5a5f' : dayColorType === 'mid_range' ? '#E39695' : '',
