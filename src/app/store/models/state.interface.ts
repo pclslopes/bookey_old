@@ -1,3 +1,3 @@
-export interface BookeyState {
-  counter: number;
-};
+//export interface BookeyState {
+//  counter: number;
+//};

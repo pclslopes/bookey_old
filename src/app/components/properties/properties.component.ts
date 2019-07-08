@@ -60,7 +60,7 @@ export class PropertiesComponent implements OnInit {
       this.currentPage = page;
       this.currentCount = Object.keys(data).length;
       this.myData = data;
-      this.dataSource = new MatTableDataSource<any>(data);
+      this.dataSource = data;
       if(this.currentCount < environment.listItemsPerPage){
         this.isLastPage = true;
       }else{

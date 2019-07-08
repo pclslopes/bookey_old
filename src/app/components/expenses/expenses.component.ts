@@ -70,7 +70,7 @@ export class ExpensesComponent implements OnInit {
     this.expenseService.getExpenses(page).then((data) => {
       this.currentPage = page;
       this.currentCount = Object.keys(data).length;
-      this.dataSource = new MatTableDataSource<any>(data);
+      this.dataSource = data;
       if(this.currentCount < environment.listItemsPerPage){
         this.isLastPage = true;
       }else{

@@ -163,9 +163,9 @@ export class BookingsService {
       // Create Customer
       this.customerService.createCustomer({name: booking.name, country: booking.country, email: booking.email, phone: booking.phone, property: booking.property}).then(dataCustomer => {
 
-        var pointerCustomer = Parse.Object.extend("Customers");
-        const customerObj = new pointerCustomer();
-        customerObj.set('objectId', dataCustomer.id);
+     //   var pointerCustomer = Parse.Object.extend("Customers");
+     //   const customerObj = new pointerCustomer();
+     //   customerObj.set('objectId', dataCustomer.id);
 
         // Get Property ACL
         this.propertyService.getPropertyACLUsers(booking.property).then(data => {
@@ -183,7 +183,7 @@ export class BookingsService {
           // Set Fields
           myNewObject.set('property', propertyObj);
           myNewObject.set('status', statusObj);
-          myNewObject.set('customer', customerObj);
+          //myNewObject.set('customer', customerObj);
           myNewObject.set('checkInDate', booking.checkInDate);
           myNewObject.set('checkOutDate', booking.checkOutDate);
           myNewObject.set('customerName', booking.customer);
