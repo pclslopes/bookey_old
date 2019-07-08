@@ -92,11 +92,10 @@ export class CalendarComponent implements OnInit {
           let rangeToYear = new Date(range.to).getFullYear();
 
           // Start of range
-          if(rangeFromDay === day && rangeFromMonth === month+1 && rangeFromYear === year){
+          if(tileDate.toUTCString() === rangeDateFrom.toUTCString()){
             returnValue = "start_range"; //'#ff5a5f'
             throw BreakException;
           }
-          
           // Inside range
           if(tileDate > rangeDateFrom && tileDate < rangeDateTo){
             returnValue = "mid_range";
@@ -104,8 +103,8 @@ export class CalendarComponent implements OnInit {
           }
           
           // End of Range
-          if(rangeToDay === day && rangeToMonth === month+1 && rangeToYear === year){
-            returnValue = "end_range";
+          if(tileDate.toUTCString() === rangeDateTo.toUTCString()){
+            returnValue = "end_range"; //'#ff5a5f'
             throw BreakException;
           }
 
@@ -116,9 +115,9 @@ export class CalendarComponent implements OnInit {
     }
     return returnValue;
   }
-
+  
   setStyles(day, month, year) {
-
+    
     let dayColorType = this.getDayColor(day, month, year);
       ///console.log("dayColorType: "+dayColorType + " day: " +day + " month: "+month);
     let styles = {
