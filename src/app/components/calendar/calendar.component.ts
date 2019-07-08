@@ -133,7 +133,7 @@ export class CalendarComponent implements OnInit {
     let styles = {
       'background-color': dayColorType === 'start_range' || dayColorType === 'end_range' ? '#ff5a5f' 
         : dayColorType === 'mid_range' ? '#E39695' 
-        : dayColorType === 'current_date' ? '#000000'
+        : dayColorType === 'current_date' ? '#D2D0BA'
         : '',
     };
     return styles;
