@@ -13,24 +13,27 @@ export class CalendarComponent implements OnInit {
   currentDate;
   currentMonth;
   currentYear;
+  displayDate;
   daysInCurrentMonth;
   currentMonthWeekDayStart;
   currentMonthDaysArray;
   selectedDay;
   selectedMonth;
+  displayType = 0; // 0: Calendar ; 1: Year Select; 2: Month Select
   calendarType = "ranges";
   ranges = [{from:"10 Jul 2019", to:"15 Jul 2019", name:"Pedro Lopes", id:""}, {from:"20 Jul 2019", to:"25 Jul 2019", name:"Johnny Lopes", id:""},{from:"25 Jul 2019", to:"29 Jul 2019", name:"Johnny Lopes", id:""},{from:"31 Jul 2019", to:"05 Aug 2019", name:"Johnny Lopes", id:""},{from:"25 Dec 2019", to:"15 Jan 2020", name:"Johnny Lopes", id:""},{from:"25 Nov 2019", to:"15 Dec 2019", name:"Johnny Lopes", id:""}];
 
   constructor() { }
 
   ngOnInit() {
+    this.displayDate = new Date();
     this.currentDate = new Date();
     this.currentDate.setHours(0,0,0,0);
     this.calculateCalendar();
   }
 
   calculateCalendar(){
-    this.currentMonth = new Date(this.currentDate).getUTCMonth();
+    this.currentMonth = new Date(this.displayDate).getUTCMonth();
     this.currentYear = new Date(this.currentDate).getUTCFullYear();
     this.currentMonthWeekDayStart = this.getWeekDayFromDate(new Date("01 "+ this.monthNames[this.currentMonth]+" "+this.currentYear));
     this.daysInCurrentMonth = this.getDaysInMonth(this.currentMonth+1, this.currentYear);
@@ -55,13 +58,12 @@ export class CalendarComponent implements OnInit {
   }
 
   nextMonth(){
-    this.currentDate = new Date(this.currentDate.setMonth(this.currentDate.getMonth()+1));
+    this.displayDate = new Date(this.displayDate.setMonth(this.displayDate.getMonth()+1));
     this.calculateCalendar();
-    console.log("Current Date: "+this.currentDate);
   }
 
   previousMonth(){
-    this.currentDate = new Date(this.currentDate.setMonth(this.currentDate.getMonth()-1));
+    this.displayDate = new Date(this.displayDate.setMonth(this.displayDate.getMonth()-1));
     this.calculateCalendar();
   }
 

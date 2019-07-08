@@ -23,7 +23,7 @@
     <div class="table-container" >
       <div>
         <button mat-button color="primary" (click)="previousMonth();">Previous</button>
-        {{monthNames[currentMonth]}} {{currentYear}}
+        <button mat-button color="primary">{{monthNames[currentMonth]}} {{currentYear}}</button>
         <button mat-button color="primary" (click)="nextMonth();">Next</button>
       </div>
       <mat-grid-list cols="7" rowHeight="2:2">
@@ -33,7 +33,7 @@
             (click)="dayClick(day)"
             [ngStyle]="setStyles(day, currentMonth, currentYear)"
             style="height: 100%"
-            >{{day}}</b>
+            >{{day}}
           </button>
           <!--"selectedDay === day && selectedMonth === currentMonth ? '#ccdbdc' : ''"-->
         </mat-grid-tile>
