@@ -25,6 +25,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.currentDate = new Date();
+    this.currentDate.setHours(0,0,0,0);
     this.calculateCalendar();
   }
 
@@ -91,11 +92,18 @@ export class CalendarComponent implements OnInit {
           let rangeToMonth = new Date(range.to).getUTCMonth()+1;
           let rangeToYear = new Date(range.to).getFullYear();
 
-          // Start of range
-          if(tileDate.toUTCString() === rangeDateFrom.toUTCString()){
-            returnValue = "start_range"; //'#ff5a5f'
+          // Current Date
+          if(tileDate.toUTCString() === this.currentDate.toUTCString()){
+            returnValue = "current_date";
             throw BreakException;
           }
+
+          // Start of range
+          if(tileDate.toUTCString() === rangeDateFrom.toUTCString()){
+            returnValue = "start_range";
+            throw BreakException;
+          }
+
           // Inside range
           if(tileDate > rangeDateFrom && tileDate < rangeDateTo){
             returnValue = "mid_range";
@@ -104,7 +112,7 @@ export class CalendarComponent implements OnInit {
           
           // End of Range
           if(tileDate.toUTCString() === rangeDateTo.toUTCString()){
-            returnValue = "end_range"; //'#ff5a5f'
+            returnValue = "end_range";
             throw BreakException;
           }
 
@@ -119,9 +127,12 @@ export class CalendarComponent implements OnInit {
   setStyles(day, month, year) {
     
     let dayColorType = this.getDayColor(day, month, year);
-      ///console.log("dayColorType: "+dayColorType + " day: " +day + " month: "+month);
+
     let styles = {
-      'background-color': dayColorType === 'start_range' || dayColorType === 'end_range' ? '#ff5a5f' : dayColorType === 'mid_range' ? '#E39695' : '',
+      'background-color': dayColorType === 'start_range' || dayColorType === 'end_range' ? '#ff5a5f' 
+        : dayColorType === 'mid_range' ? '#E39695' 
+        : dayColorType === 'current_date' ? '#000000'
+        : '',
     };
     return styles;
   }
