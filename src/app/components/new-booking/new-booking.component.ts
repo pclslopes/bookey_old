@@ -394,4 +394,7 @@ export class NewBookingComponent implements OnInit {
   onCancel(){
     this.location.back();
   }
+  onNewCustomer(){
+    
+  }
 }

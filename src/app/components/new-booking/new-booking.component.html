@@ -52,7 +52,12 @@
         </mat-card-header>
 
         <mat-card-content>
-          
+          <button mat-button 
+            [disabled]="false"
+            (click)="onNewCustomer()">
+            
+            new customer
+          </button>
           <dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>
 
         </mat-card-content>

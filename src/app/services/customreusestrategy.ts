@@ -43,7 +43,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
             }
         });
 
-        if(detach){console.log("detaching", route, "return: ", detach);}
+        //if(detach){console.log("detaching", route, "return: ", detach);}
         return detach;
     }
 
@@ -155,5 +155,4 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
         // returns true only after false HAS NOT BEEN returned through all loops
         return true;
     }
-
 }
