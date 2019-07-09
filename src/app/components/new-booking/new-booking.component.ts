@@ -75,7 +75,8 @@ export class NewBookingComponent implements OnInit {
   ];
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
-  regConfig: FieldConfig[] = [
+  @ViewChild(DynamicFormComponent) formCustomer: DynamicFormComponent;
+  regConfigCustomer: FieldConfig[] = [
     {
       type: "input",
       label: "Customer Name",
@@ -91,19 +92,6 @@ export class NewBookingComponent implements OnInit {
           name: "pattern",
           validator: Validators.pattern("^[a-zA-Z0-9_ ]*$"),
           message: "Accept only text",
-        }
-      ]
-    },
-    {
-      type: "select",
-      label: "Property",
-      name: "property",
-      options: [],
-      validations: [
-        {
-          name: "required",
-          validator: Validators.required,
-          message: "Property Required"
         }
       ]
     },
@@ -143,6 +131,22 @@ export class NewBookingComponent implements OnInit {
           name: "pattern",
           validator: Validators.pattern("(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})"),
           message: "Accept only phone number"
+        }
+      ]
+    }
+  ];
+
+  regConfig: FieldConfig[] = [
+    {
+      type: "select",
+      label: "Property",
+      name: "property",
+      options: [],
+      validations: [
+        {
+          name: "required",
+          validator: Validators.required,
+          message: "Property Required"
         }
       ]
     },
@@ -338,7 +342,7 @@ export class NewBookingComponent implements OnInit {
               this.countries = dataCountries;
 
               // Set combo options
-              this.form.setFormPropertyField("country", "options", this.countries);
+              this.formCustomer.setFormPropertyField("country", "options", this.countries);
 
               if (params['id']) {
                 this.bookingService.getBookingById(params['id']).then(data => {
@@ -365,8 +369,9 @@ export class NewBookingComponent implements OnInit {
   }
 
 
-  onSubmit(value: any) {
-    
+  onSubmit(value: any, valueCustomer: any) {
+    console.log("Form Values: " + value);
+    return;
     if(this.form.form.valid){
         
         console.log("Is this update? id:"+this.id);

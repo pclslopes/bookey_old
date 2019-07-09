@@ -10,7 +10,7 @@
   <ng-container>
     <button mat-button type="submit" class="crm-command-bar-button"
             [disabled]="false"
-            (click)="onSubmit(form.value)">
+            (click)="onSubmit(form.value, formCustomer.value)">
       <mat-icon>save</mat-icon>
       SAVE
     </button>
@@ -45,21 +45,21 @@
     <ng-container *ngIf="!item">
 
       <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            Customer/Booking Information
-          </mat-card-title>
-        </mat-card-header>
-
         <mat-card-content>
-          <button mat-button 
-            [disabled]="false"
-            (click)="onNewCustomer()">
-            
-            new customer
-          </button>
-          <dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>
-
+          <mat-tab-group>
+            <mat-tab label="Booking">
+              <p>
+                <dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>
+                <br/>
+                <br/>
+              </p>
+            </mat-tab>
+            <mat-tab label="Customer">
+              <p>
+                <dynamic-form [fields]="regConfigCustomer" (ngSubmit)="submit($event)"></dynamic-form>
+              </p>
+            </mat-tab>
+          </mat-tab-group>
         </mat-card-content>
       </mat-card>
 

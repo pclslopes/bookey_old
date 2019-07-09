@@ -11,7 +11,7 @@ import { MatPaginatorModule } from '@angular/material';
 import { RouterModule, RouteReuseStrategy } from '@angular/router';
 import { AppMaterialModule } from './app.material.module';
 import { rootRouterConfig } from './routing/routing.module';
-import { CustomReuseStrategy } from './services/customreusestrategy';
+import { CustomReuseStrategy } from './navigation/customreusestrategy';
 
 // Components
 import { AppComponent } from './app.component';

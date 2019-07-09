@@ -22,7 +22,7 @@ export class NewCustomerComponent implements OnInit {
   customer;
   properties;
   countries;
-  @Input() displayTypoe: number;
+  @Input() displayType: string;
   @Output() formObject = new EventEmitter();
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
