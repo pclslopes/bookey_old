@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import { Validators } from "@angular/forms";
 import { DynamicFormComponent } from "../../dynamic-forms/components/dynamic-form/dynamic-form.component";
@@ -22,6 +22,8 @@ export class NewCustomerComponent implements OnInit {
   customer;
   properties;
   countries;
+  @Input() displayTypoe: number;
+  @Output() formObject = new EventEmitter();
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
     regConfig: FieldConfig[] = [
