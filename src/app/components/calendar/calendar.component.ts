@@ -34,7 +34,7 @@ export class CalendarComponent implements OnInit {
 
   calculateCalendar(){
     this.currentMonth = new Date(this.displayDate).getUTCMonth();
-    this.currentYear = new Date(this.currentDate).getUTCFullYear();
+    this.currentYear = new Date(this.displayDate).getUTCFullYear();
     this.currentMonthWeekDayStart = this.getWeekDayFromDate(new Date("01 "+ this.monthNames[this.currentMonth]+" "+this.currentYear));
     this.daysInCurrentMonth = this.getDaysInMonth(this.currentMonth+1, this.currentYear);
     this.currentMonthDaysArray = Array(this.daysInCurrentMonth+this.dayNamesFull.indexOf(this.currentMonthWeekDayStart)).fill(0).map((x,i)=>(i+1 > this.dayNamesFull.indexOf(this.currentMonthWeekDayStart) ? i+1-(this.dayNamesFull.indexOf(this.currentMonthWeekDayStart)): null));
