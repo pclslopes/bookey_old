@@ -54,10 +54,13 @@
                 <br/>
               </p>
             </mat-tab>
-            <mat-tab label="Customer">
+            <mat-tab label="Guest">
               <p>
-                <dynamic-form [fields]="regConfigCustomer" (ngSubmit)="submit($event)"></dynamic-form>
-              </p>
+                <form class="dynamic-form" [formGroup]="formCustomer" (submit)="onSubmit($event)">
+                  <ng-container>
+                    dd
+                  </ng-container>
+                </form>
             </mat-tab>
           </mat-tab-group>
         </mat-card-content>

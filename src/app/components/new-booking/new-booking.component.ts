@@ -23,7 +23,6 @@ export class NewBookingComponent implements OnInit {
   bookingStatus;
   countries;
   times: any = [
-    
     {id:"1500", name:"15:00"},
     {id:"1530", name:"15:30"},
     {id:"1600", name:"16:00"},
@@ -76,6 +75,7 @@ export class NewBookingComponent implements OnInit {
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
   @ViewChild(DynamicFormComponent) formCustomer: DynamicFormComponent;
+  
   regConfigCustomer: FieldConfig[] = [
     {
       type: "input",
@@ -370,7 +370,7 @@ export class NewBookingComponent implements OnInit {
 
 
   onSubmit(value: any, valueCustomer: any) {
-    console.log("Form Values: " + value);
+    console.log("Form Values: " +JSON.stringify(value)+" Customer: "+JSON.stringify(valueCustomer));
     return;
     if(this.form.form.valid){
         
