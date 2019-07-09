@@ -8,9 +8,10 @@ import { MatTableModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material';
 
 // Modules
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouteReuseStrategy } from '@angular/router';
 import { AppMaterialModule } from './app.material.module';
 import { rootRouterConfig } from './routing/routing.module';
+import { CustomReuseStrategy } from './services/customreusestrategy';
 
 // Components
 import { AppComponent } from './app.component';
@@ -137,6 +138,7 @@ import { DataService } from './services/data.service';
     ExpenseTypesService,
     CountryService,
     DataService,
+    {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
     //appStoreProviders
   ],
 })

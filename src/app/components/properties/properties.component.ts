@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouteReuseStrategy } from '@angular/router';
 import { AuthParseService } from '../../services/auth.parse.service';
 import { PropertyService } from '../../services/property.service';
 import { PropertyModel } from '../../models/property.model';
