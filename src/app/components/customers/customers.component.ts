@@ -22,6 +22,7 @@ export class CustomersComponent implements OnInit {
   currentCount;
   isLastPage = false;
   propertyCount = undefined;
+  isLoading = true;
 
   constructor(
       public authService: AuthParseService,
@@ -68,6 +69,7 @@ export class CustomersComponent implements OnInit {
 
   getCustomers(page:number = 0){
     this.customerService.getCustomers(page).then(data => {
+      this.isLoading = false;
       this.currentPage = page;
       this.currentCount = Object.keys(data).length;
       this.dataSource = data;

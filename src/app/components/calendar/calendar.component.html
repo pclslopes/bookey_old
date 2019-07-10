@@ -18,7 +18,12 @@
     <h2 class="crm-component-title"> Calendar </h2>
   </div>
 
-  <ng-container>
+  <ng-container *ngIf="isLoading">
+    <mat-progress-spinner class="loading-indicator" color="accent" mode="indeterminate" [value]="75">
+    </mat-progress-spinner>
+  </ng-container>
+
+  <ng-container *ngIf="!isLoading">
 
     <div class="table-container" >
       <div>

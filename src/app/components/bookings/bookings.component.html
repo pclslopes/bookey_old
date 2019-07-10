@@ -23,14 +23,18 @@
   </ng-container>
 </footer-bar>
 
-
 <div #contentContainer class="crm-content-container">
 
   <div class="crm-component-title-container">
     <h2 class="crm-component-title"> Bookings </h2>
   </div>
 
-  <ng-container>
+  <ng-container *ngIf="isLoading">
+    <mat-progress-spinner class="loading-indicator" color="accent" mode="indeterminate" [value]="75">
+    </mat-progress-spinner>
+  </ng-container>
+
+  <ng-container *ngIf="!isLoading">
 
     <div class="crm-component-title-container" *ngIf="propertyCount === 0">
       <h4 class="crm-component-title"> No Property Exists </h4>

@@ -22,6 +22,7 @@ export class BookingsComponent implements OnInit {
   currentCount;
   isLastPage = false;
   propertyCount = undefined;
+  isLoading = true;
 
   constructor(
       public authService: AuthParseService,
@@ -68,6 +69,7 @@ export class BookingsComponent implements OnInit {
 
   getBookings(page:number = 0){
     this.bookingService.getBookings(page).then((data) => {
+      this.isLoading = false;
       this.currentPage = page;
       this.currentCount = Object.keys(data).length;
       this.dataSource = data;
