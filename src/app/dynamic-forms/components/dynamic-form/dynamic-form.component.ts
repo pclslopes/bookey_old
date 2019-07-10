@@ -28,7 +28,6 @@ import { FieldConfig, Validator } from "../../interfaces/dynamic-field.interface
 })
 export class DynamicFormComponent implements OnInit {
   @Input() fields: FieldConfig[] = [];
-
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
 
   form: FormGroup;

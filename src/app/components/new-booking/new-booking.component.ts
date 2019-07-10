@@ -75,7 +75,6 @@ export class NewBookingComponent implements OnInit {
   ];
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
-  @ViewChild(DynamicFormComponent) formCustomer: DynamicFormComponent;
   
   regConfigCustomer: FieldConfig[] = [
     {
@@ -343,7 +342,7 @@ export class NewBookingComponent implements OnInit {
               this.countries = dataCountries;
 
               // Set combo options
-              this.formCustomer.setFormPropertyField("country", "options", this.countries);
+              this.form.setFormPropertyField("country", "options", this.countries);
 
               if (params['id']) {
                 this.bookingService.getBookingById(params['id']).then(data => {
