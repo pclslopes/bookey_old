@@ -21,6 +21,7 @@ export class NewExpenseComponent implements OnInit {
   expense;
   properties;
   expenseTypes;
+  isLoading = true;
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
   regConfig: FieldConfig[] = [
@@ -143,7 +144,10 @@ export class NewExpenseComponent implements OnInit {
                     this.form.form.controls["expenseType"].setValue(this.expense.expenseType.id);
                     this.form.form.controls["property"].setValue(this.expense.property.id);
                   }
+                  this.isLoading = false;
                 });      
+              }else{
+                this.isLoading = false;
               }
             }
           });

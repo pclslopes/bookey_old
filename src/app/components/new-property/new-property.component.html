@@ -37,37 +37,27 @@
     <h2 class="crm-component-title" *ngIf="id"> Update Property </h2>
   </div>
 
+  <ng-container *ngIf="isLoading">
+    <mat-progress-spinner class="loading-indicator" color="accent" mode="indeterminate" [value]="75">
+    </mat-progress-spinner>
+  </ng-container>
+
   <ng-container>
 
-    <ng-container *ngIf="item; then skeleton"> </ng-container>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          General Information
+        </mat-card-title>
+      </mat-card-header>
 
-    <ng-container *ngIf="!item">
+      <mat-card-content>
+        
+        <dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>
 
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            General Information
-          </mat-card-title>
-        </mat-card-header>
+      </mat-card-content>
+    </mat-card>
 
-        <mat-card-content>
-          
-          <dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>
+  </ng-container>
 
-        </mat-card-content>
-      </mat-card>
-
-    </ng-container> <!-- gridContainer -->
-
-    <!-- Skeleton template -->
-
-    <ng-template #skeleton>
-      <div class="crm-spinner-container" [style.height.px]="containerHeight">
-        <mat-spinner color="accent"></mat-spinner>
-        <mat-progress-spinner class="example-margin" color="Accent" mode="Indeterminate"></mat-progress-spinner>
-      </div>
-    </ng-template>
-
-  </ng-container> <!-- gridContainer -->
-
-</div> <!-- contentContainer -->
+</div>

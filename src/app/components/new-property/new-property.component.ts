@@ -19,9 +19,11 @@ export class NewPropertyComponent implements OnInit {
   id;
   property;
   currencies;
+  isLoading = true;
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
-    regConfig: FieldConfig[] = [
+  
+  regConfig: FieldConfig[] = [
     {
       type: "input",
       label: "Property Name",
@@ -67,9 +69,7 @@ export class NewPropertyComponent implements OnInit {
     private snackbar: MatSnackBar,
     private location: Location,
     private propertyService: PropertyService,
-    private route: ActivatedRoute) { 
-      
-  }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {  
@@ -87,15 +87,16 @@ export class NewPropertyComponent implements OnInit {
           this.propertyService.getPropertyById(params['id']).then(data => {
             console.log("getPropertyById result: "+JSON.stringify(data));
             this.property = data;
-            //console.log("form: "+ JSON.stringify(this.form.form));
             if(this.property){
               this.id = this.property.id;
               this.form.form.controls['name'].setValue(this.property.name);
               this.form.form.controls['currency'].setValue(this.property.currency.id);
               this.form.form.controls['link'].setValue(this.property.link);
             }
-
+            this.isLoading = false;
           });
+        }else{
+          this.isLoading = false;
         }
       });
     });   

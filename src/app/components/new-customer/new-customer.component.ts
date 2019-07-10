@@ -22,6 +22,7 @@ export class NewCustomerComponent implements OnInit {
   customer;
   properties;
   countries;
+  isLoading = true;
   @Input() displayType: string;
   @Output() formObject = new EventEmitter();
 
@@ -144,8 +145,10 @@ export class NewCustomerComponent implements OnInit {
                   this.form.form.controls['phone'].setValue(this.customer.phone);
                   this.form.form.controls["property"].setValue(this.customer.property.id);
                 }
-
+                this.isLoading = false;
               });
+            }else{
+              this.isLoading = false;
             }
           });
         }

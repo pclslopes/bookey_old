@@ -22,6 +22,7 @@ export class NewBookingComponent implements OnInit {
   properties;
   bookingStatus;
   countries;
+  isLoading = true;
   times: any = [
     {id:"1500", name:"15:00"},
     {id:"1530", name:"15:30"},
@@ -360,6 +361,8 @@ export class NewBookingComponent implements OnInit {
                   }
                 });      
               }
+
+              this.isLoading = false;
             });
           });
         }

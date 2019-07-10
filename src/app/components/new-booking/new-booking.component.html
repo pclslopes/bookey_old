@@ -38,45 +38,33 @@
     <h2 class="crm-component-title"> New Booking </h2>
   </div>
 
+  <ng-container *ngIf="isLoading">
+    <mat-progress-spinner class="loading-indicator" color="accent" mode="indeterminate" [value]="75">
+    </mat-progress-spinner>
+  </ng-container>
+
   <ng-container>
 
-    <ng-container *ngIf="item; then skeleton"> </ng-container>
+    <mat-card>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab label="Booking">
+            <p>
+              <dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>
+              <br/>
+              <br/>
+            </p>
+          </mat-tab>
+          <mat-tab label="Guest">
+            <p>
+              <form class="dynamic-form" [formGroup]="formCustomer" (submit)="onSubmit($event)">
+                
+              </form>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
 
-    <ng-container *ngIf="!item">
+  </ng-container>
 
-      <mat-card>
-        <mat-card-content>
-          <mat-tab-group>
-            <mat-tab label="Booking">
-              <p>
-                <dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>
-                <br/>
-                <br/>
-              </p>
-            </mat-tab>
-            <mat-tab label="Guest">
-              <p>
-                <form class="dynamic-form" [formGroup]="formCustomer" (submit)="onSubmit($event)">
-                  <ng-container>
-                    dd
-                  </ng-container>
-                </form>
-            </mat-tab>
-          </mat-tab-group>
-        </mat-card-content>
-      </mat-card>
-
-    </ng-container> <!-- gridContainer -->
-
-    <!-- Skeleton template -->
-
-    <ng-template #skeleton>
-      <div class="crm-spinner-container" [style.height.px]="containerHeight">
-        <mat-spinner color="accent"></mat-spinner>
-        <mat-progress-spinner class="example-margin" color="Accent" mode="Indeterminate"></mat-progress-spinner>
-      </div>
-    </ng-template>
-
-  </ng-container> <!-- gridContainer -->
-
-</div> <!-- contentContainer -->
+</div>

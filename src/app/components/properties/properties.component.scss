@@ -3,6 +3,19 @@
 
 // Note: Define all color and typography styles in a "theme file" for the component / plugin
 
+/* Absolute Center Spinner */
+.loading-indicator {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 
 .mat-card {
   padding: 0;

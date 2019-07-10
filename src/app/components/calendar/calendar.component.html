@@ -45,16 +45,6 @@
       </mat-grid-list>
 
     </div>
-    
-    <ng-container *ngIf="item; then skeleton"> </ng-container>
-
-    <!-- Skeleton template -->
-
-    <ng-template #skeleton>
-      <div class="crm-spinner-container" [style.height.px]="containerHeight">
-        <mat-spinner color="accent"></mat-spinner>
-      </div>
-    </ng-template>
 
   </ng-container>
 
