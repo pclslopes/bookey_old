@@ -50,14 +50,14 @@
         <mat-tab-group>
           <mat-tab label="Booking">
             <p>
-              <dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>
+              <app-new-nested-booking [id]="params ? params['id'] : null"></app-new-nested-booking>
               <br/>
               <br/>
             </p>
           </mat-tab>
           <mat-tab label="Guest">
             <p>
-              <app-new-nested-customer></app-new-nested-customer>
+              <app-new-nested-customer [id]="params ? params['id'] : null"></app-new-nested-customer>
               <br/>
               <br/>
             </p>

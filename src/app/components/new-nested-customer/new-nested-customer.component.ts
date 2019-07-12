@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { DynamicFormComponent } from "../../dynamic-forms/components/dynamic-form/dynamic-form.component";
 import { FieldConfig } from "../../dynamic-forms/interfaces/dynamic-field.interface";
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
@@ -94,11 +94,10 @@ export class NewNestedCustomerComponent implements OnInit {
       // Set combo options
       this.form.setFormPropertyField("country", "options", this.countries);
 
-      
     });
   }
 
-  public test(){
-    alert('success!!');
+  public getForm():DynamicFormComponent{
+    return this.form;
   }
 }
