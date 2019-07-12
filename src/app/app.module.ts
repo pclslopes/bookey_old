@@ -36,6 +36,7 @@ import { NewExpenseComponent } from './components/new-expense/new-expense.compon
 import { CustomersComponent } from './components/customers/customers.component';
 import { NewCustomerComponent } from './components/new-customer/new-customer.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { NewNestedCustomerComponent } from './components/new-nested-customer/new-nested-customer.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -98,6 +99,7 @@ import { DataService } from './services/data.service';
     NewCustomerComponent,
     TemplateComponent,
     CalendarComponent,
+    NewNestedCustomerComponent,
     CommandBarComponent,
     FooterBarComponent,
     NavComponent,

@@ -10,7 +10,7 @@
   <ng-container>
     <button mat-button type="submit" class="crm-command-bar-button"
             [disabled]="false"
-            (click)="onSubmit(form.value, formCustomer.value)">
+            (click)="onSubmit(form.value)">
       <mat-icon>save</mat-icon>
       SAVE
     </button>
@@ -57,7 +57,7 @@
           </mat-tab>
           <mat-tab label="Guest">
             <p>
-             <dynamic-form [fields]="regConfigCustomer" (ngSubmit)="submit($event)"></dynamic-form>
+              <app-new-nested-customer></app-new-nested-customer>
               <br/>
               <br/>
             </p>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
 import { Validators } from "@angular/forms";
 import { DynamicFormComponent } from "../../dynamic-forms/components/dynamic-form/dynamic-form.component";
@@ -9,6 +9,7 @@ import { AuthParseService } from '../../services/auth.parse.service'
 import { BookingsService } from '../../services/bookings.service';
 import { PropertyService } from '../../services/property.service';
 import { CountryService } from '../../services/country.service';
+import { NewNestedCustomerComponent } from '../new-nested-customer/new-nested-customer.component';
 
 @Component({
   selector: 'app-new-booking',
@@ -73,7 +74,8 @@ export class NewBookingComponent implements OnInit {
     {id:"1400", name:"14:00"},
     {id:"1430", name:"14:30"}
   ];
-
+  
+  @ViewChild(NewNestedCustomerComponent) child : NewNestedCustomerComponent;
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
   
   regConfigCustomer: FieldConfig[] = [
@@ -372,6 +374,8 @@ export class NewBookingComponent implements OnInit {
 
 
   onSubmit(value: any, valueCustomer: any) {
+    this.child.test();
+    return;
     console.log("Form Values: " +JSON.stringify(value)+" Customer: "+JSON.stringify(valueCustomer));
     return;
     if(this.form.form.valid){
