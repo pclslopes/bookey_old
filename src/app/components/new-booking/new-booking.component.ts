@@ -15,12 +15,15 @@ import { NewNestedBookingComponent } from '../new-nested-booking/new-nested-book
 @Component({
   selector: 'app-new-booking',
   templateUrl: './new-booking.component.html',
-  styleUrls: ['./new-booking.component.scss']
+  styleUrls: ['./new-booking.component.scss'],
+  directives: [NewNestedCustomerComponent, NewNestedBookingComponent]
 })
 export class NewBookingComponent implements OnInit {
-  
+
   id;
   booking;
+  isBookingLoading = true;
+  isCustomerLoading = true;
   isLoading = true;
     
   @ViewChild(NewNestedCustomerComponent) customerComponent : NewNestedCustomerComponent;
@@ -44,14 +47,13 @@ export class NewBookingComponent implements OnInit {
       console.log("Params: "+ JSON.stringify(params));
 
 
-      this.isLoading = false;
 
         
     });
   }
 
 
-  onSubmit(value: any, valueCustomer: any) {
+  onSubmit() {
     let bookingForm = this.bookingComponent.getForm();
     let customerForm = this.customerComponent.getForm();
     alert(JSON.stringify(bookingForm.value));
@@ -86,5 +88,17 @@ export class NewBookingComponent implements OnInit {
   }
   onNewCustomer(){
     
+  }
+
+  onNotifyLoadComplete($event, componentName){
+    if(componentName === 'booking'){
+      this.isBookingLoading = false;
+    }
+    if(componentName === 'Customer'){
+      this.isCustomerLoading = false;
+    }
+    if(!this.isBookingLoading && !this.isCustomerLoading){
+      this.isLoading = false;
+    }
   }
 }

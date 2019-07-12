@@ -14,6 +14,8 @@ import { CountryService } from '../../services/country.service';
   template: '<dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>'
 })
 export class NewNestedCustomerComponent implements OnInit {
+  @Input() id:string;
+  @Output() notifyLoadComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   countries;
 
@@ -87,13 +89,12 @@ export class NewNestedCustomerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-     this.countryService.getAllCountries().then(dataCountries => {
-    
+    this.countryService.getAllCountries().then(dataCountries => {
       this.countries = dataCountries;
-
       // Set combo options
       this.form.setFormPropertyField("country", "options", this.countries);
 
+      this.notifyLoadComplete.emit(true);
     });
   }
 

@@ -13,9 +13,11 @@ import { PropertyService } from '../../services/property.service';
   templateUrl: './new-nested-booking.component.html',
   styleUrls: ['./new-nested-booking.component.scss'],
   template: '<dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>',
-  inputs: ['id']
+  //inputs: ['id']
 })
 export class NewNestedBookingComponent implements OnInit {
+  @Input() id:string;
+  @Output() notifyLoadComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   booking;
   properties;
@@ -279,7 +281,10 @@ export class NewNestedBookingComponent implements OnInit {
                 this.form.form.controls["property"].setValue(this.booking.property.id);
                 this.form.form.controls["status"].setValue(this.booking.status.id);
               }
+              this.notifyLoadComplete.emit(true);
             });      
+          }else{
+            this.notifyLoadComplete.emit(true);
           }
 
         });
@@ -287,4 +292,7 @@ export class NewNestedBookingComponent implements OnInit {
     });
   }
 
+  public getForm():DynamicFormComponent{
+    return this.form;
+  }
 }

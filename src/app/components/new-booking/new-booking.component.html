@@ -10,7 +10,7 @@
   <ng-container>
     <button mat-button type="submit" class="crm-command-bar-button"
             [disabled]="false"
-            (click)="onSubmit(form.value)">
+            (click)="onSubmit()">
       <mat-icon>save</mat-icon>
       SAVE
     </button>
@@ -50,14 +50,14 @@
         <mat-tab-group>
           <mat-tab label="Booking">
             <p>
-              <app-new-nested-booking [id]="params ? params['id'] : null"></app-new-nested-booking>
+              <app-new-nested-booking [id]="params ? params['id'] : null" (notifyLoadComplete)='onNotifyLoadComplete($event, "booking")'></app-new-nested-booking>
               <br/>
               <br/>
             </p>
           </mat-tab>
           <mat-tab label="Guest">
             <p>
-              <app-new-nested-customer [id]="params ? params['id'] : null"></app-new-nested-customer>
+              <app-new-nested-customer [id]="params ? params['id'] : null" (notifyLoadComplete)='onNotifyLoadComplete($event, "customer")'></app-new-nested-customer>
               <br/>
               <br/>
             </p>
