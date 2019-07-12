@@ -16,7 +16,7 @@ import { NewNestedBookingComponent } from '../new-nested-booking/new-nested-book
   selector: 'app-new-booking',
   templateUrl: './new-booking.component.html',
   styleUrls: ['./new-booking.component.scss'],
-  directives: [NewNestedCustomerComponent, NewNestedBookingComponent]
+  //directives: [NewNestedCustomerComponent, NewNestedBookingComponent]
 })
 export class NewBookingComponent implements OnInit {
 
@@ -59,7 +59,7 @@ export class NewBookingComponent implements OnInit {
     alert(JSON.stringify(bookingForm.value));
     alert(JSON.stringify(customerForm.value));
 
-    if(bookingForm.valid && customerForm.valid){
+    if(bookingForm.Valid && customerForm.Valid){
         
         console.log("Is this update? id:"+this.id);
 
@@ -94,7 +94,7 @@ export class NewBookingComponent implements OnInit {
     if(componentName === 'booking'){
       this.isBookingLoading = false;
     }
-    if(componentName === 'Customer'){
+    if(componentName === 'customer'){
       this.isCustomerLoading = false;
     }
     if(!this.isBookingLoading && !this.isCustomerLoading){
