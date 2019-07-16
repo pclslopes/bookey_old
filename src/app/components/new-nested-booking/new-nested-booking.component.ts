@@ -266,7 +266,7 @@ export class NewNestedBookingComponent implements OnInit {
           // Set combo options
           this.form.setFormPropertyField("status", "options", this.bookingStatus);
 
-
+          console.log("BOOKING ID: " + this.id);
           if (this.id) {
             this.bookingService.getBookingById(this.id).then(data => {
               console.log("getBookingById result: "+JSON.stringify(data));
@@ -276,10 +276,18 @@ export class NewNestedBookingComponent implements OnInit {
                 //this.id = this.booking.id;
                 this.form.form.controls['checkInDate'].setValue(this.booking.checkInDate);
                 this.form.form.controls['checkOutDate'].setValue(this.booking.checkOutDate);
-                this.form.form.controls["customer"].setValue(this.booking.customer);
                 this.form.form.controls["checkInTime"].setValue(this.booking.checkInTime);
                 this.form.form.controls["property"].setValue(this.booking.property.id);
                 this.form.form.controls["status"].setValue(this.booking.status.id);
+                this.form.form.controls["platform"].setValue(this.booking.platform);
+                this.form.form.controls["commissionableAmount"].setValue(this.booking.commissionableAmount);
+                this.form.form.controls["commission"].setValue(this.booking.commission);
+                this.form.form.controls["cleaningFee"].setValue(this.booking.cleaningFee);
+                this.form.form.controls["cityTax"].setValue(this.booking.cityTax);
+                this.form.form.controls["receivedTotal"].setValue(this.booking.receivedTotal);
+                this.form.form.controls["adultGuests"].setValue(this.booking.adultGuests);
+                this.form.form.controls["childGuests"].setValue(this.booking.childGuests);
+                this.form.form.controls["isReceived"].setValue(this.booking.isReceived);
               }
               this.notifyLoadComplete.emit(true);
             });      

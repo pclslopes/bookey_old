@@ -97,6 +97,7 @@ export class BookingsService {
           },
           customer: {
             id: r.has("customer") ? r.get("customer").id : null,
+            country: r.has("customer") ? r.get("customer").get("country : null,
             name: r.has("customer") ? r.get("customer").get("name") : null,
             email: r.has("customer") ? r.get("customer").get("email") : null,
             phone: r.has("customer") ? r.get("customer").get("phone") : null,
@@ -105,8 +106,10 @@ export class BookingsService {
             id: r.has("status") ? r.get("status").id : null,
             name: r.has("status") ? r.get("status").get("name") : null,
           },
-          checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
-          checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
+          //checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
+          //checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
+          checkInDate: r.get("checkInDate"),
+          checkOutDate: r.get("checkOutDate"),
           checkInTime: r.get("checkInTime"),
           platform: r.get("platform"),
           commissionableAmount: r.get("commissionableAmount"),
@@ -145,7 +148,7 @@ export class BookingsService {
     });
   }
   
-  createBooking(booking: any){
+  createBooking(booking: any, customer: any){
     return new Promise((resolve, reject) => {
       // Create Parse Object
       const parseObj = Parse.Object.extend('Bookings');
@@ -161,11 +164,11 @@ export class BookingsService {
       statusObj.set('objectId', booking.status);
 
       // Create Customer
-      this.customerService.createCustomer({name: booking.name, country: booking.country, email: booking.email, phone: booking.phone, property: booking.property}).then(dataCustomer => {
+      this.customerService.createCustomer({id: null,name: customer.name, country: customer.country, email: customer.email, phone: customer.phone, property: booking.property}).then(dataCustomer => {
 
-     //   var pointerCustomer = Parse.Object.extend("Customers");
-     //   const customerObj = new pointerCustomer();
-     //   customerObj.set('objectId', dataCustomer.id);
+        var pointerCustomer = Parse.Object.extend("Customers");
+        const customerObj = new pointerCustomer();
+        customerObj.set('objectId', dataCustomer.id);
 
         // Get Property ACL
         this.propertyService.getPropertyACLUsers(booking.property).then(data => {
@@ -183,7 +186,7 @@ export class BookingsService {
           // Set Fields
           myNewObject.set('property', propertyObj);
           myNewObject.set('status', statusObj);
-          //myNewObject.set('customer', customerObj);
+          myNewObject.set('customer', customerObj);
           myNewObject.set('checkInDate', booking.checkInDate);
           myNewObject.set('checkOutDate', booking.checkOutDate);
           myNewObject.set('customerName', booking.customer);
@@ -210,53 +213,59 @@ export class BookingsService {
     });
   }
 
-  updateBooking(booking){
+  updateBooking(booking: any, customer: any){
     return new Promise((resolve, reject) => {
+
       const bookings = Parse.Object.extend('Bookings');
       const query = new Parse.Query(bookings);
 
-      const customers = Parse.Object.extend('Customers');
-      const queryCustomer = new Parse.Query(customers);
+      //const customers = Parse.Object.extend('Customers');
+      //const queryCustomer = new Parse.Query(customers);
 
       // Get and update Customer
-      queryCustomer(booking.customer.id)
+      this.customerService.updateCustomer({id: customer.id, name: customer.name, country: customer.country, email: customer.email, phone: customer.phone, property: booking.property}).then((dataCustomer) => {
 
-      // here you put the objectId that you want to update
-      query.get(booking.id).then((object) => {
+        var pointerCustomer = Parse.Object.extend("Customers");
+        const customerObj = new pointerCustomer();
+        customerObj.set('objectId', dataCustomer.id);
 
-        // Set pointer
-        var pointerProperty = Parse.Object.extend("Properties");
-        const propertyObj = new pointerProperty();
-        propertyObj.set('objectId', booking.property);
-        
-        var pointerStatus = Parse.Object.extend("BookingStatus");
-        const statusObj = new pointerStatus();
-        statusObj.set('objectId', booking.status);
+        // here you put the objectId that you want to update
+        query.get(booking.id).then((object) => {
 
-        object.set('property', propertyObj);
-        object.set('status', statusObj);
-        //object.set('customer', statusObj);
-        object.set('checkInDate', booking.checkInDate);
-        object.set('checkOutDate', booking.checkOutDate);
-        object.set('customerName', booking.customer);
-        object.set('checkInTime', booking.checkInTime);
-        object.set('platform', booking.platform);
-        object.set('commissionableAmount', booking.commissionableAmount);
-        object.set('commission', booking.commission);
-        object.set('cleaningFee', booking.cleaningFee);
-        object.set('cityTax', booking.cityTax);
-        object.set('receivedTotal', booking.receivedTotal);
-        object.set('adultGuests', booking.adultGuests);
-        object.set('childGuests', booking.childGuests);
-        object.set('isReceived', booking.isReceived);
+          // Set pointer
+          var pointerProperty = Parse.Object.extend("Properties");
+          const propertyObj = new pointerProperty();
+          propertyObj.set('objectId', booking.property);
+          
+          var pointerStatus = Parse.Object.extend("BookingStatus");
+          const statusObj = new pointerStatus();
+          statusObj.set('objectId', booking.status);
+
+          object.set('property', propertyObj);
+          object.set('status', statusObj);
+          object.set('customer', customerObj);
+          object.set('checkInDate', booking.checkInDate);
+          object.set('checkOutDate', booking.checkOutDate);
+          object.set('customerName', booking.customer);
+          object.set('checkInTime', booking.checkInTime);
+          object.set('platform', booking.platform);
+          object.set('commissionableAmount', booking.commissionableAmount);
+          object.set('commission', booking.commission);
+          object.set('cleaningFee', booking.cleaningFee);
+          object.set('cityTax', booking.cityTax);
+          object.set('receivedTotal', booking.receivedTotal);
+          object.set('adultGuests', booking.adultGuests);
+          object.set('childGuests', booking.childGuests);
+          object.set('isReceived', booking.isReceived);
 
 
-        object.save().then((response) => {
-          // You can use the "get" method to get the value of an attribute
-          // Ex: response.get("<ATTRIBUTE_NAME>")
-          resolve(response);
-        }, (error) => {
-          reject(error);
+          object.save().then((response) => {
+            // You can use the "get" method to get the value of an attribute
+            // Ex: response.get("<ATTRIBUTE_NAME>")
+            resolve(response);
+          }, (error) => {
+            reject(error);
+          });
         });
       });
     });

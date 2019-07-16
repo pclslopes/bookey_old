@@ -45,8 +45,8 @@ export class NewBookingComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {  
       console.log("Params: "+ JSON.stringify(params));
-
-
+      this.id = params["id"];
+console.log("Master ID: "+ JSON.stringify(this.id));
 
         
     });
@@ -59,23 +59,20 @@ export class NewBookingComponent implements OnInit {
     alert(JSON.stringify(bookingForm.value));
     alert(JSON.stringify(customerForm.value));
 
-    if(bookingForm.Valid && customerForm.Valid){
+    if(bookingForm.isValid() && customerForm.isValid()){
         
         console.log("Is this update? id:"+this.id);
 
         if(this.id){
-          value["id"] = this.id;
-          this.bookingService.updateBooking(value).then(data => {
+          //value["id"] = this.id;
+          this.bookingService.updateBooking(bookingForm.value, customerForm.value).then(data => {
             this.location.back();
           });
         }else{
-          this.bookingService.createBooking(value).then(data => {
+          this.bookingService.createBooking(bookingForm.value, customerForm.value).then(data => {
             this.location.back();
           });
         }
-        console.log("Form: "+JSON.stringify(value));
-
-        
       }else{
         //form.form.validations
         this.snackbar.open('Please fill all mandatory fields', 'OK', { duration: 3000 });

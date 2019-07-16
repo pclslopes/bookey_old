@@ -41,6 +41,10 @@ export class DynamicFormComponent implements OnInit {
     this.form = this.createControl();
   }
 
+  public isValid(){
+    return this.form.valid;
+  }
+
   onSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();

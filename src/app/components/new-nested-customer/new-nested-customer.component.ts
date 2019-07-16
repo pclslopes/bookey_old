@@ -6,6 +6,8 @@ import { Validators } from "@angular/forms";
 import { AuthParseService } from '../../services/auth.parse.service'
 import { CustomerModel } from '../../models/customer.model';
 import { CountryService } from '../../services/country.service';
+import { CustomerService } from '../../services/customer.service';
+import { BookingsService } from '../../services/bookings.service';
 
 @Component({
   selector: 'app-new-nested-customer',
@@ -17,6 +19,7 @@ export class NewNestedCustomerComponent implements OnInit {
   @Input() id:string;
   @Output() notifyLoadComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  customer;
   countries;
 
   @ViewChild(DynamicFormComponent) form: DynamicFormComponent;
@@ -84,6 +87,8 @@ export class NewNestedCustomerComponent implements OnInit {
   constructor(
     public authService: AuthParseService,
     private countryService: CountryService,
+    private customerService: CustomerService,
+    private bookingService : BookingsService,
     private route: ActivatedRoute
 
   ) { }
@@ -91,11 +96,32 @@ export class NewNestedCustomerComponent implements OnInit {
   ngOnInit() {
     this.countryService.getAllCountries().then(dataCountries => {
       this.countries = dataCountries;
+
       // Set combo options
       this.form.setFormPropertyField("country", "options", this.countries);
 
-      this.notifyLoadComplete.emit(true);
+      console.log("BOOKING ID: " + this.id);
+      if (this.id) {
+        //this.customerService.getCustomerById(this.id).then(data => {
+        this.bookingService.getBookingById(this.id).then(data => {
+          console.log("getCustomerById result: "+JSON.stringify(data));
+          this.customer = data.customer;
+
+          if(this.customer){
+            //this.id = this.booking.id;
+            this.form.form.controls['name'].setValue(this.customer.name);
+            this.form.form.controls['country'].setValue(this.customer.country.id);
+            this.form.form.controls['email'].setValue(this.customer.email);
+            this.form.form.controls['phone'].setValue(this.customer.phone);
+          }
+          this.notifyLoadComplete.emit(true);
+        });      
+      }else{
+        this.notifyLoadComplete.emit(true);
+      }
     });
+
+    console.log("CUSTOMER ID: " + this.id);
   }
 
   public getForm():DynamicFormComponent{
