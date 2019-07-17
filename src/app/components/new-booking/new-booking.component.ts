@@ -59,7 +59,7 @@ console.log("Master ID: "+ JSON.stringify(this.id));
     alert(JSON.stringify(bookingForm));
     alert(JSON.stringify(customerForm));
 
-    if(this.bookingComponent.isValid() && this.customerComponent.isValid()){
+    if(this.bookingComponent.isFormValid() && this.customerComponent.isFormValid()){
         
         console.log("Is this update? id:"+this.id);
 
