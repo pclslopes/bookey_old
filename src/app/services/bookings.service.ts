@@ -97,7 +97,7 @@ export class BookingsService {
           },
           customer: {
             id: r.has("customer") ? r.get("customer").id : null,
-            country: r.has("customer") ? r.get("customer").get("country : null,
+            country: r.has("customer") ? r.get("customer").get("country") : null,
             name: r.has("customer") ? r.get("customer").get("name") : null,
             email: r.has("customer") ? r.get("customer").get("email") : null,
             phone: r.has("customer") ? r.get("customer").get("phone") : null,

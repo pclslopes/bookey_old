@@ -10,7 +10,7 @@ import { PropertyService } from '../../services/property.service';
 
 @Component({
   selector: 'app-new-nested-booking',
-  templateUrl: './new-nested-booking.component.html',
+  //templateUrl: './new-nested-booking.component.html',
   styleUrls: ['./new-nested-booking.component.scss'],
   template: '<dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>',
   //inputs: ['id']

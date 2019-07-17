@@ -11,7 +11,7 @@ import { BookingsService } from '../../services/bookings.service';
 
 @Component({
   selector: 'app-new-nested-customer',
-  templateUrl: './new-nested-customer.component.html',
+  //templateUrl: './new-nested-customer.component.html',
   styleUrls: ['./new-nested-customer.component.scss'],
   template: '<dynamic-form [fields]="regConfig" (ngSubmit)="submit($event)"></dynamic-form>'
 })
