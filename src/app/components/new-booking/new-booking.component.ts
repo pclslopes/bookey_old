@@ -56,20 +56,20 @@ console.log("Master ID: "+ JSON.stringify(this.id));
   onSubmit() {
     let bookingForm = this.bookingComponent.getForm();
     let customerForm = this.customerComponent.getForm();
-    alert(JSON.stringify(bookingForm.value));
-    alert(JSON.stringify(customerForm.value));
+    alert(JSON.stringify(bookingForm));
+    alert(JSON.stringify(customerForm));
 
-    if(bookingForm.isValid() && customerForm.isValid()){
+    if(this.bookingComponent.isValid() && this.customerComponent.isValid()){
         
         console.log("Is this update? id:"+this.id);
 
         if(this.id){
           //value["id"] = this.id;
-          this.bookingService.updateBooking(bookingForm.value, customerForm.value).then(data => {
+          this.bookingService.updateBooking(bookingForm, customerForm).then(data => {
             this.location.back();
           });
         }else{
-          this.bookingService.createBooking(bookingForm.value, customerForm.value).then(data => {
+          this.bookingService.createBooking(bookingForm, customerForm).then(data => {
             this.location.back();
           });
         }

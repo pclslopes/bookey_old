@@ -105,7 +105,7 @@ export class NewNestedCustomerComponent implements OnInit {
         //this.customerService.getCustomerById(this.id).then(data => {
         this.bookingService.getBookingById(this.id).then(data => {
           console.log("getCustomerById result: "+JSON.stringify(data));
-          this.customer = data.customer;
+          this.customer = data["customer"];
 
           if(this.customer){
             //this.id = this.booking.id;
@@ -124,7 +124,13 @@ export class NewNestedCustomerComponent implements OnInit {
     console.log("CUSTOMER ID: " + this.id);
   }
 
+  public isFormValid(){
+    return this.form.isValid();
+  }
+
   public getForm():DynamicFormComponent{
-    return this.form;
+    let returnForm = this.form.value;
+    returnForm.id = this.customer.id;
+    return returnForm;
   }
 }

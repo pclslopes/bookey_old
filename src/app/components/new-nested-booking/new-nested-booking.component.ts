@@ -300,7 +300,13 @@ export class NewNestedBookingComponent implements OnInit {
     });
   }
 
+  public isFormValid(){
+    return this.form.isValid();
+  }
+
   public getForm():DynamicFormComponent{
-    return this.form;
+    let returnForm = this.form.value;
+    returnForm.id = this.booking.id;
+    return returnForm;
   }
 }
