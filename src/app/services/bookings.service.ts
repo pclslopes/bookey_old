@@ -128,6 +128,75 @@ export class BookingsService {
     });
   }
 
+  public getBookingsByMonth(month:number, year:number){
+    return new Promise((resolve, reject) => {
+      let startDate = new Date(year, month, 1);
+      let endDate = new Date(month === 12 ? year+1 : year, month === 12 ? 1 : month+1, 1);
+      // Setup Parse
+      var parseObj = Parse.Object.extend("Bookings");
+      var query = new Parse.Query(parseObj);
+      // Query
+      query.include("property");
+      query.include("customer");
+      query.include("status");
+      
+      // checkInDate lower and upper bound
+      console.log("Start Date: "+startDate);
+      console.log("End Date: "+endDate);
+
+      var startDateQuery = new Parse.Query(parseObj);
+      startDateQuery.greaterThanOrEqualTo('checkInDate', startDate);
+      startDateQuery.lessThan("checkInDate", startDate);
+
+      // checkInDate lower and upper bound
+      var endDateQuery = new Parse.Query(parseObj);
+      endDateQuery.greaterThanOrEqualTo('checkOutDate', endDate);
+      endDateQuery.lessThan("checkOutDate", endDate);
+
+      var mainQuery = Parse.Query.or(startDateQuery, endDateQuery);
+      //query.or(startDateQuery, endDateQuery);
+      //query.limit(environment.listItemsPerPage);
+      //query.skip(page * environment.listItemsPerPage);
+      //query.descending('createdAt');
+
+      // Find
+      mainQuery.find().then((results) => {
+        console.log("results: " + JSON.stringify(results));
+        resolve(results.map(r => ({
+          id: r.id,
+          property: {
+              id: r.has("property") ? r.get("property").id : null,
+              name: r.has("property") ? r.get("property").get("name") : null,
+          },
+          customer: {
+            id: r.has("customer") ? r.get("customer").id : null,
+            name: r.has("customer") ? r.get("customer").get("name") : null,
+            email: r.has("customer") ? r.get("customer").get("email") : null,
+            phone: r.has("customer") ? r.get("customer").get("phone") : null,
+          },
+          status: {
+            id: r.has("status") ? r.get("status").id : null,
+            name: r.has("status") ? r.get("status").get("name") : null,
+          },
+          checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
+          checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
+          checkInTime: r.get("checkInTime"),
+          platform: r.get("platform"),
+          commissionableAmount: r.get("commissionableAmount"),
+          commission: r.get("commission"),
+          cleaningFee: r.get("cleaningFee"),
+          cityTax: r.get("cityTax"),
+          receivedTotal: r.get("receivedTotal"),
+          adultGuests: r.get("adultGuests"),
+          childGuests: r.get("childGuests"),
+          isReceived: r.get("isReceived"),
+        })))
+      },(error) => {
+        reject(error);
+      });
+    });
+  }
+
   public getAllBookingStatus(){
     return new Promise((resolve, reject) => {
       // Setup Parse

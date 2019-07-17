@@ -46,9 +46,6 @@ export class NewBookingComponent implements OnInit {
     this.route.params.subscribe(params => {  
       console.log("Params: "+ JSON.stringify(params));
       this.id = params["id"];
-console.log("Master ID: "+ JSON.stringify(this.id));
-
-        
     });
   }
 

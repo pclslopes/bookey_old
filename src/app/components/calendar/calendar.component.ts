@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingsService } from '../../services/bookings.service';
 
 @Component({
   selector: 'app-calendar',
@@ -24,7 +25,9 @@ export class CalendarComponent implements OnInit {
   isLoading = true;
   ranges = [{from:"10 Jul 2019", to:"15 Jul 2019", name:"Pedro Lopes", id:""}, {from:"20 Jul 2019", to:"25 Jul 2019", name:"Johnny Lopes", id:""},{from:"25 Jul 2019", to:"29 Jul 2019", name:"Johnny Lopes", id:""},{from:"31 Jul 2019", to:"05 Aug 2019", name:"Johnny Lopes", id:""},{from:"25 Dec 2019", to:"15 Jan 2020", name:"Johnny Lopes", id:""},{from:"25 Nov 2019", to:"15 Dec 2019", name:"Johnny Lopes", id:""}];
 
-  constructor() { }
+  constructor(
+    private bookingService: BookingsService
+  ) { }
 
   ngOnInit() {
     this.displayDate = new Date();
@@ -46,6 +49,8 @@ export class CalendarComponent implements OnInit {
     console.log("Days in current month: "+this.daysInCurrentMonth);
 
     this.isLoading = false;
+
+    this.getData(this.currentMonth, this.currentYear);
   }
 
   getDaysInMonth(month , year): number {
@@ -140,5 +145,12 @@ export class CalendarComponent implements OnInit {
         : '',
     };
     return styles;
+  }
+
+  getData(month:number, year:number){
+    //getBookingsByMonth(month:number, year:number)
+    this.bookingService.getBookingsByMonth(month, year).then(data => {
+      console.log(JSON.stringify(data));
+    });
   }
 }
