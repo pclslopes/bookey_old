@@ -38,6 +38,7 @@ import { NewCustomerComponent } from './components/new-customer/new-customer.com
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { NewNestedCustomerComponent } from './components/new-nested-customer/new-nested-customer.component';
 import { NewNestedBookingComponent } from './components/new-nested-booking/new-nested-booking.component';
+import { ComissionsComponent } from './components/comissions/comissions.component';
 
 // Dynamic-Forms
 import { DynamicInputComponent } from "./dynamic-forms/components/dynamic-input/dynamic-input.component";
@@ -102,6 +103,7 @@ import { DataService } from './services/data.service';
     CalendarComponent,
     NewNestedCustomerComponent,
     NewNestedBookingComponent,
+    ComissionsComponent,
     CommandBarComponent,
     FooterBarComponent,
     NavComponent,

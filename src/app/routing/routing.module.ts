@@ -22,6 +22,7 @@ import { NewExpenseComponent } from '../components/new-expense/new-expense.compo
 import { CustomersComponent } from '../components/customers/customers.component';
 import { NewCustomerComponent } from '../components/new-customer/new-customer.component';
 import { CalendarComponent } from '../components/calendar/calendar.component';
+import { ComissionsComponent } from '../components/comissions/comissions.component';
 
 // Authentication
 //import { UserResolver } from '../components/user/user.resolver';
@@ -48,4 +49,5 @@ export const rootRouterConfig: Routes = [
   { path: 'template', component: FormTemplateComponent, canActivate: [AuthGuard] },
   { path: 'template_old', component: TemplateComponent, canActivate: [AuthGuard] },
   { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
+  { path: 'comissions', component: CalendarComponent, canActivate: [AuthGuard] },
 ];
