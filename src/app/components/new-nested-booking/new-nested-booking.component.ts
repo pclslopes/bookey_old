@@ -306,7 +306,9 @@ export class NewNestedBookingComponent implements OnInit {
 
   public getForm():DynamicFormComponent{
     let returnForm = this.form.value;
-    returnForm.id = this.booking.id;
+    if(this.booking){
+      returnForm.id = this.booking.id;
+    }
     return returnForm;
   }
 }

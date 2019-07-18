@@ -130,7 +130,9 @@ export class NewNestedCustomerComponent implements OnInit {
 
   public getForm():DynamicFormComponent{
     let returnForm = this.form.value;
-    returnForm.id = this.customer.id;
+    if(this.customer){
+      returnForm.id = this.customer.id;
+    }
     return returnForm;
   }
 }

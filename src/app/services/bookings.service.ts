@@ -130,8 +130,8 @@ export class BookingsService {
 
   public getBookingsByMonth(month:number, year:number){
     return new Promise((resolve, reject) => {
-      let startDate = new Date(year, month, 1);
-      let endDate = new Date(month === 12 ? year+1 : year, month === 12 ? 1 : month+1, 1);
+      let monthStartDate = new Date(year, month, 1);
+      let monthEndDate = new Date(month === 12 ? year+1 : year, month === 12 ? 1 : month+1, 1);
       // Setup Parse
       var parseObj = Parse.Object.extend("Bookings");
       var query = new Parse.Query(parseObj);
@@ -141,20 +141,25 @@ export class BookingsService {
       query.include("status");
       
       // checkInDate lower and upper bound
-      console.log("Start Date: "+startDate);
-      console.log("End Date: "+endDate);
+      console.log("Start Date: "+monthStartDate);
+      console.log("End Date: "+monthEndDate);
+
+
+      // (x.startDate < monthStart and x.endDate > monthStart) 
+      // or (x.startdate < monthEnd and x.enddate > monthEnd)
+      // or (x.startdate > monthStart and x.enddate < monthEnd)
 
       var startDateQuery = new Parse.Query(parseObj);
-      startDateQuery.lessThanOrEqualTo("checkInDate", startDate);
-      startDateQuery.greaterThanOrEqualTo('checkOutDate', startDate);
+      startDateQuery.lessThanOrEqualTo("checkInDate", monthStartDate);
+      startDateQuery.greaterThanOrEqualTo('checkOutDate', monthStartDate);
 
       var endDateQuery = new Parse.Query(parseObj);
-      endDateQuery.lessThanOrEqualTo("checkOutDate", endDate);
-      endDateQuery.greaterThanOrEqualTo('checkOutDate', endDate);
+      endDateQuery.lessThanOrEqualTo("checkInDate", monthEndDate);
+      endDateQuery.greaterThanOrEqualTo('checkOutDate', monthEndDate);
 
       var midDateQuery = new Parse.Query(parseObj);
-      midDateQuery.greaterThanOrEqualTo('checkInDate', startDate);
-      midDateQuery.lessThanOrEqualTo("checkOutDate", endDate);
+      midDateQuery.greaterThanOrEqualTo('checkInDate', monthStartDate);
+      midDateQuery.lessThanOrEqualTo("checkOutDate", monthEndDate);
 
       var borderQuery = Parse.Query.or(startDateQuery, endDateQuery);
       var mainQuery = Parse.Query.or(midDateQuery, borderQuery);

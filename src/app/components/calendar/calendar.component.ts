@@ -50,9 +50,9 @@ export class CalendarComponent implements OnInit {
     console.log("month weekday start: "+this.currentMonthWeekDayStart);
     console.log("Days in current month: "+this.daysInCurrentMonth);
 
-    this.isLoading = false;
-
     this.getData(this.currentMonth, this.currentYear);
+
+    this.isLoading = false;
   }
 
   getDaysInMonth(month , year): number {
@@ -68,11 +68,13 @@ export class CalendarComponent implements OnInit {
   }
 
   nextMonth(){
+    this.isLoading = true;
     this.displayDate = new Date(this.displayDate.setMonth(this.displayDate.getMonth()+1));
     this.calculateCalendar();
   }
 
   previousMonth(){
+    this.isLoading = true;
     this.displayDate = new Date(this.displayDate.setMonth(this.displayDate.getMonth()-1));
     this.calculateCalendar();
   }
