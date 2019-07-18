@@ -145,51 +145,29 @@ export class BookingsService {
       console.log("End Date: "+endDate);
 
       var startDateQuery = new Parse.Query(parseObj);
-      startDateQuery.greaterThanOrEqualTo('checkInDate', startDate);
-      startDateQuery.lessThan("checkInDate", startDate);
+      startDateQuery.lessThanOrEqualTo("checkInDate", startDate);
+      startDateQuery.greaterThanOrEqualTo('checkOutDate', startDate);
 
-      // checkInDate lower and upper bound
       var endDateQuery = new Parse.Query(parseObj);
+      endDateQuery.lessThanOrEqualTo("checkOutDate", endDate);
       endDateQuery.greaterThanOrEqualTo('checkOutDate', endDate);
-      endDateQuery.lessThan("checkOutDate", endDate);
 
-      var mainQuery = Parse.Query.or(startDateQuery, endDateQuery);
-      //query.or(startDateQuery, endDateQuery);
-      //query.limit(environment.listItemsPerPage);
-      //query.skip(page * environment.listItemsPerPage);
-      //query.descending('createdAt');
+      var midDateQuery = new Parse.Query(parseObj);
+      midDateQuery.greaterThanOrEqualTo('checkInDate', startDate);
+      midDateQuery.lessThanOrEqualTo("checkOutDate", endDate);
+
+      var borderQuery = Parse.Query.or(startDateQuery, endDateQuery);
+      var mainQuery = Parse.Query.or(midDateQuery, borderQuery);
 
       // Find
       mainQuery.find().then((results) => {
         console.log("results: " + JSON.stringify(results));
+         //{from:"10 Jul 2019", to:"15 Jul 2019", name:"Pedro Lopes", id:""}
         resolve(results.map(r => ({
           id: r.id,
-          property: {
-              id: r.has("property") ? r.get("property").id : null,
-              name: r.has("property") ? r.get("property").get("name") : null,
-          },
-          customer: {
-            id: r.has("customer") ? r.get("customer").id : null,
-            name: r.has("customer") ? r.get("customer").get("name") : null,
-            email: r.has("customer") ? r.get("customer").get("email") : null,
-            phone: r.has("customer") ? r.get("customer").get("phone") : null,
-          },
-          status: {
-            id: r.has("status") ? r.get("status").id : null,
-            name: r.has("status") ? r.get("status").get("name") : null,
-          },
-          checkInDate: this.pipe.transform(r.get("checkInDate"), "dd-MM-yyyy"),
-          checkOutDate: this.pipe.transform(r.get("checkOutDate"), "dd-MM-yyyy"),
-          checkInTime: r.get("checkInTime"),
-          platform: r.get("platform"),
-          commissionableAmount: r.get("commissionableAmount"),
-          commission: r.get("commission"),
-          cleaningFee: r.get("cleaningFee"),
-          cityTax: r.get("cityTax"),
-          receivedTotal: r.get("receivedTotal"),
-          adultGuests: r.get("adultGuests"),
-          childGuests: r.get("childGuests"),
-          isReceived: r.get("isReceived"),
+          name: r.has("customer") ? r.get("customer").get("name") : null,
+          from: r.get("checkInDate"),
+          to: r.get("checkOutDate")
         })))
       },(error) => {
         reject(error);
