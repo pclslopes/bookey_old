@@ -148,18 +148,26 @@ export class BookingsService {
       // (x.startDate < monthStart and x.endDate > monthStart) 
       // or (x.startdate < monthEnd and x.enddate > monthEnd)
       // or (x.startdate > monthStart and x.enddate < monthEnd)
+      var statusPointer = {
+        __type: 'Pointer',
+        className: 'BookingStatus',
+        objectId: "LYIxuddu3M" 
+      }
 
       var startDateQuery = new Parse.Query(parseObj);
       startDateQuery.lessThanOrEqualTo("checkInDate", monthStartDate);
       startDateQuery.greaterThanOrEqualTo('checkOutDate', monthStartDate);
+      startDateQuery.equalTo("status", statusPointer);
 
       var endDateQuery = new Parse.Query(parseObj);
       endDateQuery.lessThanOrEqualTo("checkInDate", monthEndDate);
       endDateQuery.greaterThanOrEqualTo('checkOutDate', monthEndDate);
+      endDateQuery.equalTo("status", statusPointer);
 
       var midDateQuery = new Parse.Query(parseObj);
       midDateQuery.greaterThanOrEqualTo('checkInDate', monthStartDate);
       midDateQuery.lessThanOrEqualTo("checkOutDate", monthEndDate);
+      midDateQuery.equalTo("status", statusPointer);
 
       var borderQuery = Parse.Query.or(startDateQuery, endDateQuery);
       var mainQuery = Parse.Query.or(midDateQuery, borderQuery);
@@ -171,6 +179,7 @@ export class BookingsService {
         resolve(results.map(r => ({
           id: r.id,
           name: r.has("customer") ? r.get("customer").get("name") : null,
+          property: r.has("property") ? r.get("property").get("name") : null,
           from: r.get("checkInDate"),
           to: r.get("checkOutDate")
         })))
