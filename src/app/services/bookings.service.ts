@@ -151,7 +151,7 @@ export class BookingsService {
       var statusPointer = {
         __type: 'Pointer',
         className: 'BookingStatus',
-        objectId: "LYIxuddu3M" 
+        objectId: "LYIxuddu3M" // Confirmed Status
       }
 
       var startDateQuery = new Parse.Query(parseObj);

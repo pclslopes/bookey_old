@@ -43,7 +43,7 @@
       <button mat-flat-button color="accent" (click)="navNewProperty()">Insert New Property</button>
     </div>
 
-    <div class="table-container" *ngIf="propertyCount !== 0">
+    <div class="table-container" *ngIf="propertyCount === 0">
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -72,6 +72,27 @@
         
       </table>
 
+    </div>
+
+    <div *ngFor="let bookObj of dataSource">
+      <mat-card>
+        <mat-card-content>
+          <button mat-button color="primary" 
+              (click)="navBooking(bookObj)"
+              style="height: 100%;width: 100%;"
+              >
+              <h2 class="a">{{bookObj.customer.name}}</h2>
+              <h4>{{bookObj.property.name}} | {{bookObj.checkInDate}} to {{bookObj.checkOutDate}}</h4>
+              
+
+            
+            
+          </button>
+        </mat-card-content>
+        
+      </mat-card>
+<mat-divider></mat-divider>
+      
     </div>
 
   </ng-container>
