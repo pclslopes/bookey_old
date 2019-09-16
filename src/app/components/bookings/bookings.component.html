@@ -75,6 +75,7 @@
     </div>
 
     <div *ngFor="let bookObj of dataSource">
+      
       <mat-card>
         <mat-card-content>
           <button mat-button color="primary" 
@@ -82,7 +83,9 @@
               style="height: 100%;width: 100%;"
               >
               <h2 class="a">{{bookObj.customer.name}}</h2>
-              <h4>{{bookObj.property.name}} | {{bookObj.checkInDate}} to {{bookObj.checkOutDate}}</h4>
+              <h3>{{bookObj.property.name}} | {{bookObj.checkInDate}} to {{bookObj.checkOutDate}} <br/>
+              Adults: {{bookObj.adultGuests}} | Children: {{bookObj.adultGuests}}</h3>
+              
               
 
             
