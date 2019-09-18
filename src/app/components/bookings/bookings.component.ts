@@ -7,11 +7,18 @@ import { BookingsService } from '../../services/bookings.service';
 import { PropertyService } from '../../services/property.service';
 import { BookingModel } from '../../models/booking.model';
 import { environment } from '../../../environments/environment';
+import { slider, transformer, fader, stepper } from '../../routing/router.animations';
 
 @Component({
   selector: 'app-bookings',
   templateUrl: './bookings.component.html',
-  styleUrls: ['./bookings.component.scss']
+  styleUrls: ['./bookings.component.scss'],
+  animations: [ // <-- add your animations here
+    // fader,
+    // slider,
+    // transformer,
+    stepper
+  ]
 })
 export class BookingsComponent implements OnInit {
 

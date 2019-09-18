@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthParseService } from '../../services/auth.parse.service'
+import { RouterOutlet } from '@angular/router';
+import { slider, transformer, fader, stepper } from '../../routing/router.animations';
 
 interface ROUTE {
   icon?: string;
@@ -10,7 +12,13 @@ interface ROUTE {
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
+  animations: [
+    fader,
+    //slider,
+    //transformer,
+    //stepper
+  ]
 })
 export class NavComponent {
 
@@ -89,5 +97,8 @@ anonymousRoutes: ROUTE[] = [
 
   constructor(public authService: AuthParseService) {}
 
+  prepareRoute(outlet: RouterOutlet){
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData["animation"];
+  }
 }
 

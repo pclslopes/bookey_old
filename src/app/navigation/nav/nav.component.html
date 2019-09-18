@@ -88,7 +88,9 @@
 
   <mat-sidenav-content>
     <crm-navigation-bar (toggleSidenav)="sidenav.toggle()"></crm-navigation-bar>
-    <router-outlet></router-outlet>
+    <div [@routeAnimations]="prepareRoute(outlet)" >
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
   </mat-sidenav-content>
 
 </mat-sidenav-container>
