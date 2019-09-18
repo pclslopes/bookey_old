@@ -14,10 +14,10 @@ import { slider, transformer, fader, stepper } from '../../routing/router.animat
   templateUrl: './bookings.component.html',
   styleUrls: ['./bookings.component.scss'],
   animations: [ // <-- add your animations here
-    // fader,
+     fader,
     // slider,
     // transformer,
-    stepper
+    //stepper
   ]
 })
 export class BookingsComponent implements OnInit {
